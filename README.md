@@ -4,8 +4,10 @@ Suorita sovellus komennolla _gradle run_, käynnistyy osoitteeseen http://localh
 
 Testit suoritetaan komennolla _gradle test_
 
-[![Build Status](https://travis-ci.org/mluukkai/spring-cucumber.svg?branch=master)](https://travis-ci.org/mluukkai/spring-cucumber)
+[![Build Status](https://travis-ci.org/aviledex/vinkkari.svg?branch=master)](https://travis-ci.org/aviledev/vinkkari)
 
 Testit käyttävät _lib_-hakemistossa olevaa firefox Geckodriveriä
 
 Konfiguraatiosta on kiittäminen kevään 2017 [TKT-FUBAR](https://github.com/TKT-FUBAR/Ohtu-miniprojekti)-miniprojektiryhmää.
+
+[Backlog](https://docs.google.com/spreadsheets/d/1pEWCLGSSiPcI1rFv1Su9gxMdy0C1xjPz9IltO_ZW0Qw/edit?usp=sharing)
