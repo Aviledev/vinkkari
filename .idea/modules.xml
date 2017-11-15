@@ -3,6 +3,8 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/vinkkari.iml" filepath="$PROJECT_DIR$/vinkkari.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/vinkkari_main.iml" filepath="$PROJECT_DIR$/.idea/modules/vinkkari_main.iml" group="vinkkari" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/vinkkari_test.iml" filepath="$PROJECT_DIR$/.idea/modules/vinkkari_test.iml" group="vinkkari" />
     </modules>
   </component>
 </project>
