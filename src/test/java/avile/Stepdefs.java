@@ -38,9 +38,9 @@ public class Stepdefs {
         driver.get("http://localhost:" + 8080 + "/");
     }
 
-    @When("^a link \"([^\"]*)\" is clicked$")
-    public void a_link_is_clicked(String text) throws Throwable {
-        clickLinkWithText(text);
+    @When("^something$")
+    public void something() throws Throwable {
+        
     }
 
     @Then("^\"([^\"]*)\" is shown$")
