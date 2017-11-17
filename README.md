@@ -13,3 +13,5 @@
 Suorita sovellus komennolla _gradle run_, käynnistyy osoitteeseen http://localhost:8080
 
 Testit suoritetaan komennolla _gradle test_
+
+Parametrillä ```-Dspring.profiles.active=production``` voidaan syöttää haluttu ympäristö (tässä tapauksessa ```production```. Muita mahdollisia ovat ```development``` ja ```default```).
