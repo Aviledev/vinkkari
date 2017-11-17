@@ -8,9 +8,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class Controllers {
 
     @GetMapping("/")
-    @ResponseBody
     public String home() {
-        return "<a href='/other'>linkki</a>";
+        return "index";
     }
     
     @GetMapping("/other")
