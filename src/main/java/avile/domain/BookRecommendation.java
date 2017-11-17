@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package avile.domain;
 
 import java.util.Date;
@@ -12,10 +7,6 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
-/**
- *
- * @author teepiik
- */
 @Entity
 public class BookRecommendation extends AbstractPersistable<Long>{
     // @Max(20)
@@ -23,14 +14,15 @@ public class BookRecommendation extends AbstractPersistable<Long>{
     private String author;
     private String type;
     private String isbn;
-    private List<String> tags;
-    private List<String> prerequisiteCourses;
-    private List<String> relatedCourses;
+    //private List<String> tags;
+    //private List<String> prerequisiteCourses;
+    //private List<String> relatedCourses;
     
     @Temporal(TemporalType.TIMESTAMP)
     private Date date;
 
     public BookRecommendation() {
+        
     }
 
     public String getTitle() {
@@ -64,30 +56,5 @@ public class BookRecommendation extends AbstractPersistable<Long>{
     public void setIsbn(String isbn) {
         this.isbn = isbn;
     }
-
-    public List<String> getTags() {
-        return tags;
-    }
-
-    public void setTags(List<String> tags) {
-        this.tags = tags;
-    }
-
-    public List<String> getPrerequisiteCourses() {
-        return prerequisiteCourses;
-    }
-
-    public void setPrerequisiteCourses(List<String> prerequisiteCourses) {
-        this.prerequisiteCourses = prerequisiteCourses;
-    }
-
-    public List<String> getRelatedCourses() {
-        return relatedCourses;
-    }
-
-    public void setRelatedCourses(List<String> relatedCourses) {
-        this.relatedCourses = relatedCourses;
-    }
-    
     
 }
