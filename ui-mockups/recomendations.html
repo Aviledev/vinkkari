@@ -7,14 +7,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css"
+          integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/bootstrap-tagsinput.css">
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 <div class="container">
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark rounded">
         <a class="navbar-brand" href="#">VINKKARI</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample09" aria-controls="navbarsExample09" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample09"
+                aria-controls="navbarsExample09" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
 
@@ -73,7 +76,8 @@
             <li class="list-group-item list-group-item-action list-group-item-container">
                 <div class="row">
                     <div class="col-6 col-sm-8 col-md-10">
-                        <h5 class="list-group-item-title"><a href="#">Clean Code: A Handbook of Agile Software Craftsmanship</a></h5>
+                        <h5 class="list-group-item-title"><a href="#">Clean Code: A Handbook of Agile Software
+                            Craftsmanship</a></h5>
                         <small class="text-muted">Kirja</small>
                     </div>
                     <div class="col-6 col-sm-4 col-md-2">
@@ -109,6 +113,9 @@
             </li>
         </ul>
     </div>
+
+    <button type="button" class="btn btn-primary my-3" data-toggle="modal" data-target="#createModel">Create</button>
+
     <footer class="footer bg-dark text-white">
         <div class="container">
             <span class="text-muted">&copy vinkkari 2017</span>
@@ -117,10 +124,88 @@
 
 </div>
 
+<div class="modal fade" id="createModel" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Create new recommendation</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form>
+                <div class="modal-body">
+                    <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" id="pills-book-tab" data-toggle="pill" href="#pills-book"
+                               role="tab" aria-controls="pills-book" aria-selected="true">Book</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="pills-video-tab" data-toggle="pill" href="#pills-video" role="tab"
+                               aria-controls="pills-video" aria-selected="false">Video</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="pills-blogpost-tab" data-toggle="pill" href="#pills-blogpost"
+                               role="tab" aria-controls="pills-blogpost" aria-selected="false">Blogpost</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="pills-podcast-tab" data-toggle="pill" href="#pills-podcast"
+                               role="tab" aria-controls="pills-podcast" aria-selected="false">Podcast</a>
+                        </li>
+                    </ul>
+                    <div class="tab-content" id="pills-tabContent">
+                        <div class="tab-pane fade show active" id="pills-book" role="tabpanel"
+                             aria-labelledby="pills-book-tab">
+                            <div class="form-group">
+                                <label for="inputBookTitle">Title</label>
+                                <input type="text" class="form-control" id="inputBookTitle" placeholder="Enter title">
+                            </div>
+                            <div class="form-group">
+                                <label for="inputBookAuthor">Author</label>
+                                <input type="text" class="form-control" id="inputBookAuthor" placeholder="Enter author">
+                            </div>
+                            <div class="form-group">
+                                <label for="inputBookTitle">ISBN</label>
+                                <input type="text" class="form-control" id="inputBookIsbn" placeholder="Enter ISBN">
+                            </div>
+                            <div class="form-group">
+                                <label class="d-block" for="inputBookTags">Tags</label>
+                                <input type="text" class="form-control" id="inputBookTags" placeholder="Enter tags" data-role="tagsinput">
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="pills-video" role="tabpanel" aria-labelledby="pills-video-tab">
+                            b
+                        </div>
+                        <div class="tab-pane fade" id="pills-blogpost" role="tabpanel"
+                             aria-labelledby="pills-blogpost-tab">c
+                        </div>
+                        <div class="tab-pane fade" id="pills-podcast" role="tabpanel"
+                             aria-labelledby="pills-podcast-tab">d
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"
+        integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"
+        integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh"
+        crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"
+        integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ"
+        crossorigin="anonymous"></script>
+<script src="js/bootstrap-tagsinput.min.js"></script>
+<script src="js/recommendation.js"></script>
 </body>
 </html>
