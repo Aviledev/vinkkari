@@ -56,5 +56,12 @@ public class BookRecommendation extends AbstractPersistable<Long>{
     public void setIsbn(String isbn) {
         this.isbn = isbn;
     }
-    
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
 }

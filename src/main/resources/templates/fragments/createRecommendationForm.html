@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>CreateRecommendationForm</title>
+</head>
+<body>
+<div th:fragment="createRecommendationForm">
+    <div class="modal fade" id="createBookModal" tabindex="-1" role="dialog" aria-labelledby="createBookModalTitle"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="createBookModalTitle">Create new recommendation</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form>
+                    <div class="modal-body">
+                        <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" id="pills-book-tab" data-toggle="pill" href="#pills-book"
+                                   role="tab" aria-controls="pills-book" aria-selected="true">Book</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="pills-video-tab" data-toggle="pill" href="#pills-video" role="tab"
+                                   aria-controls="pills-video" aria-selected="false">Video</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="pills-blogpost-tab" data-toggle="pill" href="#pills-blogpost"
+                                   role="tab" aria-controls="pills-blogpost" aria-selected="false">Blogpost</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="pills-podcast-tab" data-toggle="pill" href="#pills-podcast"
+                                   role="tab" aria-controls="pills-podcast" aria-selected="false">Podcast</a>
+                            </li>
+                        </ul>
+                        <div class="tab-content" id="pills-tabContent">
+                            <div class="tab-pane fade show active" id="pills-book" role="tabpanel"
+                                 aria-labelledby="pills-book-tab">
+                                <div class="form-group">
+                                    <label for="inputBookTitle">Title</label>
+                                    <input type="text" class="form-control" id="inputBookTitle" placeholder="Enter title"/>
+                                </div>
+                                <div class="form-group">
+                                    <label for="inputBookAuthor">Author</label>
+                                    <input type="text" class="form-control" id="inputBookAuthor" placeholder="Enter author"/>
+                                </div>
+                                <div class="form-group">
+                                    <label for="inputBookTitle">ISBN</label>
+                                    <input type="text" class="form-control" id="inputBookIsbn" placeholder="Enter ISBN"/>
+                                </div>
+                                <div class="form-group">
+                                    <label class="d-block" for="inputBookTags">Tags</label>
+                                    <input type="text" class="form-control" id="inputBookTags" placeholder="Enter tags" data-role="tagsinput"/>
+                                </div>
+                                <div class="form-group">
+                                    <label for="inputPrerequisiteCourses">Prerequisite courses <a href="#" class="">Missing?</a></label>
+                                    <select multiple="multiple" class="form-control" id="inputPrerequisiteCourses">
+                                        <option>1</option>
+                                        <option>2</option>
+                                        <option>3</option>
+                                        <option>4</option>
+                                        <option>5</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="inputRelatedCourses">Recommended courses <a href="#" class="">Missing?</a></label>
+                                    <select multiple="multiple" class="form-control" id="inputRelatedCourses">
+                                        <option>1</option>
+                                        <option>2</option>
+                                        <option>3</option>
+                                        <option>4</option>
+                                        <option>5</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="pills-video" role="tabpanel" aria-labelledby="pills-video-tab">
+                                b
+                            </div>
+                            <div class="tab-pane fade" id="pills-blogpost" role="tabpanel"
+                                 aria-labelledby="pills-blogpost-tab">c
+                            </div>
+                            <div class="tab-pane fade" id="pills-podcast" role="tabpanel"
+                                 aria-labelledby="pills-podcast-tab">d
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
