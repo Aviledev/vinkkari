@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 
+import java.util.Date;
+
 @Controller
 public class BookRecommendationController {
 
@@ -22,6 +24,7 @@ public class BookRecommendationController {
         b1.setAuthor("Kari Ojala");
         b1.setType("Kirja");
         b1.setIsbn("3435323");
+        b1.setDate(new Date());
         bookRecomRepo.save(b1);
 
         BookRecommendation b2 = new BookRecommendation();
@@ -29,6 +32,7 @@ public class BookRecommendationController {
         b2.setAuthor("Jaakko Peltola");
         b2.setType("Kirja");
         b2.setIsbn("5235235");
+        b2.setDate(new Date());
         bookRecomRepo.save(b2);
     }
 
