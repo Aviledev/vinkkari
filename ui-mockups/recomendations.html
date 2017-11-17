@@ -30,6 +30,9 @@
                     <a class="nav-link" href="#">Recomendations</a>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link" href="#">Courses</a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link" href="#">Account</a>
                 </li>
                 <li class="nav-item">
@@ -114,7 +117,7 @@
         </ul>
     </div>
 
-    <button type="button" class="btn btn-primary my-3" data-toggle="modal" data-target="#createModel">Create</button>
+    <button type="button" class="btn btn-primary my-3" data-toggle="modal" data-target="#createBookModal">Create</button>
 
     <footer class="footer bg-dark text-white">
         <div class="container">
@@ -124,12 +127,14 @@
 
 </div>
 
-<div class="modal fade" id="createModel" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+
+
+<div class="modal fade" id="createBookModal" tabindex="-1" role="dialog" aria-labelledby="createBookModalTitle"
      aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Create new recommendation</h5>
+                <h5 class="modal-title" id="createBookModalTitle">Create new recommendation</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -173,6 +178,26 @@
                                 <label class="d-block" for="inputBookTags">Tags</label>
                                 <input type="text" class="form-control" id="inputBookTags" placeholder="Enter tags" data-role="tagsinput">
                             </div>
+                            <div class="form-group">
+                                <label for="inputPrerequisiteCourses">Prerequisite courses <a href="#" class="">Missing?</a></label>
+                                <select multiple class="form-control" id="inputPrerequisiteCourses">
+                                    <option>1</option>
+                                    <option>2</option>
+                                    <option>3</option>
+                                    <option>4</option>
+                                    <option>5</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="inputRelatedCourses">Recommended courses <a href="#" class="">Missing?</a></label>
+                                <select multiple class="form-control" id="inputRelatedCourses">
+                                    <option>1</option>
+                                    <option>2</option>
+                                    <option>3</option>
+                                    <option>4</option>
+                                    <option>5</option>
+                                </select>
+                            </div>
                         </div>
                         <div class="tab-pane fade" id="pills-video" role="tabpanel" aria-labelledby="pills-video-tab">
                             b
@@ -193,6 +218,8 @@
         </div>
     </div>
 </div>
+
+
 
 
 <!-- Optional JavaScript -->
