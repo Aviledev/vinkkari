@@ -3,14 +3,14 @@
 <head>
     <title>Hello, world!</title>
     <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css"
-          integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
-    <link rel="stylesheet" href="css/bootstrap-tagsinput.css">
-    <link rel="stylesheet" href="css/style.css">
+          integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous"/>
+    <link rel="stylesheet" href="css/bootstrap-tagsinput.css"/>
+    <link rel="stylesheet" href="css/style.css"/>
 </head>
 <body>
 <div class="container">
@@ -24,10 +24,10 @@
         <div class="collapse navbar-collapse" id="navbarsExample09">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="#">Home<span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="../">Home<span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Recomendations</a>
+                    <a class="nav-link" href="../books/">Recommendations</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Courses</a>
@@ -49,7 +49,7 @@
                 </li>
             </ul>
             <form class="form-inline my-2 my-md-0">
-                <input class="form-control" type="text" placeholder="Search" aria-label="Search">
+                <input class="form-control" type="text" placeholder="Search" aria-label="Search"/>
             </form>
         </div>
     </nav>
@@ -61,7 +61,7 @@
         </div>
     </div>
 
-    <hr class="my-4">
+    <hr class="my-4"/>
 
     <div class="row title-row">
         <div class="col-6 col-sm-8 col-md-10">
@@ -76,12 +76,12 @@
     <div class="card">
         <ul class="list-group list-group-striped">
 
-            <li class="list-group-item list-group-item-action list-group-item-container">
+            <li class="list-group-item list-group-item-action list-group-item-container" th:each="recommendation : ${recommendations}">
                 <div class="row">
                     <div class="col-6 col-sm-8 col-md-10">
-                        <h5 class="list-group-item-title"><a href="#">Clean Code: A Handbook of Agile Software
+                        <h5 class="list-group-item-title" th:text="${recommendation.title}"><a href="#">Clean Code: A Handbook of Agile Software
                             Craftsmanship</a></h5>
-                        <small class="text-muted">Kirja</small>
+                        <small class="text-muted" th:text="${recommendation.type}">Kirja</small>
                     </div>
                     <div class="col-6 col-sm-4 col-md-2">
                         <h6 class="list-group-item-account"><a href="#">Firstname Lastname</a></h6>
@@ -90,30 +90,7 @@
                 </div>
             </li>
 
-            <li class="list-group-item list-group-item-action list-group-item-container">
-                <div class="row">
-                    <div class="col-6 col-sm-8 col-md-10">
-                        <h5 class="list-group-item-title"><a href="#">Merge sort algorithm</a></h5>
-                        <small class="text-muted">Video</small>
-                    </div>
-                    <div class="col-6 col-sm-4 col-md-2">
-                        <h6 class="list-group-item-account"><a href="#">Firstname Lastname</a></h6>
-                        <small class="text-muted">01.01.2017 18:42 UTC</small>
-                    </div>
-                </div>
-            </li>
-            <li class="list-group-item list-group-item-action list-group-item-container">
-                <div class="row">
-                    <div class="col-6 col-sm-8 col-md-10">
-                        <h5 class="list-group-item-title"><a href="#">Consistency models</a></h5>
-                        <small class="text-muted">Blogpost</small>
-                    </div>
-                    <div class="col-6 col-sm-4 col-md-2">
-                        <h6 class="list-group-item-account"><a href="#">Firstname Lastname</a></h6>
-                        <small class="text-muted">01.01.2017 18:42 UTC</small>
-                    </div>
-                </div>
-            </li>
+         
         </ul>
     </div>
 
@@ -121,7 +98,7 @@
 
     <footer class="footer bg-dark text-white">
         <div class="container">
-            <span class="text-muted">&copy vinkkari 2017</span>
+            <span class="text-muted">copy vinkkari 2017</span>
         </div>
     </footer>
 
@@ -164,19 +141,19 @@
                              aria-labelledby="pills-book-tab">
                             <div class="form-group">
                                 <label for="inputBookTitle">Title</label>
-                                <input type="text" class="form-control" id="inputBookTitle" placeholder="Enter title">
+                                <input type="text" class="form-control" id="inputBookTitle" placeholder="Enter title"/>
                             </div>
                             <div class="form-group">
                                 <label for="inputBookAuthor">Author</label>
-                                <input type="text" class="form-control" id="inputBookAuthor" placeholder="Enter author">
+                                <input type="text" class="form-control" id="inputBookAuthor" placeholder="Enter author"/>
                             </div>
                             <div class="form-group">
                                 <label for="inputBookTitle">ISBN</label>
-                                <input type="text" class="form-control" id="inputBookIsbn" placeholder="Enter ISBN">
+                                <input type="text" class="form-control" id="inputBookIsbn" placeholder="Enter ISBN"/>
                             </div>
                             <div class="form-group">
                                 <label class="d-block" for="inputBookTags">Tags</label>
-                                <input type="text" class="form-control" id="inputBookTags" placeholder="Enter tags" data-role="tagsinput">
+                                <input type="text" class="form-control" id="inputBookTags" placeholder="Enter tags" data-role="tagsinput"/>
                             </div>
                             <div class="form-group">
                                 <label for="inputPrerequisiteCourses">Prerequisite courses <a href="#" class="">Missing?</a></label>
