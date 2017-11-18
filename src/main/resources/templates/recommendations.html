@@ -19,7 +19,7 @@
 
     <div class="jumbotron title-jumbotron">
         <div class="mx-auto">
-            <h1 class="display-4">Recomendations</h1>
+            <h1 class="display-4">Recommendations</h1>
             <p class="lead">Lorem ipsum recom</p>
         </div>
     </div>
@@ -58,9 +58,10 @@
 
     <button type="button" class="btn btn-primary my-3" data-toggle="modal" data-target="#createBookModal">Create</button>
 
-    <div th:replace="fragments/footer :: footer"></div>
 
 </div>
+<div th:replace="fragments/footer :: footer"></div>
+
 
 
 <div th:replace="fragments/createRecommendationForm :: createRecommendationForm"></div>
@@ -78,7 +79,7 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"
         integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ"
         crossorigin="anonymous"></script>
-<script src="../static/js/bootstrap-tagsinput.min.js"></script>
+<script src="../static/js/bootstrap-tagsinput.min.js" th:src="@{/js/bootstrap-tagsinput.min.js}"></script>
 <script src="../static/js/recommendation.js" th:src="@{/js/recommendation.js}"></script>
 </body>
 </html>
