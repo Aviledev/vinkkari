@@ -8,7 +8,7 @@ Feature: user can create a new book recommendation
   Scenario: user can open a create dialog
     Given user is at the "books" page
     When user clicks Create button
-    Then Recommendations are shown
+    Then the form "createBookForm" is opened
 
   Scenario: user can set all fields in create dialog
     Given user is at the "books" page

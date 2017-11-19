@@ -49,10 +49,10 @@ public class BookRecommendationController {
     @PostMapping("/books")
     public String createOne(@RequestParam String title,
                             @RequestParam String author,
-                            @RequestParam String isbn,
-                            @RequestParam String tags,
-                            @RequestParam String prerequisiteCourses,
-                            @RequestParam String relatedCourses) {
+                            @RequestParam String isbn
+                           /* @RequestParam String tags,*/
+                           /* @RequestParam String prerequisiteCourses, */
+                           /* @RequestParam String relatedCourses */) {
         BookRecommendation bookRecommendation = new BookRecommendation();
         bookRecommendation.setTitle(title);
         bookRecommendation.setAuthor(author);

@@ -8,6 +8,7 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import java.io.File;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertFalse;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -61,6 +62,11 @@ public class Stepdefs {
         assertTrue(driver.getPageSource().contains("Here you can find all recommendations"));
     }
 
+    @Then("^the form \"([^\"]*)\" is opened$")
+    public void theFormIsOpened(String arg0) throws Throwable {
+        assertFalse(driver.findElement(By.id(arg0)).getCssValue("display").equals("none"));
+    }
+
 
     @When("^user clicks Create button$")
     public void userClicksCreateButton() throws Throwable {
@@ -79,7 +85,7 @@ public class Stepdefs {
 
     @Then("^the entry with title \"([^\"]*)\" is added$")
     public void theEntryWithTitleIsAdded(String arg0) throws Throwable {
-        driver.getPageSource().contains(arg0);
+        assertTrue(driver.getPageSource().contains(arg0));
     }
 
     private void clickButtonWithId(String id) {
