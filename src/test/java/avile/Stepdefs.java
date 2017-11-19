@@ -55,7 +55,7 @@ public class Stepdefs {
     @When("^user navigates to \"([^\"]*)\"$")
     public void user_navigates_to(String arg1) throws Throwable {
         clickLinkWithText(arg1);
-        new WebDriverWait(driver, 5)
+        new WebDriverWait(driver, 30)
                 .until(ExpectedConditions.titleIs("VINKKARI | " + arg1));
     }
 
