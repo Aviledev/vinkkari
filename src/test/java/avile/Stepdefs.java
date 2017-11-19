@@ -1,5 +1,6 @@
 package avile;
 
+import cucumber.api.PendingException;
 import cucumber.api.java.After;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
@@ -54,12 +55,11 @@ public class Stepdefs {
         clickLinkWithText(arg1);
     }
 
-    @Then("^\"([^\"]*)\" are shown$")
-    public void are_shown(String arg1) throws Throwable {
+    @Then("^Recommendations are shown$")
+    public void recommendationsAreShown() throws Throwable {
         assertTrue(driver.findElement(By.tagName("body"))
                 .getText().contains("Here you can find all recommendations"));
     }
-
 
     private void clickLinkWithText(String text) {
         int trials = 0;
@@ -73,5 +73,4 @@ public class Stepdefs {
             }
         }
     }
-
 }
