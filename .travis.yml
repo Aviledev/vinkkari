@@ -1,4 +1,6 @@
 language: java
+env:
+  - MOZ_HEADLESS=1
 addons:
     firefox: "57.0"
 #  apt:

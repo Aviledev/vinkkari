@@ -7,14 +7,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 public class Controllers {
 
-    @GetMapping("/")
+    @GetMapping(path = {"", "/home"})
     public String home() {
         return "index";
     }
-    
-    @GetMapping("/other")
-    @ResponseBody
-    public String other() {
-        return "Hei Maailma!";
-    }
+
 }

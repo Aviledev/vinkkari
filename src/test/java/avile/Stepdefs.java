@@ -1,15 +1,20 @@
 package avile;
 
+import cucumber.api.PendingException;
 import cucumber.api.java.After;
+import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import java.io.File;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertFalse;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class Stepdefs {
 
@@ -33,15 +38,11 @@ public class Stepdefs {
         driver.quit();
     }
 
-    @Given("^user is at the main page$")
-    public void user_is_at_the_main_page() throws Throwable {
-        driver.get("http://localhost:" + 8080 + "/");
+    @Given("^user is at the \"([^\"]*)\" page$")
+    public void userIsAtThePage(String arg0) throws Throwable {
+        driver.get("http://localhost:" + 8080 + "/"+arg0);
     }
 
-    @When("^something$")
-    public void something() throws Throwable {
-        
-    }
 
     @Then("^\"([^\"]*)\" is shown$")
     public void is_shown(String arg1) throws Throwable {
@@ -49,17 +50,62 @@ public class Stepdefs {
                 .getText().contains(arg1));
     }
 
-    private void clickLinkWithText(String text) {
-        int trials = 0;
-        while (trials++ < 5) {
-            try {
-                WebElement element = driver.findElement(By.linkText(text));
-                element.click();
-                break;
-            } catch (Exception e) {
-                System.out.println(e.getStackTrace());
-            }
-        }
+    @When("^user navigates to \"([^\"]*)\"$")
+    public void user_navigates_to(String arg1) throws Throwable {
+        clickLinkWithText(arg1);
+        new WebDriverWait(driver, 10)
+                .until(ExpectedConditions.titleIs("VINKKARI | " + arg1));
     }
+
+    @Then("^Recommendations are shown$")
+    public void recommendationsAreShown() throws Throwable {
+        assertTrue(driver.getPageSource().contains("Here you can find all recommendations"));
+    }
+
+    @Then("^the form \"([^\"]*)\" is opened$")
+    public void theFormIsOpened(String arg0) throws Throwable {
+        assertFalse(driver.findElement(By.id(arg0)).getCssValue("display").equals("none"));
+    }
+
+
+    @When("^user clicks Create button$")
+    public void userClicksCreateButton() throws Throwable {
+        clickButtonWithId("openCreateFormBtn");
+    }
+
+    @When("^the entry \"([^\"]*)\" is entered into the field \"([^\"]*)\"$")
+    public void theEntryIsEnteredIntoTheField(String arg0, String arg1) throws Throwable {
+        enterInputToField(arg0, arg1);
+    }
+
+    @When("^the form \"([^\"]*)\" is submitted$")
+    public void theIsSubmitted(String arg0) throws Throwable {
+        driver.findElement(By.id("submitBtn")).click();
+    }
+
+    @Then("^the entry with title \"([^\"]*)\" is added$")
+    public void theEntryWithTitleIsAdded(String arg0) throws Throwable {
+        assertTrue(driver.getPageSource().contains(arg0));
+    }
+
+    private void clickButtonWithId(String id) {
+        WebElement element = new WebDriverWait(driver, 10)
+                .until(ExpectedConditions.elementToBeClickable(By.id(id)));
+        element.click();
+    }
+
+    private void clickLinkWithText(String text) {
+        WebElement element = new WebDriverWait(driver, 10)
+                .until(ExpectedConditions.elementToBeClickable(By.linkText(text)));
+        element.click();
+    }
+
+    private void enterInputToField(String input, String field) {
+        WebElement element = new WebDriverWait(driver, 10)
+                .until(ExpectedConditions.elementToBeClickable(By.name(field)));
+        element.sendKeys(input);
+    }
+
+
 
 }
