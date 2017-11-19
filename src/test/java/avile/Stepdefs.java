@@ -11,6 +11,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class Stepdefs {
 
@@ -53,11 +55,12 @@ public class Stepdefs {
     @When("^user navigates to \"([^\"]*)\"$")
     public void user_navigates_to(String arg1) throws Throwable {
         clickLinkWithText(arg1);
+        new WebDriverWait(driver, 5)
+                .until(ExpectedConditions.titleIs("VINKKARI | " + arg1));
     }
 
     @Then("^Recommendations are shown$")
     public void recommendationsAreShown() throws Throwable {
-        System.out.println(driver.getPageSource());
         assertTrue(driver.getPageSource().contains("Here you can find all recommendations"));
     }
 
