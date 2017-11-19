@@ -2,6 +2,7 @@ package avile;
 
 import cucumber.api.PendingException;
 import cucumber.api.java.After;
+import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -36,15 +37,11 @@ public class Stepdefs {
         driver.quit();
     }
 
-    @Given("^user is at the home page$")
-    public void user_is_at_the_main_page() throws Throwable {
-        driver.get("http://localhost:" + 8080 + "/");
+    @Given("^user is at the \"([^\"]*)\" page$")
+    public void userIsAtThePage(String arg0) throws Throwable {
+        driver.get("http://localhost:" + 8080 + "/"+arg0);
     }
 
-    @When("^something$")
-    public void something() throws Throwable {
-        
-    }
 
     @Then("^\"([^\"]*)\" is shown$")
     public void is_shown(String arg1) throws Throwable {
@@ -64,10 +61,47 @@ public class Stepdefs {
         assertTrue(driver.getPageSource().contains("Here you can find all recommendations"));
     }
 
+
+    @When("^user clicks Create button$")
+    public void userClicksCreateButton() throws Throwable {
+        clickButtonWithId("openCreateFormBtn");
+    }
+
+    @When("^the entry \"([^\"]*)\" is entered into the field \"([^\"]*)\"$")
+    public void theEntryIsEnteredIntoTheField(String arg0, String arg1) throws Throwable {
+        enterInputToField(arg0, arg1);
+    }
+
+    @When("^the form \"([^\"]*)\" is submitted$")
+    public void theIsSubmitted(String arg0) throws Throwable {
+        driver.findElement(By.id("submitBtn")).click();
+    }
+
+    @Then("^the entry with title \"([^\"]*)\" is added$")
+    public void theEntryWithTitleIsAdded(String arg0) throws Throwable {
+        driver.getPageSource().contains(arg0);
+    }
+
+    private void clickButtonWithId(String id) {
+        System.out.println(driver.getPageSource());
+        WebElement element = new WebDriverWait(driver, 10)
+                .until(ExpectedConditions.elementToBeClickable(By.id(id)));
+        element.click();
+    }
+
     private void clickLinkWithText(String text) {
         System.out.println(driver.getPageSource());
         WebElement element = new WebDriverWait(driver, 10)
                 .until(ExpectedConditions.elementToBeClickable(By.linkText(text)));
         element.click();
     }
+
+    private void enterInputToField(String input, String field) {
+        WebElement element = new WebDriverWait(driver, 10)
+                .until(ExpectedConditions.elementToBeClickable(By.name(field)));
+        element.sendKeys(input);
+    }
+
+
+
 }
