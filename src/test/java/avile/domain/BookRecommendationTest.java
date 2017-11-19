@@ -9,7 +9,7 @@ import static org.junit.Assert.*;
 
 public class BookRecommendationTest {
 
-    BookRecommendation bookRecommendation;
+    private BookRecommendation bookRecommendation;
 
     @Before
     public void setUp() throws Exception {
