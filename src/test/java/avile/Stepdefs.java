@@ -57,8 +57,8 @@ public class Stepdefs {
 
     @Then("^Recommendations are shown$")
     public void recommendationsAreShown() throws Throwable {
-        assertTrue(driver.findElement(By.tagName("body"))
-                .getText().contains("Here you can find all recommendations"));
+        System.out.println(driver.getPageSource());
+        assertTrue(driver.getPageSource().contains("Here you can find all recommendations"));
     }
 
     private void clickLinkWithText(String text) {
