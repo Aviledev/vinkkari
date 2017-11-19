@@ -55,7 +55,7 @@ public class Stepdefs {
     @When("^user navigates to \"([^\"]*)\"$")
     public void user_navigates_to(String arg1) throws Throwable {
         clickLinkWithText(arg1);
-        new WebDriverWait(driver, 30)
+        new WebDriverWait(driver, 10)
                 .until(ExpectedConditions.titleIs("VINKKARI | " + arg1));
     }
 
@@ -65,15 +65,8 @@ public class Stepdefs {
     }
 
     private void clickLinkWithText(String text) {
-        int trials = 0;
-        while (trials++ < 5) {
-            try {
-                WebElement element = driver.findElement(By.linkText(text));
-                element.click();
-                break;
-            } catch (Exception e) {
-                System.out.println(e.getStackTrace());
-            }
-        }
+        WebElement element = new WebDriverWait(driver, 10)
+                .until(ExpectedConditions.elementToBeClickable(By.linkText(text)));
+        element.click();
     }
 }
