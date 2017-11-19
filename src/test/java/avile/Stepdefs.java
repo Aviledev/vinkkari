@@ -83,14 +83,12 @@ public class Stepdefs {
     }
 
     private void clickButtonWithId(String id) {
-        System.out.println(driver.getPageSource());
         WebElement element = new WebDriverWait(driver, 10)
                 .until(ExpectedConditions.elementToBeClickable(By.id(id)));
         element.click();
     }
 
     private void clickLinkWithText(String text) {
-        System.out.println(driver.getPageSource());
         WebElement element = new WebDriverWait(driver, 10)
                 .until(ExpectedConditions.elementToBeClickable(By.linkText(text)));
         element.click();
