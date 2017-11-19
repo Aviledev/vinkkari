@@ -11,10 +11,5 @@ public class Controllers {
     public String home() {
         return "index";
     }
-    
-    @GetMapping("/other")
-    @ResponseBody
-    public String other() {
-        return "Hei Maailma!";
-    }
+
 }

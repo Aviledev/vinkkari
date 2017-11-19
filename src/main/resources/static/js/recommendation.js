@@ -5,3 +5,8 @@ $('#inputBookTags').tagsinput({
     maxTags: 32,
     cancelConfirmKeysOnEmpty: false
 });
+
+
+$('#submitBtn').click(function () {
+    $('#create'+$('.nav-pills .active').text()+ 'Form').submit();
+});

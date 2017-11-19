@@ -33,7 +33,7 @@ public class Stepdefs {
         driver.quit();
     }
 
-    @Given("^user is at the main page$")
+    @Given("^user is at the home page$")
     public void user_is_at_the_main_page() throws Throwable {
         driver.get("http://localhost:" + 8080 + "/");
     }
@@ -48,6 +48,18 @@ public class Stepdefs {
         assertTrue(driver.findElement(By.tagName("body"))
                 .getText().contains(arg1));
     }
+
+    @When("^user navigates to \"([^\"]*)\"$")
+    public void user_navigates_to(String arg1) throws Throwable {
+        clickLinkWithText(arg1);
+    }
+
+    @Then("^\"([^\"]*)\" are shown$")
+    public void are_shown(String arg1) throws Throwable {
+        assertTrue(driver.findElement(By.tagName("body"))
+                .getText().contains("Here you can find all recommendations"));
+    }
+
 
     private void clickLinkWithText(String text) {
         int trials = 0;
