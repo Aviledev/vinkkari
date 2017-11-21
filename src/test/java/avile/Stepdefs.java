@@ -38,9 +38,8 @@ public class Stepdefs {
 
     @Given("^user is at the \"([^\"]*)\" page$")
     public void userIsAtThePage(String arg0) throws Throwable {
-        driver.get("http://localhost:" + 8080 + "/"+arg0);
+        driver.get("http://localhost:" + 8080 + "/" + arg0);
     }
-
 
     @Then("^\"([^\"]*)\" is shown$")
     public void is_shown(String arg1) throws Throwable {
@@ -65,7 +64,6 @@ public class Stepdefs {
         assertFalse(driver.findElement(By.id(arg0)).getCssValue("display").equals("none"));
     }
 
-
     @When("^user clicks Create button$")
     public void userClicksCreateButton() throws Throwable {
         clickButtonWithId("openCreateFormBtn");
@@ -81,9 +79,36 @@ public class Stepdefs {
         driver.findElement(By.id("submitBtn")).click();
     }
 
+    @When("^user clicks \"([^\"]*)\" link$")
+    public void user_clicks_link(String arg1) throws Throwable {
+        clickLinkWithText(arg1);
+    }
+
     @Then("^the entry with title \"([^\"]*)\" is added$")
     public void theEntryWithTitleIsAdded(String arg0) throws Throwable {
         assertTrue(driver.getPageSource().contains(arg0));
+    }
+
+    @Then("^user is at the page which title is \"([^\"]*)\"$")
+    public void user_is_at_the_page_which_title_is(String arg1) throws Throwable {
+        assertTrue(driver.findElement(By.tagName("h1"))
+                .getText().contains(arg1));
+    }
+
+    @Then("^user is at the page which title is \"([^\"]*)\" and contain Delete button$")
+    public void user_is_at_the_page_which_title_is_and_contain_Delete_button(String arg1) throws Throwable {
+        user_is_at_the_page_which_title_is(arg1);
+        assertTrue(driver.findElement(By.id("deleteBtn")).isDisplayed());
+    }
+
+    @When("^user clicks Delete button$")
+    public void user_clicks_Delete_button() throws Throwable {
+        clickButtonWithId("deleteBtn");
+    }
+
+    @Then("^the entry with title \"([^\"]*)\" is deleted$")
+    public void the_entry_with_title_is_deleted(String arg1) throws Throwable {
+        assertTrue(!driver.getPageSource().contains(arg1));
     }
 
     private void clickButtonWithId(String id) {
@@ -103,7 +128,5 @@ public class Stepdefs {
                 .until(ExpectedConditions.elementToBeClickable(By.name(field)));
         element.sendKeys(input);
     }
-
-
 
 }
