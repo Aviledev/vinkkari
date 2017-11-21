@@ -51,7 +51,7 @@
         </li>
     </ul>
 
-    <a class="btn btn-primary" th:href="@{/books/{id}/edit(id=${recommendation.id})}" role="button">Edit</a>
+    <a class="btn btn-primary" id="editBtn" th:href="@{/books/{id}/edit(id=${recommendation.id})}" role="button">Edit</a>
 
     <form method="post"
           class="destroy-form"
