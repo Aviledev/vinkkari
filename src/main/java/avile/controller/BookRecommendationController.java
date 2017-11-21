@@ -15,12 +15,13 @@ public class BookRecommendationController {
     @Autowired
     BookRecommendationRepository bookRecommendationRepository;
 
+
     @Autowired
     public void setUp() {
         BookRecommendation b1 = new BookRecommendation();
         b1.setTitle("eka kirja");
         b1.setAuthor("Kari Ojala");
-        b1.setType("Book");
+        b1.setType("book");
         b1.setIsbn("3435323");
         b1.setDate(new Date());
         bookRecommendationRepository.save(b1);
@@ -28,7 +29,7 @@ public class BookRecommendationController {
         BookRecommendation b2 = new BookRecommendation();
         b2.setTitle("toka kirja");
         b2.setAuthor("Jaakko Peltola");
-        b2.setType("Book");
+        b2.setType("book");
         b2.setIsbn("5235235");
         b2.setDate(new Date());
         bookRecommendationRepository.save(b2);
@@ -41,9 +42,10 @@ public class BookRecommendationController {
     }
 
     @GetMapping("/books/{id}")
-    public String getOneById(Long Id) {
-
-        return "";
+    public String getOneById(Model model, @PathVariable Long id) {
+        BookRecommendation bookRecommendation = bookRecommendationRepository.findOne(id);
+        model.addAttribute("recommendation", bookRecommendation);
+        return "recommendation_"+bookRecommendation.getType();
     }
 
     @PostMapping("/books")
@@ -57,16 +59,42 @@ public class BookRecommendationController {
         bookRecommendation.setTitle(title);
         bookRecommendation.setAuthor(author);
         bookRecommendation.setIsbn(isbn);
-        bookRecommendation.setType("Book");
+        bookRecommendation.setType("book");
         bookRecommendation.setDate(new Date());
         bookRecommendationRepository.save(bookRecommendation);
         return "redirect:/books";
     }
 
-    @PutMapping("/books/{id}")
-    public String updateOne(Long id) {
+    @GetMapping("/books/{id}/edit")
+    public String getUpdateOne(Model model, @PathVariable Long id) {
+        BookRecommendation bookRecommendation = bookRecommendationRepository.findOne(id);
+        model.addAttribute("recommendation", bookRecommendation);
+        return "recommendation_"+bookRecommendation.getType()+"_edit";
+    }
 
-        return "";
+    @PostMapping("/books/{id}/edit")
+    public String saveUpdateOne(@PathVariable Long id,
+                            @RequestParam String title,
+                            @RequestParam String author,
+                            @RequestParam String isbn
+                           /* @RequestParam String tags,*/
+                           /* @RequestParam String prerequisiteCourses, */
+                           /* @RequestParam String relatedCourses */) {
+        BookRecommendation bookRecommendation = bookRecommendationRepository.findOne(id);
+        bookRecommendation.setTitle(title);
+        bookRecommendation.setAuthor(author);
+        bookRecommendation.setIsbn(isbn);
+        bookRecommendation.setType("book");
+        bookRecommendation.setDate(new Date());
+        bookRecommendationRepository.save(bookRecommendation);
+
+        return "redirect:/books/"+id;
+    }
+
+    @PostMapping("/books/{id}/delete")
+    public String deleteOne(@PathVariable Long id) {
+        bookRecommendationRepository.delete(id);
+        return "redirect:/books";
     }
 
 }

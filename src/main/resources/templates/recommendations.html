@@ -42,7 +42,7 @@
             <li class="list-group-item list-group-item-action list-group-item-container" th:each="recommendation : ${recommendations}">
                 <div class="row">
                     <div class="col-6 col-sm-8 col-md-10">
-                        <h5 class="list-group-item-title"><a href="#" th:text="${recommendation.title}"></a></h5>
+                        <h5 class="list-group-item-title"><a th:href="@{/books/{id}(id=${recommendation.id})}" th:text="${recommendation.title}"></a></h5>
                         <small class="text-muted" th:text="${recommendation.type}">Kirja</small>
                     </div>
                     <div class="col-6 col-sm-4 col-md-2">
@@ -52,7 +52,7 @@
                 </div>
             </li>
 
-         
+
         </ul>
     </div>
 
