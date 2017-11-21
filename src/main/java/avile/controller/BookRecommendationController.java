@@ -105,7 +105,6 @@ public class BookRecommendationController {
     @PostMapping("/books/search")
     public String searchBookByTitle(Model model, @RequestParam(required = false) String bookTitle) {
         List<BookRecommendation> books = bookRecommendationService.getBookRecommendationsWithTitleLike("%"+bookTitle+"%");
-        System.out.println(books.size());
         model.addAttribute("books", books);
         model.addAttribute("searchTerm", bookTitle);
         return "search_results";
