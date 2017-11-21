@@ -111,6 +111,27 @@ public class Stepdefs {
         assertTrue(!driver.getPageSource().contains(arg1));
     }
 
+    @Then("^user is at the page which title is \"([^\"]*)\" and contain Edit button$")
+    public void user_is_at_the_page_which_title_is_and_contain_Edit_button(String arg1) throws Throwable {
+        user_is_at_the_page_which_title_is(arg1);
+        assertTrue(driver.findElement(By.id("editBtn")).isDisplayed());
+    }
+
+    @When("^user clicks Edit button$")
+    public void user_clicks_Edit_button() throws Throwable {
+        clickLinkWithText("Edit");
+    }
+
+    @When("^user clicks Save button$")
+    public void user_clicks_Save_button() throws Throwable {
+        clickButtonWithId("saveBtn");
+    }
+
+    @Then("^the entry with title \"([^\"]*)\", author \"([^\"]*)\" and isbn \"([^\"]*)\" is saved$")
+    public void the_entry_with_title_author_and_isbn_is_saved(String arg1, String arg2, String arg3) throws Throwable {
+        assertTrue(driver.getPageSource().contains(arg1) && driver.getPageSource().contains(arg2) && driver.getPageSource().contains(arg3));
+    }
+
     private void clickButtonWithId(String id) {
         WebElement element = new WebDriverWait(driver, 10)
                 .until(ExpectedConditions.elementToBeClickable(By.id(id)));

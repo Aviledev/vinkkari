@@ -17,7 +17,7 @@
 
             <div th:replace="fragments/header :: header(active = 'Recommendations')"></div>
 
-            <form method="post"
+            <form method="post" id="editBookForm"
                   th:action="@{/books/{id}/edit(id=${recommendation.id})}">
                 <div class="jumbotron title-jumbotron">
                     <div class="mx-auto">
