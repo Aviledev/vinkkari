@@ -3,4 +3,5 @@ Feature: user can search for book recommendations
     Given user is at the "home" page
     Then user searches for "kirja" and submits the search form
     And user is at the "Search results" page
-    Then book with title "TestiKirjaM" is found
+    Then book with title "eka kirja" is found
+    And book with title "toka kirja" is found5
