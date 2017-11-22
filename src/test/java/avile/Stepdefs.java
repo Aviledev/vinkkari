@@ -2,6 +2,7 @@ package avile;
 
 import cucumber.api.PendingException;
 import cucumber.api.java.After;
+import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -156,8 +157,13 @@ public class Stepdefs {
     }
 
 
-    @Then("^user searches for \"([^\"]*)\" and submits the form$")
-    public void userSearchesForAndSubmitsTheForm(String arg0) throws Throwable {
+    @Then("^user searches for \"([^\"]*)\" and submits the search form$")
+    public void userSearchesForAndSubmitsTheSearchForm(String arg0) throws Throwable {
         this.enterInputToField(arg0 + Keys.ENTER, "bookTitle");
+    }
+
+    @And("^book with title \"([^\"]*)\" is found$")
+    public void bookWithTitleIsFound(String arg0) throws Throwable {
+        assertTrue(driver.getPageSource().contains(arg0));
     }
 }
