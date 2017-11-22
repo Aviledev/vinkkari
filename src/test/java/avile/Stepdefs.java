@@ -1,5 +1,6 @@
 package avile;
 
+import cucumber.api.PendingException;
 import cucumber.api.java.After;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
@@ -150,4 +151,10 @@ public class Stepdefs {
         element.sendKeys(input);
     }
 
+
+    @Then("^user searches for \"([^\"]*)\" and submits the form$")
+    public void userSearchesForAndSubmitsTheForm(String arg0) throws Throwable {
+        this.enterInputToField(arg0,"bookTitle");
+        this.clickButtonWithId("searchBtn");
+    }
 }
