@@ -5,9 +5,12 @@ import cucumber.api.java.After;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+
 import java.io.File;
+
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertFalse;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
@@ -155,6 +158,6 @@ public class Stepdefs {
 
     @Then("^user searches for \"([^\"]*)\" and submits the form$")
     public void userSearchesForAndSubmitsTheForm(String arg0) throws Throwable {
-        this.enterInputToField(arg0,"bookTitle"+ Keys.ENTER);
+        this.enterInputToField(arg0 + Keys.ENTER, "bookTitle");
     }
 }
