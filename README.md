@@ -10,6 +10,8 @@
 
 [Sovellus](https://vinkkari.herokuapp.com/)
 
+[Definition of Done](https://github.com/Aviledev/vinkkari/blob/master/dod.md)
+
 Suorita sovellus komennolla _gradle run_, käynnistyy osoitteeseen http://localhost:8080
 
 Testit suoritetaan komennolla _gradle test_
