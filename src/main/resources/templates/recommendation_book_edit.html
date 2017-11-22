@@ -1,72 +1,76 @@
 <!doctype html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <title>VINKKARI | Recommendations</title>
-    <!-- Required meta tags -->
-    <meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <head>
+        <title>VINKKARI | Recommendations</title>
+        <!-- Required meta tags -->
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css"
-          integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous"/>
-    <link rel="stylesheet" href="../static/css/bootstrap-tagsinput.css" th:href="@{/css/bootstrap-tagsinput.css}"/>
-    <link rel="stylesheet" href="../static/css/recommendation_book_edit.css" th:href="@{/css/recommendation_book_edit.css}"/>
-</head>
-<body>
-<div class="container">
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css"
+              integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous"/>
+        <link rel="stylesheet" href="../static/css/bootstrap-tagsinput.css" th:href="@{/css/bootstrap-tagsinput.css}"/>
+        <link rel="stylesheet" href="../static/css/recommendation_book_edit.css" th:href="@{/css/recommendation_book_edit.css}"/>
+    </head>
+    <body>
+        <div class="container">
 
-    <div th:replace="fragments/header :: header(active = 'Recommendations')"></div>
+            <div th:replace="fragments/header :: header(active = 'Recommendations')"></div>
 
-    <form>
-    <div class="jumbotron title-jumbotron">
-        <div class="mx-auto">
-            <h1 class="display-4"><input type="text" th:value="${recommendation.title}" name="title" class="form-control title-input-form" id="inputBookTitle" placeholder="Enter title"/>(<b th:text="${recommendation.type}"></b>)</h1>
-            <p class="lead">Created by <a href="#">Firstname Lastname</a></p>
-            <input type="text" value="aaa,bbb,ccc" name="tags" class="form-control edit-input-form" id="inputBookTags" placeholder="Enter tags" data-role="tagsinput"/>
+            <form method="post" id="editBookForm"
+                  th:action="@{/books/{id}/edit(id=${recommendation.id})}">
+                <div class="jumbotron title-jumbotron">
+                    <div class="mx-auto">
+                        <h1 class="display-4"><input type="text" th:value="${recommendation.title}" name="title" class="form-control title-input-form" id="inputBookTitle" placeholder="Enter title"/>(<b th:text="${recommendation.type}"></b>)</h1>
+                        <p class="lead">Created by <a href="#">Firstname Lastname</a></p>
+                        <input type="text" value="aaa,bbb,ccc" name="tags" class="form-control edit-input-form" id="inputBookTags" placeholder="Enter tags" data-role="tagsinput"/>
+                    </div>
+                </div>
+
+                <hr class="my-4"/>
+
+                <ul class="list-group mb-5">
+                    <li class="list-group-item"><b>Author:</b> <input type="text" th:value="${recommendation.author}" name="author" class="form-control edit-input-form" id="inputBookAuthor" placeholder="Enter author"/></li>
+                    <li class="list-group-item"><b>ISBN:</b> <input type="text" th:value="${recommendation.isbn}" name="isbn" class="form-control edit-input-form" id="inputBookIsbn" placeholder="Enter ISBN"/>
+                    </li>
+                    <li class="list-group-item"><b>Prerequisite courses:</b>
+                        <select multiple="multiple" name="prerequisiteCourses" class="form-control" id="inputPrerequisiteCourses">
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5</option>
+                        </select>
+                    </li>
+                    <li class="list-group-item"><b>Related courses:</b>
+                        <select multiple="multiple" name="relatedCourses" class="form-control" id="inputRelatedCourses">
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5</option>
+                        </select>
+                    </li>
+                </ul>
+
+                <button type="submit" id="saveBtn" class="btn btn-default">Save</button>
+            </form>
+
         </div>
-    </div>
-
-    <hr class="my-4"/>
-
-    <ul class="list-group mb-5">
-        <li class="list-group-item"><b>Author:</b> <input type="text" th:value="${recommendation.author}" name="author" class="form-control edit-input-form" id="inputBookAuthor" placeholder="Enter author"/></li>
-        <li class="list-group-item"><b>ISBN:</b> <input type="text" th:value="${recommendation.isbn}" name="isbn" class="form-control edit-input-form" id="inputBookIsbn" placeholder="Enter ISBN"/>
-        </li>
-        <li class="list-group-item"><b>Prerequisite courses:</b>
-            <select multiple="multiple" name="prerequisiteCourses" class="form-control" id="inputPrerequisiteCourses">
-                <option>1</option>
-                <option>2</option>
-                <option>3</option>
-                <option>4</option>
-                <option>5</option>
-            </select>
-        </li>
-        <li class="list-group-item"><b>Related courses:</b>
-            <select multiple="multiple" name="relatedCourses" class="form-control" id="inputRelatedCourses">
-                <option>1</option>
-                <option>2</option>
-                <option>3</option>
-                <option>4</option>
-                <option>5</option>
-            </select>
-        </li>
-    </ul>
-    </form>
-</div>
-<div th:replace="fragments/footer :: footer"></div>
+        <div th:replace="fragments/footer :: footer"></div>
 
 
-<!-- Optional JavaScript -->
-<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-<script src="https://code.jquery.com/jquery-3.2.1.min.js"
+        <!-- Optional JavaScript -->
+        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        <script src="https://code.jquery.com/jquery-3.2.1.min.js"
         integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"
-        integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh"
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"
+                integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh"
         crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"
-        integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ"
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"
+                integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ"
         crossorigin="anonymous"></script>
-<script src="../static/js/bootstrap-tagsinput.min.js" th:src="@{/js/bootstrap-tagsinput.min.js}"></script>
-<script src="../static/js/recommendation_book.js.js" th:src="@{/js/recommendation_book_edit.js}"></script>
-</body>
+        <script src="../static/js/bootstrap-tagsinput.min.js" th:src="@{/js/bootstrap-tagsinput.min.js}"></script>
+        <script src="../static/js/recommendation_book.js.js" th:src="@{/js/recommendation_book_edit.js}"></script>
+    </body>
 </html>
