@@ -159,12 +159,12 @@ public class Stepdefs {
 
     @Then("^user searches for \"([^\"]*)\" and submits the search form$")
     public void userSearchesForAndSubmitsTheSearchForm(String arg0) throws Throwable {
-        this.enterInputToField(arg0 + Keys.ENTER, "bookTitle");
+        this.enterInputToField(arg0, "bookTitle");
+        this.clickButtonWithId("searchBtn");
     }
 
     @And("^book with title \"([^\"]*)\" is found$")
     public void bookWithTitleIsFound(String arg0) throws Throwable {
-        System.out.println("########PAGESOURCE#########"+driver.getPageSource()+ "#########PAGESOURCE########");
         new WebDriverWait(driver, 10)
                 .until(ExpectedConditions.titleIs("VINKKARI | Search results"));
         System.out.println(driver.getPageSource());
@@ -173,8 +173,6 @@ public class Stepdefs {
 
     @And("^user is at the Search results page after searching \"([^\"]*)\"$")
     public void userIsAtTheSearchResultsPageAfterSearching(String arg0) throws Throwable {
-
-        System.out.println("########PAGESOURCE#########"+driver.getPageSource()+ "#########PAGESOURCE########");
         assertTrue(driver.getPageSource().contains("Search results for <b>" + arg0 + "</b>"));
     }
 }
