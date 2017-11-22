@@ -4,4 +4,4 @@ Feature: user can search for book recommendations
     Then user searches for "kirja" and submits the search form
     And user is at the "Search results" page
     Then book with title "eka kirja" is found
-    And book with title "toka kirja" is found5
+    And book with title "toka kirja" is found

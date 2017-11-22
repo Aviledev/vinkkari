@@ -164,7 +164,7 @@ public class Stepdefs {
 
     @And("^book with title \"([^\"]*)\" is found$")
     public void bookWithTitleIsFound(String arg0) throws Throwable {
-        System.out.println(driver.getPageSource());
+        System.out.println("########PAGESOURCE#########"+driver.getPageSource()+ "#########PAGESOURCE########");
         new WebDriverWait(driver, 10)
                 .until(ExpectedConditions.titleIs("VINKKARI | Search results"));
         System.out.println(driver.getPageSource());
