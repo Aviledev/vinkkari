@@ -9,6 +9,7 @@ import java.io.File;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertFalse;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -154,7 +155,6 @@ public class Stepdefs {
 
     @Then("^user searches for \"([^\"]*)\" and submits the form$")
     public void userSearchesForAndSubmitsTheForm(String arg0) throws Throwable {
-        this.enterInputToField(arg0,"bookTitle");
-        this.clickButtonWithId("searchBtn");
+        this.enterInputToField(arg0,"bookTitle"+ Keys.ENTER);
     }
 }
