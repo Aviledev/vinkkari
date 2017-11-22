@@ -170,4 +170,9 @@ public class Stepdefs {
         System.out.println(driver.getPageSource());
         assertTrue(driver.getPageSource().contains(arg0));
     }
+
+    @And("^user is at the Search results page after searching \"([^\"]*)\"$")
+    public void userIsAtTheSearchResultsPageAfterSearching(String arg0) throws Throwable {
+        assertTrue(driver.getPageSource().contains("Search results for " + arg0));
+    }
 }
