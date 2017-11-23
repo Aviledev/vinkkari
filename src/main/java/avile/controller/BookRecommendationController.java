@@ -36,7 +36,7 @@ public class BookRecommendationController {
     }
 
     @PostMapping("/books/{id}/delete")
-    public String deleteOne(@RequestParam Long id) {
+    public String deleteOne(@PathVariable Long id) {
         bookRecommendationService.deleteBookRecommendationById(id);
         return "redirect:/recommendations";
     }
