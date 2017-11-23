@@ -2,6 +2,7 @@ package avile.controller;
 
 import avile.domain.BookRecommendation;
 import avile.domain.Recommendation;
+import avile.enums.RecommendationType;
 import avile.repository.BookRecommendationRepository;
 import avile.repository.RecommendationRepository;
 import avile.service.BookRecommendationService;
@@ -14,13 +15,7 @@ import java.util.Date;
 import java.util.List;
 
 @Controller
-public class BookRecommendationController {
-
-    @Autowired
-    BookRecommendationRepository bookRecommendationRepository;
-
-    @Autowired
-    RecommendationRepository recommendationRepository;
+public class RecommendationController {
 
     @Autowired
     BookRecommendationService bookRecommendationService;
@@ -29,37 +24,33 @@ public class BookRecommendationController {
     @Autowired
     public void setUp() {
         BookRecommendation b1 = new BookRecommendation();
-        Recommendation r1 = new Recommendation();
-        r1 = recommendationRepository.save(r1);
         b1.setTitle("eka kirja");
         b1.setAuthor("Kari Ojala");
-        b1.setType("book");
+        b1.setType(RecommendationType.BOOK);
         b1.setIsbn("3435323");
         b1.setDate(new Date());
-        b1.setRecommendation(r1);
-        bookRecommendationRepository.save(b1);
+
+        bookRecommendationService.addBookRecommendation(b1);
+
 
         BookRecommendation b2 = new BookRecommendation();
-        Recommendation r2 = new Recommendation();
-        r2 = recommendationRepository.save(r2);
         b2.setTitle("toka kirja");
         b2.setAuthor("Jaakko Peltola");
-        b2.setType("book");
+        b2.setType(RecommendationType.BOOK);
         b2.setIsbn("5235235");
         b2.setDate(new Date());
-        b2.setRecommendation(r2);
-        bookRecommendationRepository.save(b2);
+        bookRecommendationService.addBookRecommendation(b2);
     }
 
     @GetMapping("/books")
     public String getAll(Model model) {
-        model.addAttribute("recommendations", bookRecommendationRepository.findAll());
+        model.addAttribute("recommendations", bookRecommendationService.getBookRecommendations());
         return "recommendations";
     }
 
     @GetMapping("/books/{id}")
     public String getOneById(Model model, @PathVariable Long id) {
-        BookRecommendation bookRecommendation = bookRecommendationRepository.findOne(id);
+        BookRecommendation bookRecommendation = bookRecommendationService.getBookRecommendation(id);
         model.addAttribute("recommendation", bookRecommendation);
         return "recommendation_" + bookRecommendation.getType();
     }
@@ -73,23 +64,19 @@ public class BookRecommendationController {
                            /* @RequestParam String relatedCourses */) {
         BookRecommendation bookRecommendation = new BookRecommendation();
 
-        // Create recommendation
-        Recommendation recommendation = new Recommendation();
-        recommendation = recommendationRepository.save(recommendation);
-
         bookRecommendation.setTitle(title);
         bookRecommendation.setAuthor(author);
         bookRecommendation.setIsbn(isbn);
-        bookRecommendation.setType("book");
+        bookRecommendation.setType(RecommendationType.BOOK);
         bookRecommendation.setDate(new Date());
-        bookRecommendation.setRecommendation(recommendation);
-        bookRecommendationRepository.save(bookRecommendation);
+
+        bookRecommendationService.addBookRecommendation(bookRecommendation);
         return "redirect:/books";
     }
 
     @GetMapping("/books/{id}/edit")
     public String getUpdateOne(Model model, @PathVariable Long id) {
-        BookRecommendation bookRecommendation = bookRecommendationRepository.findOne(id);
+        BookRecommendation bookRecommendation = bookRecommendationService.getBookRecommendation(id);
         model.addAttribute("recommendation", bookRecommendation);
         return "recommendation_" + bookRecommendation.getType() + "_edit";
     }
@@ -102,23 +89,21 @@ public class BookRecommendationController {
                            /* @RequestParam String tags,*/
                            /* @RequestParam String prerequisiteCourses, */
                            /* @RequestParam String relatedCourses */) {
-        BookRecommendation bookRecommendation = bookRecommendationRepository.findOne(id);
+        BookRecommendation bookRecommendation = bookRecommendationService.getBookRecommendation(id);
         bookRecommendation.setTitle(title);
         bookRecommendation.setAuthor(author);
         bookRecommendation.setIsbn(isbn);
-        bookRecommendation.setType("book");
+        bookRecommendation.setType(RecommendationType.BOOK);
         bookRecommendation.setDate(new Date());
-        bookRecommendationRepository.save(bookRecommendation);
+
+        bookRecommendationService.updateBookRecommendation(bookRecommendation);
 
         return "redirect:/books/" + id;
     }
 
     @PostMapping("/books/{id}/delete")
     public String deleteOne(@PathVariable Long id) {
-        BookRecommendation bookRecommendation = bookRecommendationRepository.findOne(id);
-        Recommendation r = bookRecommendation.getRecommendation();
-        bookRecommendationRepository.delete(id);
-        recommendationRepository.delete(r);
+        bookRecommendationService.deleteBookRecommendationById(id);
         return "redirect:/books";
     }
 

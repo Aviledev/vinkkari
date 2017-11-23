@@ -1,7 +1,9 @@
 package avile.service;
 
 import avile.domain.BookRecommendation;
+import avile.domain.Recommendation;
 import avile.repository.BookRecommendationRepository;
+import avile.repository.RecommendationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,6 +14,9 @@ public class BookRecommendationService {
     @Autowired
     private BookRecommendationRepository bookRepo;
 
+    @Autowired
+    private RecommendationRepository recommendationRepository;
+
     public List<BookRecommendation> getBookRecommendationsWithTitleLike(String title) {
         return bookRepo.findBookRecommendationsByTitleIsLike(title);
     }
@@ -21,6 +26,9 @@ public class BookRecommendationService {
     }
 
     public Long addBookRecommendation(BookRecommendation book) {
+        /*Recommendation r = new Recommendation();
+        r = recommendationRepository.save(r);
+        book.setRecommendation(r);*/
         return bookRepo.save(book).getId();
     }
 
@@ -33,6 +41,16 @@ public class BookRecommendationService {
     }
 
     public void deleteBookRecommendationById(Long bookId) {
-        bookRepo.delete(bookId);
+        BookRecommendation bookRecommendation = bookRepo.findOne(bookId);
+        if (bookRecommendation != null) {
+            Recommendation r = bookRecommendation.getRecommendation();
+            bookRepo.delete(bookId);
+            recommendationRepository.delete(r);
+        }
+
+    }
+
+    public BookRecommendation getBookRecommendation(Long id) {
+        return bookRepo.findOne(id);
     }
 }
