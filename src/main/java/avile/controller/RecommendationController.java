@@ -51,6 +51,8 @@ public class RecommendationController {
         return "recommendations";
     }
 
+    @GetMapping("/recommendations/{id}")
+
     @PostMapping("/recommendation/search")
     public String searchRecommendationByTitle(Model model, @RequestParam(required = false) String title) {
         List<BookRecommendation> books = bookRecommendationService.getBookRecommendationsWithTitleLike("%"+title+"%");
