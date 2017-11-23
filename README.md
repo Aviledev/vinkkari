@@ -16,6 +16,7 @@
 
 ![Tietokantakaavio (vanha)](https://github.com/Aviledev/vinkkari/blob/master/doc/database_diagram.svg)
 
+-------------
 
 ![Tietokantakaavio (uusi)](https://github.com/Aviledev/vinkkari/blob/master/doc/database_diagram_new.svg)
 
