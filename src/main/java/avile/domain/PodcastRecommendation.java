@@ -1,20 +1,31 @@
 package avile.domain;
 
 import java.util.Date;
-import java.util.List;
 import javax.persistence.Entity;
-import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
 @Entity
-public class BookRecommendation extends AbstractPersistable<Long>{
-    // @Max(20)
+public class PodcastRecommendation extends AbstractPersistable<Long>{
+    
+    @NotNull
+    @Size(min=2, max=50)
     private String title;
+    
+    @Max(40)
     private String author;
+    
+    @NotNull
     private String type;
-    private String isbn;
+    
+    @NotNull
+    private String url;
+    
+    @Max(300)
     private String description;
     //private List<String> tags;
     //private List<String> prerequisiteCourses;
@@ -23,11 +34,7 @@ public class BookRecommendation extends AbstractPersistable<Long>{
     @Temporal(TemporalType.TIMESTAMP)
     private Date date;
 
-    @OneToOne
-    private Recommendation recommendation;
-
-    public BookRecommendation() {
-        
+    public PodcastRecommendation() {
     }
 
     public String getTitle() {
@@ -54,12 +61,20 @@ public class BookRecommendation extends AbstractPersistable<Long>{
         this.type = type;
     }
 
-    public String getIsbn() {
-        return isbn;
+    public String getUrl() {
+        return url;
     }
 
-    public void setIsbn(String isbn) {
-        this.isbn = isbn;
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public Date getDate() {
@@ -69,12 +84,7 @@ public class BookRecommendation extends AbstractPersistable<Long>{
     public void setDate(Date date) {
         this.date = date;
     }
-
-    public Recommendation getRecommendation() {
-        return recommendation;
-    }
-
-    public void setRecommendation(Recommendation recommendation) {
-        this.recommendation = recommendation;
-    }
+    
+    
+    
 }
