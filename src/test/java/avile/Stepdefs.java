@@ -1,13 +1,19 @@
 package avile;
 
+import cucumber.api.PendingException;
 import cucumber.api.java.After;
+import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+
 import java.io.File;
+
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertFalse;
+
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -150,4 +156,23 @@ public class Stepdefs {
         element.sendKeys(input);
     }
 
+
+    @Then("^user searches for \"([^\"]*)\" and submits the search form$")
+    public void userSearchesForAndSubmitsTheSearchForm(String arg0) throws Throwable {
+        this.enterInputToField(arg0, "bookTitle");
+        this.clickButtonWithId("searchBtn");
+    }
+
+    @And("^book with title \"([^\"]*)\" is found$")
+    public void bookWithTitleIsFound(String arg0) throws Throwable {
+        new WebDriverWait(driver, 10)
+                .until(ExpectedConditions.titleIs("VINKKARI | Search results"));
+        System.out.println(driver.getPageSource());
+        assertTrue(driver.getPageSource().contains(arg0));
+    }
+
+    @And("^user is at the Search results page after searching \"([^\"]*)\"$")
+    public void userIsAtTheSearchResultsPageAfterSearching(String arg0) throws Throwable {
+        assertTrue(driver.getPageSource().contains("Search results for <b>" + arg0 + "</b>"));
+    }
 }

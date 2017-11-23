@@ -1,0 +1,17 @@
+// {type:class}
+// {direction:leftToRight}
+// {generate:true}
+[Ehdotus| id (PK)]
+[Tag| id (PK) | ehdotus_id (FK) | nimi (string)]
+[Kurssi| id (PK) | ehdotus_id (FK) | nimi (string)]
+[Kirja| id (PK) | ehdotus_id (FK) | kirjoittaja (string) | otsikko (string) | tyyppi (string) | ISBN (string)]
+[Kirja]1-1[Ehdotus]
+[Video| id (PK) | ehdotus_id (FK) | otsikko (string) | url (string) | kommentti (string)]
+[Video]1-1[Ehdotus]
+[Blogipostaus| id (PK) | ehdotus_id (FK) | otsikko (string) | kirjoittaja (string) | url (string)]
+[Blogipostaus]1-1[Ehdotus]
+[Podcast| id (PK)|ehdotus_id (FK) |author (string)|otsikko (string)|kuvaus (string)]
+[Podcast]1-1[Ehdotus]
+[Kayttaja| id (PK) | email (string) | password (string)]
+[Ehdotus]*-*[Tag]
+[Ehdotus]*-*[Kurssi]
