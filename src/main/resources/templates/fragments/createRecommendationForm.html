@@ -6,12 +6,12 @@
 </head>
 <body>
 <div th:fragment="createRecommendationForm">
-    <div class="modal fade" id="createBookModal" tabindex="-1" role="dialog" aria-labelledby="createBookModalTitle"
+    <div class="modal fade" id="createRecommendationModal" tabindex="-1" role="dialog" aria-labelledby="createRecommendationModalTitle"
          aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="createBookModalTitle">Create new recommendation</h5>
+                    <h5 class="modal-title" id="createRecommendationModalTitle">Create new recommendation</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -53,12 +53,16 @@
                                     <input type="text" name="isbn" class="form-control" id="inputBookIsbn" placeholder="Enter ISBN"/>
                                 </div>
                                 <div class="form-group">
+                                    <label for="inputBookDescription">Description</label>
+                                    <textarea type="text" rows="3" name="description" class="form-control" id="inputBookDescription" placeholder="Enter description"></textarea>
+                                </div>
+                                <div class="form-group">
                                     <label class="d-block" for="inputBookTags">Tags</label>
                                     <input type="text" name="tags" class="form-control" id="inputBookTags" placeholder="Enter tags" data-role="tagsinput"/>
                                 </div>
                                 <div class="form-group">
-                                    <label for="inputPrerequisiteCourses">Prerequisite courses <a href="#" class="">Missing?</a></label>
-                                    <select multiple="multiple" name="prerequisiteCourses" class="form-control" id="inputPrerequisiteCourses">
+                                    <label for="inputBookPrerequisiteCourses">Prerequisite courses <a href="#" class="">Missing?</a></label>
+                                    <select multiple="multiple" name="prerequisiteCourses" class="form-control" id="inputBookPrerequisiteCourses">
                                         <option>1</option>
                                         <option>2</option>
                                         <option>3</option>
@@ -67,8 +71,8 @@
                                     </select>
                                 </div>
                                 <div class="form-group">
-                                    <label for="inputRelatedCourses">Recommended courses <a href="#" class="">Missing?</a></label>
-                                    <select multiple="multiple" name="relatedCourses" class="form-control" id="inputRelatedCourses">
+                                    <label for="inputBookRelatedCourses">Recommended courses <a href="#" class="">Missing?</a></label>
+                                    <select multiple="multiple" name="relatedCourses" class="form-control" id="inputBookRelatedCourses">
                                         <option>1</option>
                                         <option>2</option>
                                         <option>3</option>
@@ -79,13 +83,146 @@
                                 </form>
                             </div>
                             <div class="tab-pane fade" id="pills-video" role="tabpanel" aria-labelledby="pills-video-tab">
-                                b
+                                <form method="POST" th:action="@{/recommendations/video}" id="createVideoForm">
+                                    <div class="form-group">
+                                        <label for="inputVideoTitle">Title</label>
+                                        <input type="text" name="title" class="form-control" id="inputVideoTitle" placeholder="Enter title"/>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="inputVideoAuthor">Author</label>
+                                        <input type="text" name="author" class="form-control" id="inputVideoAuthor" placeholder="Enter author"/>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="inputVideoUrl">URL</label>
+                                        <input type="url" name="isbn" class="form-control" id="inputVideoUrl" placeholder="Enter URL"/>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="inputVideoDescription">Description</label>
+                                        <textarea type="text" rows="3" name="description" class="form-control" id="inputVideoDescription" placeholder="Enter description"></textarea>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="d-block" for="inputVideoTags">Tags</label>
+                                        <input type="text" name="tags" class="form-control" id="inputVideoTags" placeholder="Enter tags" data-role="tagsinput"/>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="inputVideoPrerequisiteCourses">Prerequisite courses <a href="#" class="">Missing?</a></label>
+                                        <select multiple="multiple" name="prerequisiteCourses" class="form-control" id="inputVideoPrerequisiteCourses">
+                                            <option>1</option>
+                                            <option>2</option>
+                                            <option>3</option>
+                                            <option>4</option>
+                                            <option>5</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="inputVideoRelatedCourses">Recommended courses <a href="#" class="">Missing?</a></label>
+                                        <select multiple="multiple" name="relatedCourses" class="form-control" id="inputVideoRelatedCourses">
+                                            <option>1</option>
+                                            <option>2</option>
+                                            <option>3</option>
+                                            <option>4</option>
+                                            <option>5</option>
+                                        </select>
+                                    </div>
+                                </form>
                             </div>
                             <div class="tab-pane fade" id="pills-blogpost" role="tabpanel"
-                                 aria-labelledby="pills-blogpost-tab">c
+                                 aria-labelledby="pills-blogpost-tab">
+                                <form method="POST" th:action="@{/recommendations/blogpost}" id="createBlogpostForm">
+                                    <div class="form-group">
+                                        <label for="inputBlogpostTitle">Title</label>
+                                        <input type="text" name="title" class="form-control" id="inputBlogpostTitle" placeholder="Enter title"/>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="inputBlogpostAuthor">Author</label>
+                                        <input type="text" name="author" class="form-control" id="inputBlogpostAuthor" placeholder="Enter author"/>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="inputBlogpostUrl">URL</label>
+                                        <input type="url" name="isbn" class="form-control" id="inputBlogpostUrl" placeholder="Enter URL"/>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="inputBlogpostDescription">Description</label>
+                                        <textarea type="text" rows="3" name="description" class="form-control" id="inputBlogpostDescription" placeholder="Enter description"></textarea>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="d-block" for="inputBlogpostReleaseDate">Release date</label>
+                                        <input type="date" name="releaseDate" class="form-control" id="inputBlogpostReleaseDate" placeholder="Enter release date"/>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="d-block" for="inputBlogpostTags">Tags</label>
+                                        <input type="text" name="tags" class="form-control" id="inputBlogpostTags" placeholder="Enter tags" data-role="tagsinput"/>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="inputBlogpostPrerequisiteCourses">Prerequisite courses <a href="#" class="">Missing?</a></label>
+                                        <select multiple="multiple" name="prerequisiteCourses" class="form-control" id="inputBlogpostPrerequisiteCourses">
+                                            <option>1</option>
+                                            <option>2</option>
+                                            <option>3</option>
+                                            <option>4</option>
+                                            <option>5</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="inputBlogpostRelatedCourses">Recommended courses <a href="#" class="">Missing?</a></label>
+                                        <select multiple="multiple" name="relatedCourses" class="form-control" id="inputBlogpostRelatedCourses">
+                                            <option>1</option>
+                                            <option>2</option>
+                                            <option>3</option>
+                                            <option>4</option>
+                                            <option>5</option>
+                                        </select>
+                                    </div>
+                                </form>
                             </div>
                             <div class="tab-pane fade" id="pills-podcast" role="tabpanel"
-                                 aria-labelledby="pills-podcast-tab">d
+                                 aria-labelledby="pills-podcast-tab">
+                                <form method="POST" th:action="@{/recommendations/podcast}" id="createPodcastForm">
+                                    <div class="form-group">
+                                        <label for="inputPodcastTitle">Title</label>
+                                        <input type="text" name="title" class="form-control" id="inputPodcastTitle" placeholder="Enter title"/>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="inputPodcastAuthor">Author</label>
+                                        <input type="text" name="author" class="form-control" id="inputPodcastAuthor" placeholder="Enter author"/>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="inputPodcastUrl">URL</label>
+                                        <input type="url" name="isbn" class="form-control" id="inputPodcastUrl" placeholder="Enter URL"/>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="inputPodcastDescription">Description</label>
+                                        <textarea type="text" rows="3" name="description" class="form-control" id="inputPodcastDescription" placeholder="Enter description"></textarea>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="d-block" for="inputPodcastReleaseDate">Release date</label>
+                                        <input type="date" name="releaseDate" class="form-control" id="inputPodcastReleaseDate" placeholder="Enter release date"/>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="d-block" for="inputPodcastTags">Tags</label>
+                                        <input type="text" name="tags" class="form-control" id="inputPodcastTags" placeholder="Enter tags" data-role="tagsinput"/>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="inputPodcastPrerequisiteCourses">Prerequisite courses <a href="#" class="">Missing?</a></label>
+                                        <select multiple="multiple" name="prerequisiteCourses" class="form-control" id="inputPodcastPrerequisiteCourses">
+                                            <option>1</option>
+                                            <option>2</option>
+                                            <option>3</option>
+                                            <option>4</option>
+                                            <option>5</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="inputPodcastRelatedCourses">Recommended courses <a href="#" class="">Missing?</a></label>
+                                        <select multiple="multiple" name="relatedCourses" class="form-control" id="inputPodcastRelatedCourses">
+                                            <option>1</option>
+                                            <option>2</option>
+                                            <option>3</option>
+                                            <option>4</option>
+                                            <option>5</option>
+                                        </select>
+                                    </div>
+                                </form>
                             </div>
                         </div>
                     </div>

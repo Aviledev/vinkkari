@@ -7,6 +7,11 @@ import javax.persistence.TemporalType;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.List;
+import javax.persistence.*;
+
+import avile.enums.RecommendationType;
+
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
 @Entity
@@ -17,12 +22,7 @@ public class BookRecommendation extends AbstractPersistable<Long>{
     
     @Size(max=40)
     private String author;
-    
-    @NotNull
-    private String type;
-    
-    // ISBN validaatio erikseen
-    @NotNull
+
     private String isbn;
     
     @Size(max=300)
@@ -38,9 +38,9 @@ public class BookRecommendation extends AbstractPersistable<Long>{
     public void setDescription(String description) {
         this.description = description;
     }
-    
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date date;
+
+    @OneToOne(cascade= CascadeType.ALL)
+    private Recommendation recommendation;
 
     public BookRecommendation() {
         
@@ -63,11 +63,17 @@ public class BookRecommendation extends AbstractPersistable<Long>{
     }
 
     public String getType() {
-        return type;
+        if(this.recommendation == null) {
+            return "N/A";
+        }
+        return this.recommendation.getRecommendationType().toString();
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setType(RecommendationType type) {
+        if(this.recommendation == null) {
+            this.recommendation = new Recommendation();
+        }
+        this.recommendation.setRecommendationType(type);
     }
 
     public String getIsbn() {
@@ -79,10 +85,24 @@ public class BookRecommendation extends AbstractPersistable<Long>{
     }
 
     public Date getDate() {
-        return date;
+        if(this.recommendation == null) {
+            return null;
+        }
+        return this.recommendation.getDate();
     }
 
     public void setDate(Date date) {
-        this.date = date;
+        if(this.recommendation == null) {
+            this.recommendation = new Recommendation();
+        }
+        this.recommendation.setDate(date);
+    }
+
+    public Recommendation getRecommendation() {
+        return recommendation;
+    }
+
+    public void setRecommendation(Recommendation recommendation) {
+        this.recommendation = recommendation;
     }
 }
