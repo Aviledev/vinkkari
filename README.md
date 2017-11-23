@@ -12,6 +12,8 @@
 
 [Definition of Done](https://github.com/Aviledev/vinkkari/blob/master/dod.md)
 
+![Tietokantakaavio](https://github.com/Aviledev/vinkkari/blob/master/doc/database_diagram.svg)
+
 Suorita sovellus komennolla _gradle run_, käynnistyy osoitteeseen http://localhost:8080
 
 Testit suoritetaan komennolla _gradle test_
