@@ -1,18 +1,13 @@
 package avile.domain;
 
-import java.util.Date;
-import javax.persistence.Entity;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
-import java.util.List;
-import javax.persistence.*;
-
 import avile.enums.RecommendationType;
-
 import org.springframework.data.jpa.domain.AbstractPersistable;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.OneToOne;
+import javax.validation.constraints.Size;
+import java.util.Date;
 
 @Entity
 public class BookRecommendation extends AbstractPersistable<Long> {
@@ -26,6 +21,12 @@ public class BookRecommendation extends AbstractPersistable<Long> {
     //private List<String> tags;
     //private List<String> prerequisiteCourses;
     //private List<String> relatedCourses;
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+    private Recommendation recommendation;
+
+    public BookRecommendation() {
+
+    }
 
     public String getDescription() {
         if (this.recommendation == null) {
@@ -39,13 +40,6 @@ public class BookRecommendation extends AbstractPersistable<Long> {
             this.recommendation = new Recommendation();
         }
         this.recommendation.setDescription(description);
-    }
-
-    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
-    private Recommendation recommendation;
-
-    public BookRecommendation() {
-
     }
 
     public String getTitle() {
