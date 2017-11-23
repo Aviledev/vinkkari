@@ -1,23 +1,43 @@
 package avile.domain;
 
 import java.util.Date;
-import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
 @Entity
 public class BookRecommendation extends AbstractPersistable<Long>{
-    // @Max(20)
+    @NotNull
+    @Size(min=2, max=50)
     private String title;
+    
+    @Max(40)
     private String author;
+    
+    @NotNull
     private String type;
+    
+    // ISBN validaatio erikseen
+    @NotNull
     private String isbn;
+    
+    @Max(300)
     private String description;
     //private List<String> tags;
     //private List<String> prerequisiteCourses;
     //private List<String> relatedCourses;
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
     
     @Temporal(TemporalType.TIMESTAMP)
     private Date date;
