@@ -1,5 +1,6 @@
 package avile.domain;
 
+import avile.enums.RecommendationType;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -32,8 +33,8 @@ public class BookRecommendationTest {
 
     @Test
     public void getType() throws Exception {
-        String type = "Book";
-        bookRecommendation.setType(type);
+        RecommendationType type = RecommendationType.BOOK;
+        bookRecommendation.setType(RecommendationType.BOOK);
         assertEquals(type, bookRecommendation.getType());
     }
 
