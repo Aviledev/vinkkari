@@ -17,18 +17,12 @@ public class BookRecommendationService {
     @Autowired
     private RecommendationRepository recommendationRepository;
 
-    public List<BookRecommendation> getBookRecommendationsWithTitleLike(String title) {
-        return bookRepo.findBookRecommendationsByTitleIsLike(title);
-    }
 
     public List<BookRecommendation> getBookRecommendations() {
         return bookRepo.findAll();
     }
 
     public Long addBookRecommendation(BookRecommendation book) {
-        /*Recommendation r = new Recommendation();
-        r = recommendationRepository.save(r);
-        book.setRecommendation(r);*/
         return bookRepo.save(book).getId();
     }
 
@@ -52,5 +46,9 @@ public class BookRecommendationService {
 
     public BookRecommendation getBookRecommendation(Long id) {
         return bookRepo.findOne(id);
+    }
+
+    public BookRecommendation getBookRecommendationByRecommendationId(Long id) {
+        return bookRepo.findByRecommendationId(id);
     }
 }

@@ -1,13 +1,12 @@
 package avile.domain;
 
-import java.util.Date;
+import avile.enums.RecommendationType;
+import org.springframework.data.jpa.domain.AbstractPersistable;
+
 import javax.persistence.*;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
-
-import avile.enums.RecommendationType;
-import org.springframework.data.jpa.domain.AbstractPersistable;
+import java.util.Date;
 
 @Entity
 public class PodcastRecommendation extends AbstractPersistable<Long> {
@@ -28,6 +27,11 @@ public class PodcastRecommendation extends AbstractPersistable<Long> {
 
     @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
     private Recommendation recommendation;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date date;
+
+    public PodcastRecommendation() {
+    }
 
     public Date getReleaseDate() {
         return releaseDate;
@@ -35,12 +39,6 @@ public class PodcastRecommendation extends AbstractPersistable<Long> {
 
     public void setReleaseDate(Date releaseDate) {
         this.releaseDate = releaseDate;
-    }
-
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date date;
-
-    public PodcastRecommendation() {
     }
 
     public String getTitle() {
@@ -63,7 +61,7 @@ public class PodcastRecommendation extends AbstractPersistable<Long> {
     }
 
     public String getType() {
-        if(this.recommendation == null) {
+        if (this.recommendation == null) {
             return "N/A";
         }
         return this.recommendation.getRecommendationType().toString();
@@ -111,8 +109,6 @@ public class PodcastRecommendation extends AbstractPersistable<Long> {
         }
         this.recommendation.setDate(date);
     }
-
-
 
 
 }
