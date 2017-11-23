@@ -14,6 +14,7 @@ public class BookRecommendation extends AbstractPersistable<Long>{
     private String author;
     private String type;
     private String isbn;
+    private String description;
     //private List<String> tags;
     //private List<String> prerequisiteCourses;
     //private List<String> relatedCourses;
