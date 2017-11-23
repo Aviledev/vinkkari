@@ -6,6 +6,7 @@ import avile.enums.RecommendationType;
 import avile.repository.BookRecommendationRepository;
 import avile.repository.RecommendationRepository;
 import avile.service.BookRecommendationService;
+import avile.service.RecommendationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,6 +21,8 @@ public class RecommendationController {
     @Autowired
     BookRecommendationService bookRecommendationService;
 
+    @Autowired
+    RecommendationService recommendationService;
 
     @Autowired
     public void setUp() {
@@ -42,76 +45,17 @@ public class RecommendationController {
         bookRecommendationService.addBookRecommendation(b2);
     }
 
-    @GetMapping("/books")
+    @GetMapping("/recommendations")
     public String getAll(Model model) {
-        model.addAttribute("recommendations", bookRecommendationService.getBookRecommendations());
+        model.addAttribute("recommendations", recommendationService.getRecommendations());
         return "recommendations";
     }
 
-    @GetMapping("/books/{id}")
-    public String getOneById(Model model, @PathVariable Long id) {
-        BookRecommendation bookRecommendation = bookRecommendationService.getBookRecommendation(id);
-        model.addAttribute("recommendation", bookRecommendation);
-        return "recommendation_" + bookRecommendation.getType();
-    }
-
-    @PostMapping("/books")
-    public String createOne(@RequestParam String title,
-                            @RequestParam String author,
-                            @RequestParam String isbn
-                           /* @RequestParam String tags,*/
-                           /* @RequestParam String prerequisiteCourses, */
-                           /* @RequestParam String relatedCourses */) {
-        BookRecommendation bookRecommendation = new BookRecommendation();
-
-        bookRecommendation.setTitle(title);
-        bookRecommendation.setAuthor(author);
-        bookRecommendation.setIsbn(isbn);
-        bookRecommendation.setType(RecommendationType.BOOK);
-        bookRecommendation.setDate(new Date());
-
-        bookRecommendationService.addBookRecommendation(bookRecommendation);
-        return "redirect:/books";
-    }
-
-    @GetMapping("/books/{id}/edit")
-    public String getUpdateOne(Model model, @PathVariable Long id) {
-        BookRecommendation bookRecommendation = bookRecommendationService.getBookRecommendation(id);
-        model.addAttribute("recommendation", bookRecommendation);
-        return "recommendation_" + bookRecommendation.getType() + "_edit";
-    }
-
-    @PostMapping("/books/{id}/edit")
-    public String saveUpdateOne(@PathVariable Long id,
-                                @RequestParam String title,
-                                @RequestParam String author,
-                                @RequestParam String isbn
-                           /* @RequestParam String tags,*/
-                           /* @RequestParam String prerequisiteCourses, */
-                           /* @RequestParam String relatedCourses */) {
-        BookRecommendation bookRecommendation = bookRecommendationService.getBookRecommendation(id);
-        bookRecommendation.setTitle(title);
-        bookRecommendation.setAuthor(author);
-        bookRecommendation.setIsbn(isbn);
-        bookRecommendation.setType(RecommendationType.BOOK);
-        bookRecommendation.setDate(new Date());
-
-        bookRecommendationService.updateBookRecommendation(bookRecommendation);
-
-        return "redirect:/books/" + id;
-    }
-
-    @PostMapping("/books/{id}/delete")
-    public String deleteOne(@PathVariable Long id) {
-        bookRecommendationService.deleteBookRecommendationById(id);
-        return "redirect:/books";
-    }
-
-    @PostMapping("/books/search")
-    public String searchBookByTitle(Model model, @RequestParam(required = false) String bookTitle) {
-        List<BookRecommendation> books = bookRecommendationService.getBookRecommendationsWithTitleLike("%"+bookTitle+"%");
+    @PostMapping("/recommendation/search")
+    public String searchRecommendationByTitle(Model model, @RequestParam(required = false) String title) {
+        List<BookRecommendation> books = bookRecommendationService.getBookRecommendationsWithTitleLike("%"+title+"%");
         model.addAttribute("books", books);
-        model.addAttribute("searchTerm", bookTitle);
+        model.addAttribute("searchTerm", title);
         return "search_results";
     }
 

@@ -26,9 +26,6 @@ public class BookRecommendationService {
     }
 
     public Long addBookRecommendation(BookRecommendation book) {
-        /*Recommendation r = new Recommendation();
-        r = recommendationRepository.save(r);
-        book.setRecommendation(r);*/
         return bookRepo.save(book).getId();
     }
 

@@ -18,7 +18,7 @@ public class BookRecommendation extends AbstractPersistable<Long>{
     //private List<String> prerequisiteCourses;
     //private List<String> relatedCourses;
 
-    @OneToOne(cascade= CascadeType.ALL)
+    @OneToOne(cascade= CascadeType.ALL/*, orphanRemoval = true*/)
     private Recommendation recommendation;
 
     public BookRecommendation() {
