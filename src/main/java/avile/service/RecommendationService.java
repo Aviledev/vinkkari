@@ -15,8 +15,13 @@ public class RecommendationService {
     RecommendationRepository recommendationRepository;
 
     public List<Recommendation> getRecommendationsWithTitleLike(String title) {
-        return recommendationRepository.findRecommendationsByTitleIsLike(title);
+        return recommendationRepository.findRecommendationsByTitleIsLike("%"+title+"%");
     }
+
+    public Recommendation getRecommendation(Long id) {
+        return recommendationRepository.findOne(id);
+    }
+
 
     public List<Recommendation> getRecommendations() {
         return recommendationRepository.findAll();

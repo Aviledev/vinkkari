@@ -19,12 +19,6 @@ public class BookRecommendationController {
     @Autowired
     BookRecommendationService bookRecommendationService;
 
-    @GetMapping("/books/{id}")
-    public String getOneById(Model model, @PathVariable Long id) {
-        BookRecommendation bookRecommendation = bookRecommendationService.getBookRecommendation(id);
-        model.addAttribute("recommendation", bookRecommendation);
-        return "recommendation_" + bookRecommendation.getType();
-    }
 
     @PostMapping("/books")
     public String createOne(@RequestParam String title,
@@ -37,22 +31,16 @@ public class BookRecommendationController {
         bookRecommendation.setType(RecommendationType.BOOK);
         bookRecommendation.setDate(new Date());
         bookRecommendationService.addBookRecommendation(bookRecommendation);
-        return "redirect:/books";
+        return "redirect:/recommendations";
 
     }
 
     @PostMapping("/books/{id}/delete")
     public String deleteOne(@RequestParam Long id) {
         bookRecommendationService.deleteBookRecommendationById(id);
-        return "redirect:/books";
+        return "redirect:/recommendations";
     }
 
-    @GetMapping("/books/{id}/edit")
-    public String getUpdateOne(Model model, @PathVariable Long id) {
-        BookRecommendation bookRecommendation = bookRecommendationService.getBookRecommendation(id);
-        model.addAttribute("recommendation", bookRecommendation);
-        return "recommendation_" + bookRecommendation.getType() + "_edit";
-    }
 
     @PostMapping("/books/{id}/edit")
     public String updateOne(@PathVariable Long id,
@@ -66,7 +54,7 @@ public class BookRecommendationController {
         bookRecommendation.setType(RecommendationType.BOOK);
         bookRecommendation.setDate(new Date());
         bookRecommendationService.updateBookRecommendation(bookRecommendation);
-        return "redirect:/books/" + id;
+        return "redirect:/recommendations/" + id;
     }
 
 }

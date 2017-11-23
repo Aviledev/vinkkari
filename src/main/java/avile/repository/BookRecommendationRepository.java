@@ -4,13 +4,9 @@ import avile.domain.BookRecommendation;
 import java.io.Serializable;
 import java.util.List;
 
+import avile.domain.Recommendation;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface BookRecommendationRepository extends JpaRepository<BookRecommendation, Long>{
-    /**
-     * Returns books where its title is %like%
-     * @param title Title
-     * @return List of books
-     */
-    List<BookRecommendation> findBookRecommendationsByTitleIsLike(String title);
+    BookRecommendation findByRecommendationId(Long id);
 }

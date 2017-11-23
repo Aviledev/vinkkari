@@ -24,6 +24,8 @@ public class RecommendationController {
     @Autowired
     RecommendationService recommendationService;
 
+
+
     @Autowired
     public void setUp() {
         BookRecommendation b1 = new BookRecommendation();
@@ -52,11 +54,39 @@ public class RecommendationController {
     }
 
     @GetMapping("/recommendations/{id}")
+    public String getOne(Model model, @PathVariable Long id) {
+        Recommendation recommendation = recommendationService.getRecommendation(id);
+        switch (recommendation.getRecommendationType()) {
+            case BOOK:
+                model.addAttribute("recommendation", bookRecommendationService.getBookRecommendationByRecommendationId(id));
+            case VIDEO:
+
+            case PODCAST:
+
+            case BLOGPOST:
+        }
+        return "recommendation_" + recommendation.getRecommendationType();
+    }
+
+    @GetMapping("/recommendations/{id}/edit")
+    public String getEditOne(Model model, @PathVariable Long id) {
+        Recommendation recommendation = recommendationService.getRecommendation(id);
+        switch (recommendation.getRecommendationType()) {
+            case BOOK:
+                model.addAttribute("recommendation", bookRecommendationService.getBookRecommendationByRecommendationId(id));
+            case VIDEO:
+
+            case PODCAST:
+
+            case BLOGPOST:
+        }
+        return "recommendation_" + recommendation.getRecommendationType()+"_edit";
+    }
 
     @PostMapping("/recommendation/search")
     public String searchRecommendationByTitle(Model model, @RequestParam(required = false) String title) {
-        List<BookRecommendation> books = bookRecommendationService.getBookRecommendationsWithTitleLike("%"+title+"%");
-        model.addAttribute("books", books);
+        //List<BookRecommendation> books = bookRecommendationService.getBookRecommendationsWithTitleLike("%"+title+"%");
+        //model.addAttribute("books", books);
         model.addAttribute("searchTerm", title);
         return "search_results";
     }

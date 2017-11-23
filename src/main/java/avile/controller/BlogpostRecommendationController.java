@@ -7,17 +7,17 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class BlogpostRecommendationController {
 
-    @PostMapping()
+    //@PostMapping()
     public void createOne(@RequestParam Long id) {
 
     }
 
-    @PostMapping()
+    //@PostMapping()
     public void deleteOne(@RequestParam Long id) {
 
     }
 
-    @PostMapping()
+    //@PostMapping()
     public void updateOne(@RequestParam Long id) {
 
     }
