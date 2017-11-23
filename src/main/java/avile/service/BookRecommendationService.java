@@ -17,9 +17,6 @@ public class BookRecommendationService {
     @Autowired
     private RecommendationRepository recommendationRepository;
 
-    public List<BookRecommendation> getBookRecommendationsWithTitleLike(String title) {
-        return bookRepo.findBookRecommendationsByTitleIsLike(title);
-    }
 
     public List<BookRecommendation> getBookRecommendations() {
         return bookRepo.findAll();
@@ -49,5 +46,9 @@ public class BookRecommendationService {
 
     public BookRecommendation getBookRecommendation(Long id) {
         return bookRepo.findOne(id);
+    }
+
+    public BookRecommendation getBookRecommendationByRecommendationId(Long id) {
+        return bookRepo.findByRecommendationId(id);
     }
 }
