@@ -1,7 +1,9 @@
 package avile.controller;
 
 import avile.domain.BookRecommendation;
+import avile.domain.Recommendation;
 import avile.repository.BookRecommendationRepository;
+import avile.repository.RecommendationRepository;
 import avile.service.BookRecommendationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,25 +20,34 @@ public class BookRecommendationController {
     BookRecommendationRepository bookRecommendationRepository;
 
     @Autowired
+    RecommendationRepository recommendationRepository;
+
+    @Autowired
     BookRecommendationService bookRecommendationService;
 
 
     @Autowired
     public void setUp() {
         BookRecommendation b1 = new BookRecommendation();
+        Recommendation r1 = new Recommendation();
+        r1 = recommendationRepository.save(r1);
         b1.setTitle("eka kirja");
         b1.setAuthor("Kari Ojala");
         b1.setType("book");
         b1.setIsbn("3435323");
         b1.setDate(new Date());
+        b1.setRecommendation(r1);
         bookRecommendationRepository.save(b1);
 
         BookRecommendation b2 = new BookRecommendation();
+        Recommendation r2 = new Recommendation();
+        r2 = recommendationRepository.save(r2);
         b2.setTitle("toka kirja");
         b2.setAuthor("Jaakko Peltola");
         b2.setType("book");
         b2.setIsbn("5235235");
         b2.setDate(new Date());
+        b2.setRecommendation(r2);
         bookRecommendationRepository.save(b2);
     }
 
@@ -61,11 +72,17 @@ public class BookRecommendationController {
                            /* @RequestParam String prerequisiteCourses, */
                            /* @RequestParam String relatedCourses */) {
         BookRecommendation bookRecommendation = new BookRecommendation();
+
+        // Create recommendation
+        Recommendation recommendation = new Recommendation();
+        recommendation = recommendationRepository.save(recommendation);
+
         bookRecommendation.setTitle(title);
         bookRecommendation.setAuthor(author);
         bookRecommendation.setIsbn(isbn);
         bookRecommendation.setType("book");
         bookRecommendation.setDate(new Date());
+        bookRecommendation.setRecommendation(recommendation);
         bookRecommendationRepository.save(bookRecommendation);
         return "redirect:/books";
     }
@@ -98,7 +115,10 @@ public class BookRecommendationController {
 
     @PostMapping("/books/{id}/delete")
     public String deleteOne(@PathVariable Long id) {
+        BookRecommendation bookRecommendation = bookRecommendationRepository.findOne(id);
+        Recommendation r = bookRecommendation.getRecommendation();
         bookRecommendationRepository.delete(id);
+        recommendationRepository.delete(r);
         return "redirect:/books";
     }
 

@@ -3,6 +3,7 @@ package avile.domain;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Entity;
+import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import org.springframework.data.jpa.domain.AbstractPersistable;
@@ -20,6 +21,9 @@ public class BookRecommendation extends AbstractPersistable<Long>{
     
     @Temporal(TemporalType.TIMESTAMP)
     private Date date;
+
+    @OneToOne
+    private Recommendation recommendation;
 
     public BookRecommendation() {
         
@@ -63,5 +67,13 @@ public class BookRecommendation extends AbstractPersistable<Long>{
 
     public void setDate(Date date) {
         this.date = date;
+    }
+
+    public Recommendation getRecommendation() {
+        return recommendation;
+    }
+
+    public void setRecommendation(Recommendation recommendation) {
+        this.recommendation = recommendation;
     }
 }
