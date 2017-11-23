@@ -35,7 +35,7 @@ public class BookRecommendationTest {
     public void getType() throws Exception {
         RecommendationType type = RecommendationType.BOOK;
         bookRecommendation.setType(RecommendationType.BOOK);
-        assertEquals(type, bookRecommendation.getType());
+        assertEquals(type.toString(), bookRecommendation.getType());
     }
 
 
@@ -53,7 +53,5 @@ public class BookRecommendationTest {
         assertEquals(date.getTime(), bookRecommendation.getDate().getTime());
         assertEquals(date.toString(), bookRecommendation.getDate().toString());
     }
-
-
 
 }
