@@ -15,7 +15,7 @@ public class BookRecommendation extends AbstractPersistable<Long>{
     @Size(min=2, max=50)
     private String title;
     
-    @Max(40)
+    @Size(max=40)
     private String author;
     
     @NotNull
@@ -25,7 +25,7 @@ public class BookRecommendation extends AbstractPersistable<Long>{
     @NotNull
     private String isbn;
     
-    @Max(300)
+    @Size(max=300)
     private String description;
     //private List<String> tags;
     //private List<String> prerequisiteCourses;
