@@ -25,7 +25,6 @@ public class RecommendationController {
     RecommendationService recommendationService;
 
 
-
     @Autowired
     public void setUp() {
         BookRecommendation b1 = new BookRecommendation();
