@@ -1,38 +1,33 @@
 package avile.domain;
 
 import java.util.Date;
-import javax.persistence.Entity;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import javax.persistence.*;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+
+import avile.enums.RecommendationType;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
 @Entity
-public class PodcastRecommendation extends AbstractPersistable<Long>{
-    
-    @NotNull
-    @Size(min=2, max=50)
-    private String title;
-    
+public class PodcastRecommendation extends AbstractPersistable<Long> {
+
     @Max(40)
     private String author;
-    
-    @NotNull
-    private String type;
-    
+
     @NotNull
     private String url;
-    
-    @Max(300)
-    private String description;
+
     //private List<String> tags;
     //private List<String> prerequisiteCourses;
     //private List<String> relatedCourses;
-    
+
     @Temporal(TemporalType.TIMESTAMP)
     private Date releaseDate;
+
+
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+    private Recommendation recommendation;
 
     public Date getReleaseDate() {
         return releaseDate;
@@ -41,7 +36,7 @@ public class PodcastRecommendation extends AbstractPersistable<Long>{
     public void setReleaseDate(Date releaseDate) {
         this.releaseDate = releaseDate;
     }
-    
+
     @Temporal(TemporalType.TIMESTAMP)
     private Date date;
 
@@ -49,11 +44,14 @@ public class PodcastRecommendation extends AbstractPersistable<Long>{
     }
 
     public String getTitle() {
-        return title;
+        return this.recommendation.getTitle();
     }
 
     public void setTitle(String title) {
-        this.title = title;
+        if (this.recommendation == null) {
+            this.recommendation = new Recommendation();
+        }
+        this.recommendation.setTitle(title);
     }
 
     public String getAuthor() {
@@ -65,11 +63,17 @@ public class PodcastRecommendation extends AbstractPersistable<Long>{
     }
 
     public String getType() {
-        return type;
+        if(this.recommendation == null) {
+            return "N/A";
+        }
+        return this.recommendation.getRecommendationType().toString();
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setType(RecommendationType type) {
+        if (this.recommendation == null) {
+            this.recommendation = new Recommendation();
+        }
+        this.recommendation.setRecommendationType(type);
     }
 
     public String getUrl() {
@@ -81,21 +85,34 @@ public class PodcastRecommendation extends AbstractPersistable<Long>{
     }
 
     public String getDescription() {
-        return description;
+        if (this.recommendation == null) {
+            return "N/A";
+        }
+        return this.recommendation.getDescription();
     }
 
     public void setDescription(String description) {
-        this.description = description;
+        if (this.recommendation == null) {
+            this.recommendation = new Recommendation();
+        }
+        this.recommendation.setDescription(description);
     }
 
     public Date getDate() {
-        return date;
+        if (this.recommendation == null) {
+            return null;
+        }
+        return this.recommendation.getDate();
     }
 
     public void setDate(Date date) {
-        this.date = date;
+        if (this.recommendation == null) {
+            this.recommendation = new Recommendation();
+        }
+        this.recommendation.setDate(date);
     }
-    
-    
-    
+
+
+
+
 }
