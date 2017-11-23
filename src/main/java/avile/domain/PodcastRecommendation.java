@@ -32,6 +32,17 @@ public class PodcastRecommendation extends AbstractPersistable<Long>{
     //private List<String> relatedCourses;
     
     @Temporal(TemporalType.TIMESTAMP)
+    private Date releaseDate;
+
+    public Date getReleaseDate() {
+        return releaseDate;
+    }
+
+    public void setReleaseDate(Date releaseDate) {
+        this.releaseDate = releaseDate;
+    }
+    
+    @Temporal(TemporalType.TIMESTAMP)
     private Date date;
 
     public PodcastRecommendation() {
