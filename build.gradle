@@ -45,6 +45,7 @@ dependencies {
     compile('org.springframework.boot:spring-boot-starter-validation')
     compile("org.springframework.boot:spring-boot-starter-thymeleaf")
     compile('org.springframework.boot:spring-boot-starter-security')
+    compile("org.springframework.boot:spring-boot-devtools")
     compile("nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect")
 
     runtime('com.h2database:h2') //if it doesn't work switch to compile
