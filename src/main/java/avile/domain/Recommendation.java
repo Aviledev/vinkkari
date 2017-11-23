@@ -10,6 +10,7 @@ import java.util.Date;
 
 @Entity
 public class Recommendation extends AbstractPersistable<Long> {
+
     @Temporal(TemporalType.TIMESTAMP)
     private Date date;
 

@@ -6,7 +6,7 @@
 [Course| id (PK) | name (string)]
 [Book| id (PK) | Recommendation_id (FK) | author (string) | title (string) | type (string) | ISBN (string) | description (string)]
 [Book]1-1[Recommendation]
-[Video| id (PK) | Recommendation_id (FK) | title (string) | url (string) | comment (string) | description (string)]
+[Video| id (PK) | Recommendation_id (FK) | title (string) | url (string) | description (string)]
 [Video]1-1[Recommendation]
 [Blogpost| id (PK) | Recommendation_id (FK) | title (string) | writer (string) | url (string) | description (string)]
 [Blogpost]1-1[Recommendation]
