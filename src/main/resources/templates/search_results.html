@@ -39,15 +39,15 @@
     <div class="card">
         <ul class="list-group list-group-striped">
 
-            <li class="list-group-item list-group-item-action list-group-item-container" th:each="book : ${books}">
+            <li class="list-group-item list-group-item-action list-group-item-container" th:each="recommendation : ${recommendations}">
                 <div class="row">
                     <div class="col-6 col-sm-8 col-md-10">
-                        <h5 class="list-group-item-title"><a th:href="@{/books/{id}(id=${book.id})}" th:text="${book.title}"></a></h5>
-                        <small class="text-muted" th:text="${book.type}">Kirja</small>
+                        <h5 class="list-group-item-title"><a th:href="@{/recommendation/{id}(id=${recommendation.id})}" th:text="${recommendation.title}"></a></h5>
+                        <small class="text-muted" th:text="${recommendation.recommendationType}">Type</small>
                     </div>
                     <div class="col-6 col-sm-4 col-md-2">
                         <h6 class="list-group-item-account"><a href="#">Firstname Lastname</a></h6>
-                        <small class="text-muted" th:text="${#calendars.format(book.date, 'HH:mm dd.MM.yyyy')}">01.01.2017 18:42 UTC</small>
+                        <small class="text-muted" th:text="${#calendars.format(recommendation.date, 'HH:mm dd.MM.yyyy')}">01.01.2017 18:42 UTC</small>
                     </div>
                 </div>
             </li>

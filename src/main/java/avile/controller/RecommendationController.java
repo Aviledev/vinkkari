@@ -3,23 +3,29 @@ package avile.controller;
 import avile.domain.BookRecommendation;
 import avile.domain.Recommendation;
 import avile.enums.RecommendationType;
-import avile.repository.BookRecommendationRepository;
-import avile.repository.RecommendationRepository;
-import avile.service.BookRecommendationService;
-import avile.service.RecommendationService;
+
+import avile.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
-import java.util.List;
 
 @Controller
 public class RecommendationController {
 
     @Autowired
     BookRecommendationService bookRecommendationService;
+
+    @Autowired
+    VideoRecommendationService videoRecommendationService;
+
+    @Autowired
+    PodcastRecommendationService podcastRecommendationService;
+
+    @Autowired
+    BlogpostRecommendationService blogpostRecommendationService;
 
     @Autowired
     RecommendationService recommendationService;
@@ -54,40 +60,35 @@ public class RecommendationController {
 
     @GetMapping("/recommendations/{id}")
     public String getOne(Model model, @PathVariable Long id) {
-        Recommendation recommendation = recommendationService.getRecommendation(id);
-        switch (recommendation.getRecommendationType()) {
-            case BOOK:
-                model.addAttribute("recommendation", bookRecommendationService.getBookRecommendationByRecommendationId(id));
-            case VIDEO:
-
-            case PODCAST:
-
-            case BLOGPOST:
-        }
-        return "recommendation_" + recommendation.getRecommendationType();
+        return getRecommendationFromRecommendationId(model, id);
     }
 
-    @GetMapping("/recommendations/{id}/edit")
+        @GetMapping("/recommendations/{id}/edit")
     public String getEditOne(Model model, @PathVariable Long id) {
-        Recommendation recommendation = recommendationService.getRecommendation(id);
-        switch (recommendation.getRecommendationType()) {
-            case BOOK:
-                model.addAttribute("recommendation", bookRecommendationService.getBookRecommendationByRecommendationId(id));
-            case VIDEO:
-
-            case PODCAST:
-
-            case BLOGPOST:
-        }
-        return "recommendation_" + recommendation.getRecommendationType()+"_edit";
+        return getRecommendationFromRecommendationId(model, id) + "_edit";
     }
 
-    @PostMapping("/recommendation/search")
+    @PostMapping("/recommendations/search")
     public String searchRecommendationByTitle(Model model, @RequestParam(required = false) String title) {
-        //List<BookRecommendation> books = bookRecommendationService.getBookRecommendationsWithTitleLike("%"+title+"%");
-        //model.addAttribute("books", books);
+        model.addAttribute("recommendations", recommendationService.getRecommendationsWithTitleLike(title));
         model.addAttribute("searchTerm", title);
         return "search_results";
+    }
+
+    // Used for parsing the typed recommendation item from the "super" recommendation and adding it to model
+    private String getRecommendationFromRecommendationId(Model model, Long id) {
+        Recommendation recommendation = recommendationService.getRecommendation(id);
+        switch (recommendation.getRecommendationType()) {
+            case BOOK:
+                model.addAttribute("recommendation", bookRecommendationService.getBookRecommendationByRecommendationId(id));
+            case VIDEO:
+                model.addAttribute("recommendation", videoRecommendationService.getVideoRecommendationByRecommendationId(id));
+            case PODCAST:
+                model.addAttribute("recommendation", podcastRecommendationService.getPodcastRecommendationByRecommendationId(id));
+            case BLOGPOST:
+                model.addAttribute("recommendation", blogpostRecommendationService.getBlogpostRecommendationByRecommendationId(id));
+        }
+        return "recommendation_" + recommendation.getRecommendationType();
     }
 
 }

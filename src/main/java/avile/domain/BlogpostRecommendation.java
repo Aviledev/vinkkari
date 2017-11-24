@@ -15,7 +15,7 @@ import avile.enums.RecommendationType;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
 @Entity
-public class Blogpost extends AbstractPersistable<Long> {
+public class BlogpostRecommendation extends AbstractPersistable<Long> {
 
     @Size(max = 40)
     private String author;
@@ -32,7 +32,7 @@ public class Blogpost extends AbstractPersistable<Long> {
     @OneToOne(cascade = CascadeType.ALL)
     private Recommendation recommendation;
 
-    public Blogpost() {
+    public BlogpostRecommendation() {
 
     }
     

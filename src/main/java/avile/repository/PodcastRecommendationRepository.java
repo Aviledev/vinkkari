@@ -5,5 +5,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 
 public interface PodcastRecommendationRepository extends JpaRepository<PodcastRecommendation, Long>{
-    
+
+    PodcastRecommendation findByRecommendationId(Long id);
 }
