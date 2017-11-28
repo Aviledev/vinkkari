@@ -2,6 +2,7 @@ package avile.controller;
 
 import avile.domain.BookRecommendation;
 import avile.domain.Recommendation;
+import avile.domain.VideoRecommendation;
 import avile.enums.RecommendationType;
 
 import avile.service.*;
@@ -55,6 +56,8 @@ public class RecommendationController {
     @GetMapping("/recommendations")
     public String getAll(Model model) {
         model.addAttribute("recommendations", recommendationService.getRecommendations());
+        // Kytke kiinni videoRecommendation validointia varten
+        model.addAttribute("videoRecommendation", new VideoRecommendation());
         return "recommendations";
     }
 

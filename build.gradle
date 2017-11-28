@@ -48,6 +48,8 @@ dependencies {
     compile("org.springframework.boot:spring-boot-devtools")
     compile("nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect")
 
+    compile("org.springframework.boot:spring-boot-starter-actuator")
+
     runtime('com.h2database:h2') //if it doesn't work switch to compile
     runtime('org.postgresql:postgresql')
 

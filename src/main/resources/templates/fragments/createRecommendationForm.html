@@ -83,22 +83,18 @@
                                 </form>
                             </div>
                             <div class="tab-pane fade" id="pills-video" role="tabpanel" aria-labelledby="pills-video-tab">
-                                <form method="POST" th:action="@{/recommendations/video}" id="createVideoForm">
+                                <form method="POST" th:action="@{/video}" th:object="${videoRecommendation}" id="createVideoForm">
                                     <div class="form-group">
                                         <label for="inputVideoTitle">Title</label>
-                                        <input type="text" name="title" class="form-control" id="inputVideoTitle" placeholder="Enter title"/>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="inputVideoAuthor">Author</label>
-                                        <input type="text" name="author" class="form-control" id="inputVideoAuthor" placeholder="Enter author"/>
+                                        <input type="text" name="title" class="form-control" id="inputVideoTitle" placeholder="Enter title" th:field="*{recommendation.title}" />
                                     </div>
                                     <div class="form-group">
                                         <label for="inputVideoUrl">URL</label>
-                                        <input type="url" name="isbn" class="form-control" id="inputVideoUrl" placeholder="Enter URL"/>
+                                        <input type="url" name="isbn" class="form-control" id="inputVideoUrl" th:field="*{url}" placeholder="Enter URL"/>
                                     </div>
                                     <div class="form-group">
                                         <label for="inputVideoDescription">Description</label>
-                                        <textarea type="text" rows="3" name="description" class="form-control" id="inputVideoDescription" placeholder="Enter description"></textarea>
+                                        <textarea type="text" rows="3" name="description" class="form-control" id="inputVideoDescription" th:field="*{recommendation.description}" placeholder="Enter description"></textarea>
                                     </div>
                                     <div class="form-group">
                                         <label class="d-block" for="inputVideoTags">Tags</label>
