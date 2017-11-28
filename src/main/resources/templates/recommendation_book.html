@@ -20,7 +20,7 @@
 
     <div class="jumbotron title-jumbotron">
         <div class="mx-auto">
-            <h1 class="display-4"><span id="pageTitle" th:text="${recommendation.title}"></span> (<b th:text="${recommendation.type}"></b>)</h1>
+            <h1 class="display-4"><span id="pageTitle" th:text="${bookRecommendation.recommendation.title}"></span> (<b th:text="${bookRecommendation.recommendation.recommendationType}"></b>)</h1>
             <p class="lead">Created by <a href="#">Firstname Lastname</a></p>
             <a href="#"><span class="recommendation-tag badge badge-pill badge-primary">Tag1</span></a>
             <a href="#"><span class="recommendation-tag badge badge-pill badge-primary">Tag1</span></a>
@@ -31,8 +31,8 @@
     <hr class="my-4"/>
 
     <ul class="list-group mb-3">
-        <li class="list-group-item"><b>Author:</b> <span th:text="${recommendation.author}"></span></li>
-        <li class="list-group-item"><b>ISBN:</b> <span th:text="${recommendation.isbn}"></span></li>
+        <li class="list-group-item"><b>Author:</b> <span th:text="${bookRecommendation.author}"></span></li>
+        <li class="list-group-item"><b>ISBN:</b> <span th:text="${bookRecommendation.isbn}"></span></li>
         <li class="list-group-item"><b>Prerequisite courses:</b>
             <ul>
                 <li>A</li>
@@ -51,13 +51,13 @@
         </li>
     </ul>
 
-    <a class="btn btn-primary" id="editBtn" th:href="@{/recommendations/{id}/edit(id=${recommendation.recommendation.id})}" role="button">Edit</a>
+    <a class="btn btn-primary" id="editBtn" th:href="@{/recommendations/{id}/edit(id=${bookRecommendation.recommendation.id})}" role="button">Edit</a>
 
     <form method="post"
           class="destroy-form"
           data-confirm="Are you sure, you want to delete this recommendation"
           style="display: inline-block"
-          th:action="@{/books/{id}/delete(id=${recommendation.id})}">
+          th:action="@{/books/{id}/delete(id=${bookRecommendation.id})}">
         <button type="submit" id="deleteBtn" class="btn btn-danger">Delete</button>
     </form>
 </div>

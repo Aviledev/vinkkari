@@ -59,3 +59,8 @@ body {
 .badge {
     font-size: 100%;
 }
+.invalid-feedback-edit {
+    margin-top: .25rem;
+    font-size: .875rem;
+    color: #dc3545;
+}

@@ -17,12 +17,6 @@ public class BookRecommendationTest {
         bookRecommendation = new BookRecommendation();
     }
 
-    @Test
-    public void getSetTitle() throws Exception {
-        String title = "Test title";
-        bookRecommendation.setTitle(title);
-        assertEquals(title, bookRecommendation.getTitle());
-    }
 
     @Test
     public void getSetAuthor() throws Exception {
@@ -31,27 +25,12 @@ public class BookRecommendationTest {
         assertEquals(author, bookRecommendation.getAuthor());
     }
 
-    @Test
-    public void getType() throws Exception {
-        RecommendationType type = RecommendationType.BOOK;
-        bookRecommendation.setType(RecommendationType.BOOK);
-        assertEquals(type.toString(), bookRecommendation.getType());
-    }
-
 
     @Test
     public void getIsbn() throws Exception {
         String isbn = "123456789";
         bookRecommendation.setIsbn(isbn);
         assertEquals(isbn, bookRecommendation.getIsbn());
-    }
-
-    @Test
-    public void getSetDate() throws Exception {
-        Date date = new Date();
-        bookRecommendation.setDate(date);
-        assertEquals(date.getTime(), bookRecommendation.getDate().getTime());
-        assertEquals(date.toString(), bookRecommendation.getDate().toString());
     }
 
 }

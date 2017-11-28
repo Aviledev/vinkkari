@@ -16,23 +16,26 @@
         <div class="container">
 
             <div th:replace="fragments/header :: header(active = 'Recommendations')"></div>
-
             <form method="post" id="editBookForm"
-                  th:action="@{/books/{id}/edit(id=${recommendation.id})}">
+                  th:object="${bookRecommendation}" th:action="@{/books/edit}">
                 <div class="jumbotron title-jumbotron">
                     <div class="mx-auto">
-                        <h1 class="display-4"><input type="text" th:value="${recommendation.title}" name="title" class="form-control title-input-form" id="inputBookTitle" placeholder="Enter title"/>(<b th:text="${recommendation.type}"></b>)</h1>
+                        <h1 class="display-4"><input type="text" name="title" class="form-control title-input-form" id="inputBookTitle" placeholder="Enter title"  th:field="*{recommendation.title}" th:errorclass="is-invalid" />(<b th:text="*{recommendation.recommendationType}"></b>)</h1>
+                        <div class="invalid-feedback-edit" th:if="${#fields.hasErrors('recommendation.title')}" th:errors="*{recommendation.title}">Error</div>
                         <p class="lead">Created by <a href="#">Firstname Lastname</a></p>
                         <input type="text" value="aaa,bbb,ccc" name="tags" class="form-control edit-input-form" id="inputBookTags" placeholder="Enter tags" data-role="tagsinput"/>
+                        <input type="hidden" name="id" th:field="*{id}"/>
+                        <input type="hidden" name="recommendationId" th:field="*{recommendation.id}"/>
                     </div>
                 </div>
 
                 <hr class="my-4"/>
 
                 <ul class="list-group mb-3">
-                    <li class="list-group-item"><b>Author:</b> <input type="text" th:value="${recommendation.author}" name="author" class="form-control edit-input-form" id="inputBookAuthor" placeholder="Enter author"/></li>
-                    <li class="list-group-item"><b>ISBN:</b> <input type="text" th:value="${recommendation.isbn}" name="isbn" class="form-control edit-input-form" id="inputBookIsbn" placeholder="Enter ISBN"/>
-                    </li>
+                    <li class="list-group-item"><b>Author:</b> <input type="text" th:field="*{author}" name="author" class="form-control edit-input-form" id="inputBookAuthor" placeholder="Enter author" th:errorclass="is-invalid"/></li>
+                    <div class="invalid-feedback-edit" th:if="${#fields.hasErrors('author')}" th:errors="*{author}">Error</div>
+                    <li class="list-group-item"><b>ISBN:</b> <input type="text" th:field="*{isbn}" name="isbn" class="form-control edit-input-form" id="inputBookIsbn" placeholder="Enter ISBN" th:errorclass="is-invalid"/></li>
+                    <div class="invalid-feedback-edit" th:if="${#fields.hasErrors('isbn')}" th:errors="*{isbn}">Error</div>
                     <li class="list-group-item"><b>Prerequisite courses:</b>
                         <select multiple="multiple" name="prerequisiteCourses" class="form-control" id="inputPrerequisiteCourses">
                             <option>1</option>

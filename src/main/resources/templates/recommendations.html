@@ -17,12 +17,16 @@
 
     <div th:replace="fragments/header :: header(active='Recommendations')"></div>
 
+
+
     <div class="jumbotron title-jumbotron">
         <div class="mx-auto">
             <h1 class="display-4">Recommendations</h1>
             <p class="lead">Here you can find all recommendations</p>
         </div>
     </div>
+
+
 
     <hr class="my-4"/>
 
@@ -81,5 +85,25 @@
         crossorigin="anonymous"></script>
 <script src="../static/js/bootstrap-tagsinput.min.js" th:src="@{/js/bootstrap-tagsinput.min.js}"></script>
 <script src="../static/js/recommendation.js" th:src="@{/js/recommendation.js}"></script>
+
+<script th:if="${#fields.hasErrors('${bookRecommendation.*}')}">
+    $('#createRecommendationModal').modal('show');
+    $('#pills-book-tab').tab('show')
+</script>
+<script th:if="${#fields.hasErrors('${videoRecommendation.*}')}">
+    $('#createRecommendationModal').modal('show');
+    $('#pills-video-tab').tab('show')
+</script>
+<script th:if="${#fields.hasErrors('${blogpostRecommendation.*}')}">
+    $('#createRecommendationModal').modal('show');
+    $('#pills-blogpost-tab').tab('show')
+</script>
+<script th:if="${#fields.hasErrors('${podcastRecommendation.*}')}">
+    $('#createRecommendationModal').modal('show');
+    $('#pills-podcast-tab').tab('show')
+</script>
+
+
+
 </body>
 </html>

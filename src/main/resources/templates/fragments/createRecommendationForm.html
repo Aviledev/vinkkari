@@ -38,23 +38,23 @@
                         <div class="tab-content" id="pills-tabContent">
                             <div class="tab-pane fade show active" id="pills-book" role="tabpanel"
                                  aria-labelledby="pills-book-tab">
-                                <form method="POST" th:action="@{/books}" id="createBookForm">
-
+                                <form method="POST" th:action="@{/books}" th:object="${bookRecommendation}" id="createBookForm">
                                 <div class="form-group">
-                                    <label for="inputBookTitle">Title</label>
-                                    <input type="text" name="title" class="form-control" id="inputBookTitle" placeholder="Enter title"/>
+                                    <label for="inputVideoTitle">Title</label>
+                                    <input type="text" name="title" class="form-control" id="inputBookTitle" placeholder="Enter title" th:field="*{recommendation.title}" th:errorclass="is-invalid"/>
+                                    <div class="invalid-feedback" th:if="${#fields.hasErrors('recommendation.title')}" th:errors="*{recommendation.title}">Error</div>
                                 </div>
                                 <div class="form-group">
                                     <label for="inputBookAuthor">Author</label>
-                                    <input type="text" name="author" class="form-control" id="inputBookAuthor" placeholder="Enter author"/>
+                                    <input type="text" name="author" class="form-control" id="inputBookAuthor" placeholder="Enter author" th:field="*{author}"/>
                                 </div>
                                 <div class="form-group">
                                     <label for="inputBookIsbn">ISBN</label>
-                                    <input type="text" name="isbn" class="form-control" id="inputBookIsbn" placeholder="Enter ISBN"/>
+                                    <input type="text" name="isbn" class="form-control" id="inputBookIsbn" placeholder="Enter ISBN" th:field="*{isbn}"/>
                                 </div>
                                 <div class="form-group">
                                     <label for="inputBookDescription">Description</label>
-                                    <textarea type="text" rows="3" name="description" class="form-control" id="inputBookDescription" placeholder="Enter description"></textarea>
+                                    <textarea type="text" rows="3" name="description" class="form-control" id="inputBookDescription"  th:field="*{recommendation.description}" placeholder="Enter description"></textarea>
                                 </div>
                                 <div class="form-group">
                                     <label class="d-block" for="inputBookTags">Tags</label>
@@ -83,14 +83,16 @@
                                 </form>
                             </div>
                             <div class="tab-pane fade" id="pills-video" role="tabpanel" aria-labelledby="pills-video-tab">
-                                <form method="POST" th:action="@{/video}" th:object="${videoRecommendation}" id="createVideoForm">
+                                <form method="POST" th:action="@{/videos}" th:object="${videoRecommendation}" id="createVideoForm">
                                     <div class="form-group">
                                         <label for="inputVideoTitle">Title</label>
-                                        <input type="text" name="title" class="form-control" id="inputVideoTitle" placeholder="Enter title" th:field="*{recommendation.title}" />
+                                        <input type="text" name="title" class="form-control" id="inputVideoTitle" placeholder="Enter title" th:field="*{recommendation.title}" th:errorclass="is-invalid"/>
+                                        <div class="invalid-feedback" th:if="${#fields.hasErrors('recommendation.title')}" th:errors="*{recommendation.title}">Error</div>
                                     </div>
                                     <div class="form-group">
                                         <label for="inputVideoUrl">URL</label>
-                                        <input type="url" name="isbn" class="form-control" id="inputVideoUrl" th:field="*{url}" placeholder="Enter URL"/>
+                                        <input type="url" name="url" class="form-control" id="inputVideoUrl" th:field="*{url}" placeholder="Enter URL" th:errorclass="is-invalid"/>
+                                        <div class="invalid-feedback" th:if="${#fields.hasErrors('url')}" th:errors="*{url}">Error</div>
                                     </div>
                                     <div class="form-group">
                                         <label for="inputVideoDescription">Description</label>
@@ -124,7 +126,7 @@
                             </div>
                             <div class="tab-pane fade" id="pills-blogpost" role="tabpanel"
                                  aria-labelledby="pills-blogpost-tab">
-                                <form method="POST" th:action="@{/recommendations/blogpost}" id="createBlogpostForm">
+                                <form method="POST" th:action="@{/blogposts}" th:object="${blogpostRecommendation}" id="createBlogpostForm">
                                     <div class="form-group">
                                         <label for="inputBlogpostTitle">Title</label>
                                         <input type="text" name="title" class="form-control" id="inputBlogpostTitle" placeholder="Enter title"/>
@@ -173,7 +175,7 @@
                             </div>
                             <div class="tab-pane fade" id="pills-podcast" role="tabpanel"
                                  aria-labelledby="pills-podcast-tab">
-                                <form method="POST" th:action="@{/recommendations/podcast}" id="createPodcastForm">
+                                <form method="POST" th:action="@{/podcasts}" th:object="${podcastRecommendation}" id="createPodcastForm">
                                     <div class="form-group">
                                         <label for="inputPodcastTitle">Title</label>
                                         <input type="text" name="title" class="form-control" id="inputPodcastTitle" placeholder="Enter title"/>
@@ -230,5 +232,6 @@
         </div>
     </div>
 </div>
+
 </body>
 </html>

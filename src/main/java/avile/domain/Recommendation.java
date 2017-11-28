@@ -56,6 +56,11 @@ public class Recommendation extends AbstractPersistable<Long> {
     public String getDescription() {
         return description;
     }
-    
-    
+
+    public Long getId() {
+        return super.getId();
+    }
+    public void setId(Long id) {
+        super.setId(id);
+    }
 }
