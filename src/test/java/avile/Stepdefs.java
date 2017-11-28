@@ -82,7 +82,7 @@ public class Stepdefs {
 
     @When("^the form \"([^\"]*)\" is submitted$")
     public void theIsSubmitted(String arg0) throws Throwable {
-        driver.findElement(By.id("submitBtn")).click();
+        clickButtonWithId("submitBtn");
     }
 
     @When("^user clicks \"([^\"]*)\" link$")
@@ -97,7 +97,7 @@ public class Stepdefs {
 
     @Then("^user is at the page which title is \"([^\"]*)\"$")
     public void user_is_at_the_page_which_title_is(String arg1) throws Throwable {
-        assertTrue(driver.findElement(By.tagName("h1"))
+        assertTrue(driver.findElement(By.id("pageTitle"))
                 .getText().contains(arg1));
     }
 
@@ -150,16 +150,17 @@ public class Stepdefs {
         element.click();
     }
 
-    private void enterInputToField(String input, String field) {
+    private void enterInputToField(String input, String fieldId) {
         WebElement element = new WebDriverWait(driver, 10)
-                .until(ExpectedConditions.elementToBeClickable(By.name(field)));
+                .until(ExpectedConditions.elementToBeClickable(By.id(fieldId)));
+        element.click();
         element.sendKeys(input);
     }
 
 
     @Then("^user searches for \"([^\"]*)\" and submits the search form$")
     public void userSearchesForAndSubmitsTheSearchForm(String arg0) throws Throwable {
-        this.enterInputToField(arg0, "bookTitle");
+        this.enterInputToField(arg0, "titleInput");
         this.clickButtonWithId("searchBtn");
     }
 

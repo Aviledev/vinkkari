@@ -6,6 +6,6 @@ Feature: user can explore book recommendations
     Then Recommendations are shown
 
   Scenario: user can open a selected book recommendation
-    Given user is at the "books" page
+    Given user is at the "recommendations" page
     When user clicks "TestiKirja" link
     Then user is at the page which title is "TestiKirja"

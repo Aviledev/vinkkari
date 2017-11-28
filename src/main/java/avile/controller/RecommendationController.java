@@ -63,9 +63,9 @@ public class RecommendationController {
         return getRecommendationFromRecommendationId(model, id);
     }
 
-        @GetMapping("/recommendations/{id}/edit")
+    @GetMapping("/recommendations/{id}/edit")
     public String getEditOne(Model model, @PathVariable Long id) {
-        return getRecommendationFromRecommendationId(model, id) + "_edit";
+        return getRecommendationFromRecommendationId(model, id)+"_edit";
     }
 
     @PostMapping("/recommendations/search")
@@ -78,17 +78,20 @@ public class RecommendationController {
     // Used for parsing the typed recommendation item from the "super" recommendation and adding it to model
     private String getRecommendationFromRecommendationId(Model model, Long id) {
         Recommendation recommendation = recommendationService.getRecommendation(id);
-        switch (recommendation.getRecommendationType()) {
-            case BOOK:
-                model.addAttribute("recommendation", bookRecommendationService.getBookRecommendationByRecommendationId(id));
-            case VIDEO:
-                model.addAttribute("recommendation", videoRecommendationService.getVideoRecommendationByRecommendationId(id));
-            case PODCAST:
-                model.addAttribute("recommendation", podcastRecommendationService.getPodcastRecommendationByRecommendationId(id));
-            case BLOGPOST:
-                model.addAttribute("recommendation", blogpostRecommendationService.getBlogpostRecommendationByRecommendationId(id));
+
+        if(recommendation.getRecommendationType() == RecommendationType.BOOK) {
+            model.addAttribute("recommendation", bookRecommendationService.getBookRecommendationByRecommendationId(id));
+        } else if (recommendation.getRecommendationType() == RecommendationType.VIDEO) {
+            model.addAttribute("recommendation", videoRecommendationService.getVideoRecommendationByRecommendationId(id));
+        } else if (recommendation.getRecommendationType() == RecommendationType.PODCAST) {
+            model.addAttribute("recommendation", podcastRecommendationService.getPodcastRecommendationByRecommendationId(id));
+        }else if (recommendation.getRecommendationType() == RecommendationType.BLOGPOST) {
+            model.addAttribute("recommendation", blogpostRecommendationService.getBlogpostRecommendationByRecommendationId(id));
         }
+
         return "recommendation_" + recommendation.getRecommendationType();
     }
+
+
 
 }

@@ -6,16 +6,16 @@ Feature: user can create a new book recommendation
     Then Recommendations are shown
 
   Scenario: user can open a create dialog
-    Given user is at the "books" page
+    Given user is at the "recommendations" page
     When user clicks Create button
     Then the form "createBookForm" is opened
 
   Scenario: user can set all fields in create dialog
-    Given user is at the "books" page
+    Given user is at the "recommendations" page
     When user clicks Create button
-    And the entry "TestiKirja" is entered into the field "title"
-    And the entry "TestiAuthor" is entered into the field "author"
-    And the entry "TestiIsbn" is entered into the field "isbn"
+    And the entry "TestiKirja" is entered into the field "inputBookTitle"
+    And the entry "TestiAuthor" is entered into the field "inputBookAuthor"
+    And the entry "TestiIsbn" is entered into the field "inputBookIsbn"
     And the form "createBookForm" is submitted
     Then the entry with title "TestiKirja" is added
 

@@ -26,7 +26,7 @@ public class BlogpostRecommendationTest {
     @Test
     public void getSetUrl() throws Exception {
         String url = "http://www.youtube.com";
-        blogpostRecommendation.setAuthor(url);
+        blogpostRecommendation.setUrl(url);
         assertEquals(url, blogpostRecommendation.getUrl());
     }
 
