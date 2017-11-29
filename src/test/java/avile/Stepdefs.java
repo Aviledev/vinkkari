@@ -137,6 +137,11 @@ public class Stepdefs {
         assertTrue(driver.getPageSource().contains(arg1) && driver.getPageSource().contains(arg2) && driver.getPageSource().contains(arg3));
     }
 
+    @Then("^the entry with title \"([^\"]*)\", author \"([^\"]*)\" and url \"([^\"]*)\" is saved$")
+    public void theEntryWithTitleAuthorAndUrlIsSaved(String arg0, String arg1, String arg2) throws Throwable {
+        assertTrue(driver.getPageSource().contains(arg0) && driver.getPageSource().contains(arg1) && driver.getPageSource().contains(arg2));
+    }
+
     private void clickButtonWithId(String id) {
         WebElement element = new WebDriverWait(driver, 10)
                 .until(ExpectedConditions.elementToBeClickable(By.id(id)));
@@ -174,4 +179,6 @@ public class Stepdefs {
     public void userIsAtTheSearchResultsPageAfterSearching(String arg0) throws Throwable {
         assertTrue(driver.getPageSource().contains("Search results for <b>" + arg0 + "</b>"));
     }
+
+
 }
