@@ -47,10 +47,12 @@
                                 <div class="form-group">
                                     <label for="inputBookAuthor">Author</label>
                                     <input type="text" name="author" class="form-control" id="inputBookAuthor" placeholder="Enter author" th:field="*{author}"/>
+                                    <div class="invalid-feedback" th:if="${#fields.hasErrors('author')}" th:errors="*{author}">Error</div>
                                 </div>
                                 <div class="form-group">
                                     <label for="inputBookIsbn">ISBN</label>
                                     <input type="text" name="isbn" class="form-control" id="inputBookIsbn" placeholder="Enter ISBN" th:field="*{isbn}"/>
+                                    <div class="invalid-feedback" th:if="${#fields.hasErrors('isbn')}" th:errors="*{isbn}">Error</div>
                                 </div>
                                 <div class="form-group">
                                     <label for="inputBookDescription">Description</label>
@@ -90,6 +92,11 @@
                                         <div class="invalid-feedback" th:if="${#fields.hasErrors('recommendation.title')}" th:errors="*{recommendation.title}">Error</div>
                                     </div>
                                     <div class="form-group">
+                                        <label for="inputVideoAuthor">Author</label>
+                                        <input type="text" name="author" class="form-control" id="inputVideoAuthor" placeholder="Enter author" th:field="*{author}" th:errorclass="is-invalid"/>
+                                        <div class="invalid-feedback" th:if="${#fields.hasErrors('author')}" th:errors="*{author}">Error</div>
+                                    </div>
+                                    <div class="form-group">
                                         <label for="inputVideoUrl">URL</label>
                                         <input type="url" name="url" class="form-control" id="inputVideoUrl" th:field="*{url}" placeholder="Enter URL" th:errorclass="is-invalid"/>
                                         <div class="invalid-feedback" th:if="${#fields.hasErrors('url')}" th:errors="*{url}">Error</div>
@@ -97,6 +104,7 @@
                                     <div class="form-group">
                                         <label for="inputVideoDescription">Description</label>
                                         <textarea type="text" rows="3" name="description" class="form-control" id="inputVideoDescription" th:field="*{recommendation.description}" placeholder="Enter description"></textarea>
+                                        <div class="invalid-feedback" th:if="${#fields.hasErrors('recommendation.description')}" th:errors="*{recommendation.description}">Error</div>
                                     </div>
                                     <div class="form-group">
                                         <label class="d-block" for="inputVideoTags">Tags</label>
@@ -129,23 +137,28 @@
                                 <form method="POST" th:action="@{/blogposts}" th:object="${blogpostRecommendation}" id="createBlogpostForm">
                                     <div class="form-group">
                                         <label for="inputBlogpostTitle">Title</label>
-                                        <input type="text" name="title" class="form-control" id="inputBlogpostTitle" placeholder="Enter title"/>
+                                        <input type="text" name="title" class="form-control" id="inputBlogpostTitle" placeholder="Enter title" th:field="*{recommendation.title}" th:errorclass="is-invalid"/>
+                                        <div class="invalid-feedback" th:if="${#fields.hasErrors('recommendation.title')}" th:errors="*{recommendation.title}">Error</div>
                                     </div>
                                     <div class="form-group">
                                         <label for="inputBlogpostAuthor">Author</label>
-                                        <input type="text" name="author" class="form-control" id="inputBlogpostAuthor" placeholder="Enter author"/>
+                                        <input type="text" name="author" class="form-control" id="inputBlogpostAuthor" placeholder="Enter author" th:field="*{author}" th:errorclass="is-invalid"/>
+                                        <div class="invalid-feedback" th:if="${#fields.hasErrors('author')}" th:errors="*{author}">Error</div>
                                     </div>
                                     <div class="form-group">
                                         <label for="inputBlogpostUrl">URL</label>
-                                        <input type="url" name="isbn" class="form-control" id="inputBlogpostUrl" placeholder="Enter URL"/>
+                                        <input type="url" name="isbn" class="form-control" id="inputBlogpostUrl" placeholder="Enter URL" th:field="*{url}" th:errorclass="is-invalid"/>
+                                        <div class="invalid-feedback" th:if="${#fields.hasErrors('url')}" th:errors="*{url}">Error</div>
                                     </div>
                                     <div class="form-group">
                                         <label for="inputBlogpostDescription">Description</label>
-                                        <textarea type="text" rows="3" name="description" class="form-control" id="inputBlogpostDescription" placeholder="Enter description"></textarea>
+                                        <textarea type="text" rows="3" name="description" class="form-control" id="inputBlogpostDescription" placeholder="Enter description" th:field="*{recommendation.description}" th:errorclass="is-invalid"></textarea>
+                                        <div class="invalid-feedback" th:if="${#fields.hasErrors('recommendation.description')}" th:errors="*{recommendation.description}">Error</div>
                                     </div>
                                     <div class="form-group">
                                         <label class="d-block" for="inputBlogpostReleaseDate">Release date</label>
-                                        <input type="date" name="releaseDate" class="form-control" id="inputBlogpostReleaseDate" placeholder="Enter release date"/>
+                                        <input type="date" name="releaseDate" class="form-control" id="inputBlogpostReleaseDate" placeholder="Enter release date" th:field="*{releaseDate}" th:errorclass="is-invalid"/>
+                                        <div class="invalid-feedback" th:if="${#fields.hasErrors('releaseDate')}" th:errors="*{releaseDate}">Error</div>
                                     </div>
                                     <div class="form-group">
                                         <label class="d-block" for="inputBlogpostTags">Tags</label>
@@ -178,23 +191,27 @@
                                 <form method="POST" th:action="@{/podcasts}" th:object="${podcastRecommendation}" id="createPodcastForm">
                                     <div class="form-group">
                                         <label for="inputPodcastTitle">Title</label>
-                                        <input type="text" name="title" class="form-control" id="inputPodcastTitle" placeholder="Enter title"/>
+                                        <input type="text" name="title" class="form-control" id="inputPodcastTitle" placeholder="Enter title" th:field="*{recommendation.title}" th:errorclass="is-invalid"/>
+                                        <div class="invalid-feedback" th:if="${#fields.hasErrors('recommendation.title')}" th:errors="*{recommendation.title}">Error</div>
                                     </div>
                                     <div class="form-group">
                                         <label for="inputPodcastAuthor">Author</label>
-                                        <input type="text" name="author" class="form-control" id="inputPodcastAuthor" placeholder="Enter author"/>
+                                        <input type="text" name="author" class="form-control" id="inputPodcastAuthor" placeholder="Enter author" th:field="*{author}" th:errorclass="is-invalid"/>
+                                        <div class="invalid-feedback" th:if="${#fields.hasErrors('author')}" th:errors="*{author}">Error</div>
                                     </div>
                                     <div class="form-group">
                                         <label for="inputPodcastUrl">URL</label>
-                                        <input type="url" name="isbn" class="form-control" id="inputPodcastUrl" placeholder="Enter URL"/>
+                                        <input type="url" name="url" class="form-control" id="inputPodcastUrl" placeholder="Enter URL" th:field="*{url}" th:errorclass="is-invalid"/>
+                                        <div class="invalid-feedback" th:if="${#fields.hasErrors('url')}" th:errors="*{url}">Error</div>
                                     </div>
                                     <div class="form-group">
                                         <label for="inputPodcastDescription">Description</label>
-                                        <textarea type="text" rows="3" name="description" class="form-control" id="inputPodcastDescription" placeholder="Enter description"></textarea>
+                                        <textarea type="text" rows="3" name="description" class="form-control" id="inputPodcastDescription" placeholder="Enter description" th:field="*{recommendation.description}" th:errorclass="is-invalid"></textarea>
+                                        <div class="invalid-feedback" th:if="${#fields.hasErrors('recommendation.description')}" th:errors="*{recommendation.description}">Error</div>
                                     </div>
                                     <div class="form-group">
                                         <label class="d-block" for="inputPodcastReleaseDate">Release date</label>
-                                        <input type="date" name="releaseDate" class="form-control" id="inputPodcastReleaseDate" placeholder="Enter release date"/>
+                                        <input type="date" name="releaseDate" class="form-control" id="inputPodcastReleaseDate" placeholder="Enter release date" th:field="*{releaseDate}" th:errorclass="is-invalid"/>
                                     </div>
                                     <div class="form-group">
                                         <label class="d-block" for="inputPodcastTags">Tags</label>

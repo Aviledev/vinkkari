@@ -25,4 +25,13 @@ public class VideoRecommendationService {
     public VideoRecommendation getVideoRecommendationByRecommendationId(Long id) {
         return videoRecommendationRepository.findByRecommendationId(id);
     }
+
+    public void deleteVideoRecommendationById(Long id) {
+        this.videoRecommendationRepository.delete(id);
+    }
+
+    public Long updateVideoRecommendation(VideoRecommendation videoRecommendation) {
+        return this.addVideoRecommendation(videoRecommendation);
+    }
+
 }

@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -29,26 +30,37 @@ public class VideoRecommendationController {
     public String createOne(@Valid VideoRecommendation videoRecommendation, BindingResult bs, Model model) {
 
         if (bs.hasErrors()) {
-
             model.addAttribute("recommendations", recommendationService.getRecommendations());
-            model.addAttribute("bookRecommendation", new BookRecommendation());
             model.addAttribute("blogpostRecommendation", new BlogpostRecommendation());
+            model.addAttribute("bookRecommendation", new BookRecommendation());
             model.addAttribute("podcastRecommendation", new PodcastRecommendation());
             return "recommendations";
         } else {
             videoRecommendationService.addVideoRecommendation(videoRecommendation);
             return "redirect:/recommendations";
         }
-    }
-
-    //@PostMapping()
-    public void deleteOne(@RequestParam Long id) {
 
     }
 
-    //@PostMapping()
-    public void updateOne(@RequestParam Long id) {
+    @PostMapping("/videos/{id}/delete")
+    public String deleteOne(@PathVariable Long id) {
+        videoRecommendationService.deleteVideoRecommendationById(id);
+        return "redirect:/recommendations";
+    }
 
+
+    @PostMapping("/videos/edit")
+    public String updateOne(@Valid VideoRecommendation videoRecommendation, BindingResult bs, Model model) {
+        if (bs.hasErrors()) {
+            model.addAttribute("recommendations", recommendationService.getRecommendations());
+            model.addAttribute("blogpostRecommendation", new BlogpostRecommendation());
+            model.addAttribute("bookRecommendation", new BookRecommendation());
+            model.addAttribute("podcastRecommendation", new PodcastRecommendation());
+            return "recommendation_video_edit";
+        } else {
+            videoRecommendationService.updateVideoRecommendation(videoRecommendation);
+            return "redirect:/recommendations/"+ videoRecommendation.getRecommendation().getId();
+        }
     }
 
 }

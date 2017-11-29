@@ -7,7 +7,7 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface BlogpostRecommendationRepository extends JpaRepository<BookRecommendation, Long>{
+public interface BlogpostRecommendationRepository extends JpaRepository<BlogpostRecommendation, Long>{
 
     BlogpostRecommendation findByRecommendationId(Long id);
 }

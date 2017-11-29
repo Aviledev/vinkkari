@@ -14,4 +14,15 @@ public class BlogpostRecommendationService {
     public BlogpostRecommendation getBlogpostRecommendationByRecommendationId(Long id) {
         return blogpostRecommendationRepository.findByRecommendationId(id);
     }
+
+    public void deleteBlogpostRecommendationById(Long id) { this.blogpostRecommendationRepository.delete(id);
+    }
+
+    public Long addBlogpostRecommendation(BlogpostRecommendation blogpostRecommendation) {
+        return this.blogpostRecommendationRepository.save(blogpostRecommendation).getId();
+    }
+
+    public Long updateBlogpostRecommendation(BlogpostRecommendation blogpostRecommendation) {
+        return this.addBlogpostRecommendation(blogpostRecommendation);
+    }
 }

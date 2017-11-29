@@ -1,7 +1,6 @@
 package avile.service;
 
 import avile.domain.BookRecommendation;
-import avile.domain.Recommendation;
 import avile.repository.BookRecommendationRepository;
 import avile.repository.RecommendationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,43 +11,35 @@ import java.util.List;
 @Service
 public class BookRecommendationService {
     @Autowired
-    private BookRecommendationRepository bookRepo;
+    private BookRecommendationRepository bookRecommendationRepository;
 
     @Autowired
     private RecommendationRepository recommendationRepository;
 
 
     public List<BookRecommendation> getBookRecommendations() {
-        return bookRepo.findAll();
+        return bookRecommendationRepository.findAll();
     }
 
-    public Long addBookRecommendation(BookRecommendation book) {
-        return bookRepo.save(book).getId();
+    public Long addBookRecommendation(BookRecommendation bookRecommendation) {
+        return bookRecommendationRepository.save(bookRecommendation).getId();
     }
 
-    public Long updateBookRecommendation(BookRecommendation book) {
-        return this.addBookRecommendation(book);
+    public Long updateBookRecommendation(BookRecommendation bookRecommendation) {
+        return this.addBookRecommendation(bookRecommendation);
     }
 
-    public void deleteBookRecommendation(BookRecommendation book) {
-        this.deleteBookRecommendationById(book.getId());
+    public void deleteBookRecommendation(BookRecommendation bookRecommendation) {
+        this.deleteBookRecommendationById(bookRecommendation.getId());
     }
 
-    public void deleteBookRecommendationById(Long bookId) {
-        BookRecommendation bookRecommendation = bookRepo.findOne(bookId);
-        if (bookRecommendation != null) {
-            Recommendation r = bookRecommendation.getRecommendation();
-            bookRepo.delete(bookId);
-            recommendationRepository.delete(r);
-        }
-
-    }
+    public void deleteBookRecommendationById(Long id) {  this.bookRecommendationRepository.delete(id); }
 
     public BookRecommendation getBookRecommendation(Long id) {
-        return bookRepo.findOne(id);
+        return bookRecommendationRepository.findOne(id);
     }
 
     public BookRecommendation getBookRecommendationByRecommendationId(Long id) {
-        return bookRepo.findByRecommendationId(id);
+        return bookRecommendationRepository.findByRecommendationId(id);
     }
 }

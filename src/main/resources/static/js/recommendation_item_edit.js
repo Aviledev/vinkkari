@@ -1,4 +1,4 @@
-$("#inputBookTags").tagsinput({
+$("#inputRecommendationTags").tagsinput({
     tagClass: "h4 badge badge-primary mb-0",
     trimValue: true,
     maxChars: 24,

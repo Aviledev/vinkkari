@@ -16,11 +16,11 @@
         <div class="container">
 
             <div th:replace="fragments/header :: header(active = 'Recommendations')"></div>
-            <form method="post" id="editBookForm"
-                  th:object="${bookRecommendation}" th:action="@{/books/edit}">
+            <form method="post" id="editPodcastForm"
+                  th:object="${podcastRecommendation}" th:action="@{/podcasts/edit}">
                 <div class="jumbotron title-jumbotron">
                     <div class="mx-auto">
-                        <h1 class="display-4"><input type="text" name="title" class="form-control title-input-form" id="inputBookTitle" placeholder="Enter title"  th:field="*{recommendation.title}" th:errorclass="is-invalid" />(<b th:text="*{recommendation.recommendationType}"></b>)</h1>
+                        <h1 class="display-4"><input type="text" name="title" class="form-control title-input-form" id="inputPodcastTitle" placeholder="Enter title"  th:field="*{recommendation.title}" th:errorclass="is-invalid" />(<b th:text="*{recommendation.recommendationType}"></b>)</h1>
                         <div class="invalid-feedback-edit" th:if="${#fields.hasErrors('recommendation.title')}" th:errors="*{recommendation.title}">Error</div>
                         <p class="lead">Created by <a href="#">Firstname Lastname</a></p>
                         <input type="text" value="aaa,bbb,ccc" name="tags" class="form-control edit-input-form" id="inputRecommendationTags" placeholder="Enter tags" data-role="tagsinput"/>
@@ -34,17 +34,22 @@
                 <ul class="list-group mb-3">
                     <li class="list-group-item">
                         <b>Author:</b>
-                        <input type="text" th:field="*{author}" name="author" class="form-control edit-input-form" id="inputBookAuthor" placeholder="Enter author" th:errorclass="is-invalid"/>
+                        <input type="text" th:field="*{author}" name="author" class="form-control edit-input-form" id="inputPodcastAuthor" placeholder="Enter author" th:errorclass="is-invalid"/>
                         <div class="invalid-feedback-edit" th:if="${#fields.hasErrors('author')}" th:errors="*{author}">Error</div>
                     </li>
                     <li class="list-group-item">
-                        <b>ISBN:</b>
-                        <input type="text" th:field="*{isbn}" name="isbn" class="form-control edit-input-form" id="inputBookIsbn" placeholder="Enter ISBN" th:errorclass="is-invalid"/>
-                        <div class="invalid-feedback-edit" th:if="${#fields.hasErrors('isbn')}" th:errors="*{isbn}">Error</div>
+                        <b>URL:</b>
+                        <input type="text" th:field="*{url}" name="isbn" class="form-control edit-input-form" id="inputPodcastUrl" placeholder="Enter URL" th:errorclass="is-invalid"/>
+                        <div class="invalid-feedback-edit" th:if="${#fields.hasErrors('url')}" th:errors="*{url}">Error</div>
+                    </li>
+                    <li class="list-group-item">
+                        <b>Release date:</b>
+                        <input type="date" th:field="*{releaseDate}" name="releaseDate" class="form-control edit-input-form" id="inputPodcastReleaseDate" placeholder="Enter release date" th:errorclass="is-invalid"/>
+                        <div class="invalid-feedback-edit" th:if="${#fields.hasErrors('releaseDate')}" th:errors="*{releaseDate}">Error</div>
                     </li>
                     <li class="list-group-item">
                         <b>Description:</b>
-                        <textarea type="text" rows="3" name="description" class="form-control" id="inputBookDescription" placeholder="Enter description" th:field="*{recommendation.description}" th:errorclass="is-invalid"></textarea>
+                        <textarea type="text" rows="3" name="description" class="form-control" id="inputPodcastDescription" placeholder="Enter description" th:field="*{recommendation.description}" th:errorclass="is-invalid"></textarea>
                         <div class="invalid-feedback" th:if="${#fields.hasErrors('recommendation.description')}" th:errors="*{recommendation.description}">Error</div>
                     </li>
                     <li class="list-group-item"><b>Prerequisite courses:</b>

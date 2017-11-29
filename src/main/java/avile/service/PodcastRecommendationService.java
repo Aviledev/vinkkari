@@ -14,4 +14,16 @@ public class PodcastRecommendationService {
     public PodcastRecommendation getPodcastRecommendationByRecommendationId(Long id) {
         return podcastRecommendationRepository.findByRecommendationId(id);
     }
+
+    public Long addPodcastRecommendation(PodcastRecommendation podcastRecommendation) {
+        return this.podcastRecommendationRepository.save(podcastRecommendation).getId();
+    }
+
+    public void deletePodcastRecommendationById(Long id) {
+        this.podcastRecommendationRepository.delete(id);
+    }
+
+    public Long updatePodcastRecommendation(PodcastRecommendation podcastRecommendation) {
+        return this.addPodcastRecommendation(podcastRecommendation);
+    }
 }

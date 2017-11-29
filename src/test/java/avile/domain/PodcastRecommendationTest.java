@@ -15,19 +15,6 @@ public class PodcastRecommendationTest {
         podcastRecommendation = new PodcastRecommendation();
     }
 
-    @Test
-    public void getSetTitle() {
-        String title = "podcast";
-        podcastRecommendation.setTitle(title);
-        assertEquals(title, podcastRecommendation.getTitle());
-    }
-
-    @Test
-    public void getSetAuthor() {
-        String author = "author";
-        podcastRecommendation.setAuthor(author);
-        assertEquals(author, podcastRecommendation.getAuthor());
-    }
 
     
 /*  HUOM!!!!!!!!!! Date testit korjattava TODO
@@ -48,25 +35,12 @@ public class PodcastRecommendationTest {
         assertEquals(date.toString(), podcastRecommendation.getReleaseDate().getTime());
     } */
 
-    @Test
-    public void getSetDescription() {
-        String description = "kipsterin theoreema";
-        podcastRecommendation.setDescription(description);
-        assertEquals(description, podcastRecommendation.getDescription());
-    }
     
     @Test
     public void getSetUrl() {
         String url = "www.helsinki.fi";
         podcastRecommendation.setUrl(url);
         assertEquals(url, podcastRecommendation.getUrl());
-    }
-    
-     @Test
-    public void getType() throws Exception {
-        RecommendationType type = RecommendationType.PODCAST;
-        podcastRecommendation.setType(RecommendationType.PODCAST);
-        assertEquals(type.toString(), podcastRecommendation.getType());
     }
 
 }

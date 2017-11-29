@@ -20,7 +20,7 @@ public class Recommendation extends AbstractPersistable<Long> {
     @Temporal(TemporalType.TIMESTAMP)
     private Date date;
 
-    @Size(max = 300)
+    @Size(max = 600)
     private String description;
 
     private RecommendationType recommendationType;
