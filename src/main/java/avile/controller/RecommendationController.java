@@ -2,14 +2,14 @@ package avile.controller;
 
 import avile.domain.*;
 import avile.enums.RecommendationType;
-
 import avile.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.Date;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class RecommendationController {
@@ -44,6 +44,13 @@ public class RecommendationController {
         b2.setAuthor("Jaakko Peltola");
         b2.setIsbn("5235235");
         bookRecommendationService.addBookRecommendation(b2);
+
+        VideoRecommendation v1 = new VideoRecommendation();
+        v1.getRecommendation().setTitle("Kissavideo");
+        v1.setAuthor("Kissa Fani");
+        v1.setUrl("http://google.fi");
+        v1.getRecommendation().setDescription("Kissa-aiheinen video.");
+        videoRecommendationService.addVideoRecommendation(v1);
     }
 
     @GetMapping("/recommendations")
@@ -63,7 +70,7 @@ public class RecommendationController {
 
     @GetMapping("/recommendations/{id}/edit")
     public String getEditOne(Model model, @PathVariable Long id) {
-        return getRecommendationFromRecommendationId(model, id)+"_edit";
+        return getRecommendationFromRecommendationId(model, id) + "_edit";
     }
 
     @PostMapping("/recommendations/search")
@@ -77,19 +84,18 @@ public class RecommendationController {
     private String getRecommendationFromRecommendationId(Model model, Long id) {
         Recommendation recommendation = recommendationService.getRecommendation(id);
 
-        if(recommendation.getRecommendationType() == RecommendationType.BOOK) {
+        if (recommendation.getRecommendationType() == RecommendationType.BOOK) {
             model.addAttribute("bookRecommendation", bookRecommendationService.getBookRecommendationByRecommendationId(id));
         } else if (recommendation.getRecommendationType() == RecommendationType.VIDEO) {
             model.addAttribute("videoRecommendation", videoRecommendationService.getVideoRecommendationByRecommendationId(id));
         } else if (recommendation.getRecommendationType() == RecommendationType.PODCAST) {
             model.addAttribute("podcastRecommendation", podcastRecommendationService.getPodcastRecommendationByRecommendationId(id));
-        }else if (recommendation.getRecommendationType() == RecommendationType.BLOGPOST) {
+        } else if (recommendation.getRecommendationType() == RecommendationType.BLOGPOST) {
             model.addAttribute("blogpostRecommendation", blogpostRecommendationService.getBlogpostRecommendationByRecommendationId(id));
         }
 
         return "recommendation_" + recommendation.getRecommendationType();
     }
-
 
 
 }

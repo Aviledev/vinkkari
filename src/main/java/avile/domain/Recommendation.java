@@ -1,6 +1,7 @@
 package avile.domain;
 
 import avile.enums.RecommendationType;
+import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
 import javax.persistence.Entity;
@@ -14,7 +15,8 @@ import javax.validation.constraints.Size;
 public class Recommendation extends AbstractPersistable<Long> {
 
     @NotNull
-    @Size(min = 2, max = 50)
+    @Size(max = 50)
+    @NotEmpty
     private String title;
 
     @Temporal(TemporalType.TIMESTAMP)

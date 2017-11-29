@@ -1,6 +1,7 @@
 package avile.domain;
 
 import avile.enums.RecommendationType;
+import org.hibernate.validator.constraints.NotEmpty;
 import org.hibernate.validator.constraints.URL;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
@@ -8,18 +9,17 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.OneToOne;
 import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.Date;
 
 @Entity
-public class VideoRecommendation extends AbstractPersistable<Long>
-{
-    @NotNull
+public class VideoRecommendation extends AbstractPersistable<Long> {
+    @NotEmpty
     @URL
     private String url;
 
     @Size(max = 40)
+    @NotEmpty
     private String author;
 
     @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
