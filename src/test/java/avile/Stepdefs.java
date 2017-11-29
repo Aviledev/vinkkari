@@ -26,14 +26,17 @@ public class Stepdefs {
         File file;
         if (System.getProperty("os.name").matches("Mac OS X")) {
             file = new File("lib/macchromedriver");
-            this.driver = new ChromeDriver();
         } else {
             file = new File("lib/geckodriver");
-            this.driver = new FirefoxDriver();
         }
         String absolutePath = file.getAbsolutePath();
         System.setProperty("webdriver.gecko.driver", absolutePath);
 
+        if (System.getProperty("os.name").matches("Mac OS X")) {
+            this.driver = new ChromeDriver();
+        } else {
+            this.driver = new FirefoxDriver();
+        }
     }
 
     @After
@@ -161,7 +164,6 @@ public class Stepdefs {
         element.sendKeys(input);
     }
 
-
     @Then("^user searches for \"([^\"]*)\" and submits the search form$")
     public void userSearchesForAndSubmitsTheSearchForm(String arg0) throws Throwable {
         this.enterInputToField(arg0, "titleInput");
@@ -180,5 +182,9 @@ public class Stepdefs {
         assertTrue(driver.getPageSource().contains("Search results for <b>" + arg0 + "</b>"));
     }
 
+    @When("^user clicks Blogpost button$")
+    public void user_clicks_Blogpost_button() throws Throwable {
+        clickButtonWithId("pills-blogpost-tab");
+    }
 
 }
