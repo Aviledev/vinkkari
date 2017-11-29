@@ -1,24 +1,22 @@
 package avile;
 
-import cucumber.api.PendingException;
 import cucumber.api.java.After;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
-
-import java.io.File;
-
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.assertFalse;
-
 import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.io.File;
+
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 public class Stepdefs {
 
@@ -27,14 +25,15 @@ public class Stepdefs {
     public Stepdefs() {
         File file;
         if (System.getProperty("os.name").matches("Mac OS X")) {
-            file = new File("lib/macgeckodriver");
+            file = new File("lib/macchromedriver");
+            this.driver = new ChromeDriver();
         } else {
             file = new File("lib/geckodriver");
+            this.driver = new FirefoxDriver();
         }
         String absolutePath = file.getAbsolutePath();
         System.setProperty("webdriver.gecko.driver", absolutePath);
 
-        this.driver = new FirefoxDriver();
     }
 
     @After
