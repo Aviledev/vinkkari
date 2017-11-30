@@ -64,7 +64,7 @@ public class Stepdefs {
 
     @Then("^Recommendations are shown$")
     public void recommendationsAreShown() throws Throwable {
-        assertTrue(driver.getPageSource().contains("Here you can find all recommendations"));
+        assertTrue(driver.getPageSource().contains("RECOMMENDATIONS"));
     }
 
     @Then("^the form \"([^\"]*)\" is opened$")
@@ -179,7 +179,7 @@ public class Stepdefs {
 
     @And("^user is at the Search results page after searching \"([^\"]*)\"$")
     public void userIsAtTheSearchResultsPageAfterSearching(String arg0) throws Throwable {
-        assertTrue(driver.getPageSource().contains("Search results for <b>" + arg0 + "</b>"));
+        assertTrue(driver.getPageSource().contains("SEARCH RESULTS"));
     }
 
     @When("^user clicks Blogpost button$")
