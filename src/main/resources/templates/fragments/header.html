@@ -7,7 +7,7 @@
 <body>
 <div th:fragment="header(active)">
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark rounded">
-    <a class="navbar-brand" href="#">VINKKARI</a>
+    <a class="navbar-brand" href="/" th:text="${#strings.toUpperCase(active)}">VINKKARI</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarMain"
             aria-controls="navbarMain" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -15,9 +15,9 @@
 
     <div class="collapse navbar-collapse" id="navbarMain">
         <ul class="navbar-nav mr-auto">
-            <li class="nav-item" th:classappend="${active == 'Home'} ? active : ''">
+       <!-- <li class="nav-item" th:classappend="${active == 'Home'} ? active : ''">
                 <a class="nav-link" href="/">Home</a>
-            </li>
+            </li> -->
             <li class="nav-item" th:classappend="${active == 'Recommendations'} ? active : ''">
                 <a class="nav-link" href="/recommendations">Recommendations</a>
             </li>
@@ -40,10 +40,6 @@
                 <a class="nav-link" href="#">About</a>
             </li>
         </ul>
-        <form class="form-inline my-2 my-md-0" action="/recommendations/search" method="POST">
-            <input class="form-control" type="text" placeholder="Search" aria-label="Search" id="titleInput" name="title"/>
-            <button type="submit" class="btn btn-secondary" id="searchBtn">Search</button>
-        </form>
     </div>
 </nav>
 </div>

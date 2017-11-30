@@ -33,8 +33,8 @@
     <orderEntry type="library" name="Gradle: org.seleniumhq.selenium:selenium-remote-driver:3.4.0" level="project" />
     <orderEntry type="library" name="Gradle: io.github.bonigarcia:webdrivermanager:1.6.2" level="project" />
     <orderEntry type="library" name="Gradle: org.springframework.boot:spring-boot-starter-test:1.5.8.RELEASE" level="project" />
-    <orderEntry type="library" scope="RUNTIME" name="Gradle: com.h2database:h2:1.4.196" level="project" />
     <orderEntry type="library" name="Gradle: org.springframework.security:spring-security-test:4.2.3.RELEASE" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Gradle: com.h2database:h2:1.4.196" level="project" />
     <orderEntry type="library" name="Gradle: org.springframework:spring-test:4.3.12.RELEASE" level="project" />
     <orderEntry type="library" name="Gradle: info.cukes:cucumber-core:1.2.5" level="project" />
     <orderEntry type="library" name="Gradle: info.cukes:cucumber-java:1.2.5" level="project" />

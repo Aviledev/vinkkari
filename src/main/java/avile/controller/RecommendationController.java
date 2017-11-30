@@ -53,7 +53,7 @@ public class RecommendationController {
         videoRecommendationService.addVideoRecommendation(v1);
     }
 
-    @GetMapping("/recommendations")
+    @GetMapping(path = {"", "/", "/home","/recommendations"})
     public String getAll(Model model) {
         model.addAttribute("recommendations", recommendationService.getRecommendations());
         model.addAttribute("bookRecommendation", new BookRecommendation());
