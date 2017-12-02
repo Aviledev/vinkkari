@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 import java.util.Date;
@@ -30,7 +31,7 @@ public class BookRecommendationController {
 
 
     @PostMapping("/books")
-    public String createOne(@Valid BookRecommendation bookRecommendation, BindingResult bs, Model model) {
+    public String createOne(@Valid BookRecommendation bookRecommendation, BindingResult bs, Model model, final RedirectAttributes redirectAttributes) {
 
         if (bs.hasErrors()) {
             model.addAttribute("recommendations", recommendationService.getRecommendations());
@@ -40,6 +41,9 @@ public class BookRecommendationController {
             return "recommendations";
         } else {
             bookRecommendationService.addBookRecommendation(bookRecommendation);
+            //success or warning
+            redirectAttributes.addFlashAttribute("messageType", "success");
+            redirectAttributes.addFlashAttribute("message", "New book recommendation was created successfully.");
             return "redirect:/recommendations";
         }
 

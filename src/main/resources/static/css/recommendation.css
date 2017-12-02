@@ -46,11 +46,13 @@ ul.list-group.list-group-striped li:nth-of-type(odd) {
 
 .list-group-item-title {
     margin-bottom: 0;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-.list-group-item-account {
-    margin-bottom: 0;
+    font-size: 1.1rem;
 }
 
+.col-title {
+    max-width: 40%;
+}
+.col-tags {
+    max-width: 60%;
+    text-align: right;
+}

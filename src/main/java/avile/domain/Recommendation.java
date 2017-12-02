@@ -15,7 +15,7 @@ import javax.validation.constraints.Size;
 public class Recommendation extends AbstractPersistable<Long> {
 
     @NotNull
-    @Size(max = 50)
+    @Size(max = 100)
     @NotEmpty
     private String title;
 

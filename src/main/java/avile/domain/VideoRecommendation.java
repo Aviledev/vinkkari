@@ -18,7 +18,7 @@ public class VideoRecommendation extends AbstractPersistable<Long> {
     @URL
     private String url;
 
-    @Size(max = 40)
+    @Size(max = 100)
     @NotEmpty
     private String author;
 
