@@ -15,7 +15,7 @@ import java.util.Date;
 @Entity
 public class PodcastRecommendation extends AbstractPersistable<Long> {
 
-    @Size(max = 40)
+    @Size(max = 100)
     private String author;
 
     @NotNull

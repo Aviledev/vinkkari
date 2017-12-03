@@ -46,34 +46,13 @@ ul.list-group.list-group-striped li:nth-of-type(odd) {
 
 .list-group-item-title {
     margin-bottom: 0;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-.list-group-item-account {
-    margin-bottom: 0;
+    font-size: 1.1rem;
 }
 
-.bootstrap-tagsinput {
-    display: block;
-    width: 100%;
-    padding: .375rem .75rem;
-    font-size: 1rem;
-    line-height: 1.5;
-    color: #495057;
-    background-color: #fff;
-    background-image: none;
-    background-clip: padding-box;
-    border: 1px solid #ced4da;
-    border-radius: .25rem;
-    transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
-    box-shadow: unset;
+.col-title {
+    max-width: 40%;
 }
-
-.bootstrap-tagsinput > input {
-    padding: 0;
-}
-
-.badge {
-    font-size: 100%;
+.col-tags {
+    max-width: 60%;
+    text-align: right;
 }

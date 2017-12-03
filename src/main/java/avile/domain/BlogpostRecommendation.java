@@ -20,7 +20,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 @Entity
 public class BlogpostRecommendation extends AbstractPersistable<Long> {
 
-    @Size(max = 40)
+    @Size(max = 100)
     private String author;
 
     @NotNull

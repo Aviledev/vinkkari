@@ -33,27 +33,27 @@ public class RecommendationController {
     @Autowired
     public void setUp() {
         BookRecommendation b1 = new BookRecommendation();
-        b1.getRecommendation().setTitle("eka kirja");
-        b1.setAuthor("Kari Ojala");
-        b1.setIsbn("3435323");
+        b1.getRecommendation().setTitle("Introduction to Algorithms, 3rd Edition");
+        b1.setAuthor("Thomas H. Cormen, Charles E. Leiserson, Ronald L. Rivest, Clifford Stein");
+        b1.setIsbn("9780262033848");
         bookRecommendationService.addBookRecommendation(b1);
 
 
         BookRecommendation b2 = new BookRecommendation();
-        b2.getRecommendation().setTitle("toka kirja");
-        b2.setAuthor("Jaakko Peltola");
-        b2.setIsbn("5235235");
+        b2.getRecommendation().setTitle("C Programming Language, 2nd Edition");
+        b2.setAuthor("Brian W. Kernighan, Dennis M. Ritchie");
+        b2.setIsbn("9780131103627");
         bookRecommendationService.addBookRecommendation(b2);
 
         VideoRecommendation v1 = new VideoRecommendation();
-        v1.getRecommendation().setTitle("Kissavideo");
-        v1.setAuthor("Kissa Fani");
-        v1.setUrl("http://google.fi");
-        v1.getRecommendation().setDescription("Kissa-aiheinen video.");
+        v1.getRecommendation().setTitle("Java Programming Tutorial - 2 - Running a Java Program");
+        v1.setAuthor("thenewboston");
+        v1.setUrl("https://www.youtube.com/watch?v=5u8rFbpdvds");
+        v1.getRecommendation().setDescription("Very interesting tutorial about running Java program");
         videoRecommendationService.addVideoRecommendation(v1);
     }
 
-    @GetMapping("/recommendations")
+    @GetMapping(path = {"", "/", "/home","/recommendations"})
     public String getAll(Model model) {
         model.addAttribute("recommendations", recommendationService.getRecommendations());
         model.addAttribute("bookRecommendation", new BookRecommendation());
