@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>VINKKARI | Recommendations</title>
+        <!-- Required meta tags -->
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css"
+              integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous"/>
+        <link rel="stylesheet" href="../static/css/course_item_edit.css" th:href="@{/css/course_item_edit.css}"/>
+    </head>
+    <body>
+        <div class="container">
+
+            <div th:replace="fragments/header :: header(active = 'Courses')"></div>
+            <form method="post" id="editCourseForm"
+                  th:object="${course}" th:action="@{/courses/edit}">
+                <div class="jumbotron title-jumbotron">
+                    <div class="mx-auto">
+                        <h1 class="display-4"><input type="text" name="name" class="form-control title-input-form" id="inputCourseName" placeholder="Enter title" th:field="*{name}" th:errorclass="is-invalid"/></h1>
+                        <div class="invalid-feedback-edit" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Error</div>
+                        <p class="lead">Created by <a href="#">Firstname Lastname</a></p>
+                        <input type="hidden" name="id" th:field="*{id}"/>
+                    </div>
+                </div>
+
+                <hr class="my-4"/>
+
+                <ul class="list-group mb-3">
+                    <li class="list-group-item">
+                        <b>code:</b>
+                        <input type="text" th:field="*{code}" name="code" class="form-control edit-input-form" id="inputCourseCode" placeholder="Enter course code" th:errorclass="is-invalid"/>
+                        <div class="invalid-feedback-edit" th:if="${#fields.hasErrors('code')}" th:errors="*{code}">Error</div>
+                    </li>
+                    <li class="list-group-item">
+                        <b>Description:</b>
+                        <textarea type="text" rows="3" name="description" class="form-control" id="inputCourseDescription" placeholder="Enter description" th:field="*{description}" th:errorclass="is-invalid"></textarea>
+                        <div class="invalid-feedback" th:if="${#fields.hasErrors('description')}" th:errors="*{description}">Error</div>
+                    </li>
+                </ul>
+
+                <button type="submit" id="saveBtn" class="btn btn-primary">Save</button>
+            </form>
+
+        </div>
+        <div th:replace="fragments/footer :: footer"></div>
+
+
+        <!-- Optional JavaScript -->
+        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        <script src="https://code.jquery.com/jquery-3.2.1.min.js"
+        integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"
+                integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh"
+        crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"
+                integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ"
+        crossorigin="anonymous"></script>
+    </body>
+</html>
