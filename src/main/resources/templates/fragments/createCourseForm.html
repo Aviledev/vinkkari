@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>CreateCourseForm</title>
+</head>
+<body>
+<div th:fragment="createCourseForm">
+    <div class="modal fade" id="createCourseModal" tabindex="-1" role="dialog" aria-labelledby="createCourseModalTitle"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="createCourseModalTitle">Create new course</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form method="POST" th:action="@{/course}" th:object="${course}" id="createCourseForm">
+                        <div class="form-group">
+                            <label for="inputCourseName">Name</label>
+                            <input type="text" name="name" class="form-control" id="inputCourseName"
+                                   placeholder="Enter name" th:field="*{name}" th:errorclass="is-invalid"/>
+                            <div class="invalid-feedback" th:if="${#fields.hasErrors('name')}"
+                                 th:errors="*{name}">Error
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputCourseCode">Code</label>
+                            <input type="text" name="code" class="form-control" id="inputCourseCode"
+                                   placeholder="Enter course code (e.g. TKT20007)" th:field="*{code}"/>
+                            <div class="invalid-feedback" th:if="${#fields.hasErrors('code')}" th:errors="*{code}">
+                                Error
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputCourseDescription">Description</label>
+                            <textarea type="text" rows="3" name="description" class="form-control"
+                                      id="inputCourseDescription" th:field="*{description}"
+                                      placeholder="Enter description"></textarea>
+                            <div class="invalid-feedback" th:if="${#fields.hasErrors('description')}" th:errors="*{description}">Error</div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" id="submitBtn" class="btn btn-primary">Submit</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

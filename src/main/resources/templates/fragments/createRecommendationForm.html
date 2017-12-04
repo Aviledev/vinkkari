@@ -40,7 +40,7 @@
                                  aria-labelledby="pills-book-tab">
                                 <form method="POST" th:action="@{/books}" th:object="${bookRecommendation}" id="createBookForm">
                                 <div class="form-group">
-                                    <label for="inputVideoTitle">Title</label>
+                                    <label for="inputBookTitle">Title</label>
                                     <input type="text" name="title" class="form-control" id="inputBookTitle" placeholder="Enter title" th:field="*{recommendation.title}" th:errorclass="is-invalid"/>
                                     <div class="invalid-feedback" th:if="${#fields.hasErrors('recommendation.title')}" th:errors="*{recommendation.title}">Error</div>
                                 </div>
@@ -57,6 +57,7 @@
                                 <div class="form-group">
                                     <label for="inputBookDescription">Description</label>
                                     <textarea type="text" rows="3" name="description" class="form-control" id="inputBookDescription"  th:field="*{recommendation.description}" placeholder="Enter description"></textarea>
+                                    <div class="invalid-feedback" th:if="${#fields.hasErrors('recommendation.description')}" th:errors="*{recommendation.description}">Error</div>
                                 </div>
                                 <div class="form-group">
                                     <label class="d-block" for="inputBookTags">Tags</label>
@@ -64,22 +65,19 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="inputBookPrerequisiteCourses">Prerequisite courses <a href="#" class="">Missing?</a></label>
-                                    <select multiple="multiple" name="prerequisiteCourses" class="form-control" id="inputBookPrerequisiteCourses">
-                                        <option>1</option>
-                                        <option>2</option>
-                                        <option>3</option>
-                                        <option>4</option>
-                                        <option>5</option>
+                                    <!-- Tässä on mahdollinen ongelman aiheuttaja. Erityisesti tuple brackets vai id? Mihin field? Lisätäänkö th:selected vai osaako field hoitaa? -->
+                                    <select multiple="multiple" name="prerequisiteCourses" th:field="*{recommendation.prerequisiteCourses}" class="form-control" id="inputBookPrerequisiteCourses">
+                                        <option th:each="course: ${courses}"
+                                                th:value="${{course}}"
+                                                th:text="${course.name}"></option>
                                     </select>
                                 </div>
                                 <div class="form-group">
-                                    <label for="inputBookRelatedCourses">Recommended courses <a href="#" class="">Missing?</a></label>
-                                    <select multiple="multiple" name="relatedCourses" class="form-control" id="inputBookRelatedCourses">
-                                        <option>1</option>
-                                        <option>2</option>
-                                        <option>3</option>
-                                        <option>4</option>
-                                        <option>5</option>
+                                    <label for="inputBookRelatedCourses">Related courses <a href="#" class="">Missing?</a></label>
+                                    <select multiple="multiple" name="relatedCourses" th:field="*{recommendation.relatedCourses}" class="form-control" id="inputBookRelatedCourses">
+                                        <option th:each="course: ${courses}"
+                                                th:value="${{course}}"
+                                                th:text="${course.name}"></option>
                                     </select>
                                 </div>
                                 </form>
@@ -112,22 +110,18 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="inputVideoPrerequisiteCourses">Prerequisite courses <a href="#" class="">Missing?</a></label>
-                                        <select multiple="multiple" name="prerequisiteCourses" class="form-control" id="inputVideoPrerequisiteCourses">
-                                            <option>1</option>
-                                            <option>2</option>
-                                            <option>3</option>
-                                            <option>4</option>
-                                            <option>5</option>
+                                        <select multiple="multiple" name="prerequisiteCourses" th:field="*{recommendation.prerequisiteCourses}" class="form-control" id="inputVideoPrerequisiteCourses">
+                                            <option th:each="course: ${courses}"
+                                                    th:value="${{course}}"
+                                                    th:text="${course.name}"></option>
                                         </select>
                                     </div>
                                     <div class="form-group">
                                         <label for="inputVideoRelatedCourses">Recommended courses <a href="#" class="">Missing?</a></label>
-                                        <select multiple="multiple" name="relatedCourses" class="form-control" id="inputVideoRelatedCourses">
-                                            <option>1</option>
-                                            <option>2</option>
-                                            <option>3</option>
-                                            <option>4</option>
-                                            <option>5</option>
+                                        <select multiple="multiple" name="relatedCourses" th:field="*{recommendation.relatedCourses}" class="form-control" id="inputVideoRelatedCourses">
+                                            <option th:each="course: ${courses}"
+                                                    th:value="${{course}}"
+                                                    th:text="${course.name}"></option>
                                         </select>
                                     </div>
                                 </form>
@@ -166,22 +160,18 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="inputBlogpostPrerequisiteCourses">Prerequisite courses <a href="#" class="">Missing?</a></label>
-                                        <select multiple="multiple" name="prerequisiteCourses" class="form-control" id="inputBlogpostPrerequisiteCourses">
-                                            <option>1</option>
-                                            <option>2</option>
-                                            <option>3</option>
-                                            <option>4</option>
-                                            <option>5</option>
+                                        <select multiple="multiple" name="prerequisiteCourses" th:field="*{recommendation.prerequisiteCourses}" class="form-control" id="inputBlogpostPrerequisiteCourses">
+                                            <option th:each="course: ${courses}"
+                                                    th:value="${{course}}"
+                                                    th:text="${course.name}"></option>
                                         </select>
                                     </div>
                                     <div class="form-group">
                                         <label for="inputBlogpostRelatedCourses">Recommended courses <a href="#" class="">Missing?</a></label>
-                                        <select multiple="multiple" name="relatedCourses" class="form-control" id="inputBlogpostRelatedCourses">
-                                            <option>1</option>
-                                            <option>2</option>
-                                            <option>3</option>
-                                            <option>4</option>
-                                            <option>5</option>
+                                        <select multiple="multiple" name="relatedCourses" th:field="*{recommendation.relatedCourses}" class="form-control" id="inputBlogpostRelatedCourses">
+                                            <option th:each="course: ${courses}"
+                                                    th:value="${{course}}"
+                                                    th:text="${course.name}"></option>
                                         </select>
                                     </div>
                                 </form>
@@ -219,22 +209,18 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="inputPodcastPrerequisiteCourses">Prerequisite courses <a href="#" class="">Missing?</a></label>
-                                        <select multiple="multiple" name="prerequisiteCourses" class="form-control" id="inputPodcastPrerequisiteCourses">
-                                            <option>1</option>
-                                            <option>2</option>
-                                            <option>3</option>
-                                            <option>4</option>
-                                            <option>5</option>
+                                        <select multiple="multiple" name="prerequisiteCourses" th:field="*{recommendation.prerequisiteCourses}" class="form-control" id="inputPodcastPrerequisiteCourses">
+                                            <option th:each="course: ${courses}"
+                                                    th:value="${{course}}"
+                                                    th:text="${course.name}"></option>
                                         </select>
                                     </div>
                                     <div class="form-group">
                                         <label for="inputPodcastRelatedCourses">Recommended courses <a href="#" class="">Missing?</a></label>
-                                        <select multiple="multiple" name="relatedCourses" class="form-control" id="inputPodcastRelatedCourses">
-                                            <option>1</option>
-                                            <option>2</option>
-                                            <option>3</option>
-                                            <option>4</option>
-                                            <option>5</option>
+                                        <select multiple="multiple" name="relatedCourses" th:field="*{recommendation.relatedCourses}" class="form-control" id="inputPodcastRelatedCourses">
+                                            <option th:each="course: ${courses}"
+                                                    th:value="${{course}}"
+                                                    th:text="${course.name}"></option>
                                         </select>
                                     </div>
                                 </form>

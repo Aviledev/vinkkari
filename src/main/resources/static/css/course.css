@@ -1,0 +1,51 @@
+html {
+    min-height: 100%;
+    position: relative;
+}
+
+body {
+    padding-top: 1.5rem;
+    margin-bottom: 80px;
+}
+.display-4 {
+    font-size: 2.5rem;
+}
+.footer {
+    position: absolute;
+    bottom:0;
+    width: 100%;
+    height: 60px;
+    line-height: 60px;
+    left: 0;
+}
+.navbar {
+    margin-bottom: 20px;
+}
+.title-jumbotron {
+    padding: 1rem;
+}
+
+.list-group-item-container {
+    padding-top: 4px;
+    padding-bottom: 4px;
+    padding-left: 6px;
+    padding-right: 6px;
+}
+.title-row {
+    padding-left: 6px;
+    padding-right: 6px;
+}
+.row {
+    margin-left: 0;
+    margin-right: 0;
+}
+
+ul.list-group.list-group-striped li:nth-of-type(odd) {
+    background-color: #f9f9f9;
+}
+
+.list-group-item-title {
+    margin-bottom: 0;
+    font-size: 1.1rem;
+}
+
