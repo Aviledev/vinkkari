@@ -1,0 +1,66 @@
+html {
+    min-height: 100%;
+    position: relative;
+}
+body {
+    padding-top: 1.5rem;
+    margin-bottom: 80px;
+}
+.display-4 {
+    font-size: 2.5rem;
+}
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 60px;
+    line-height: 60px;
+    left: 0;
+}
+.navbar {
+    margin-bottom: 20px;
+}
+
+.title-jumbotron {
+    padding: 1rem;
+}
+.title-input-form {
+    width: 65%;
+    display: unset;
+    font-size: 2.5rem;
+    font-weight: 300;
+    line-height: 1.2;
+}
+.edit-input-form {
+    width: 65%;
+    display: unset;
+}
+
+.bootstrap-tagsinput {
+    display: block;
+    width: 100%;
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    background-image: none;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: .25rem;
+    transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+    box-shadow: unset;
+}
+
+.bootstrap-tagsinput > input {
+    padding: 0;
+}
+
+.badge {
+    font-size: 100%;
+}
+.invalid-feedback-edit {
+    margin-top: .25rem;
+    font-size: .875rem;
+    color: #dc3545;
+}
