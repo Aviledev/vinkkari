@@ -8,6 +8,9 @@ import javax.persistence.Entity;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import java.util.Date;
+import java.util.List;
+import javax.persistence.FetchType;
+import javax.persistence.ManyToMany;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -27,6 +30,17 @@ public class Recommendation extends AbstractPersistable<Long> {
 
     private RecommendationType recommendationType;
 
+    @ManyToMany
+    private List<Course> relatedCourses;
+
+    public void setRelatedCourses(List<Course> relatedCourses) {
+        this.relatedCourses = relatedCourses;
+    }
+
+    public List<Course> getRelatedCourses() {
+        return relatedCourses;
+    }
+    
     public Date getDate() {
         return date;
     }

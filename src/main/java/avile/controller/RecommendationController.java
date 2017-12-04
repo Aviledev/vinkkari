@@ -3,6 +3,8 @@ package avile.controller;
 import avile.domain.*;
 import avile.enums.RecommendationType;
 import avile.service.*;
+import java.util.ArrayList;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -29,20 +31,34 @@ public class RecommendationController {
     @Autowired
     RecommendationService recommendationService;
 
+    @Autowired
+    CourseService courseService;
 
     @Autowired
     public void setUp() {
+        Course c1 = new Course();
+        c1.setName("TKTL2001 Laskennan mallit");
+        courseService.addCourse(c1);
+
+        Course c2 = new Course();
+        c2.setName("TKTL2004 Tietokantojen perusteet");
+        courseService.addCourse(c2);
+
         BookRecommendation b1 = new BookRecommendation();
         b1.getRecommendation().setTitle("Introduction to Algorithms, 3rd Edition");
         b1.setAuthor("Thomas H. Cormen, Charles E. Leiserson, Ronald L. Rivest, Clifford Stein");
         b1.setIsbn("9780262033848");
+        List<Long> courses = new ArrayList<>();
+        courses.add((long) 1);
+        courses.add((long) 2);
         bookRecommendationService.addBookRecommendation(b1);
-
 
         BookRecommendation b2 = new BookRecommendation();
         b2.getRecommendation().setTitle("C Programming Language, 2nd Edition");
         b2.setAuthor("Brian W. Kernighan, Dennis M. Ritchie");
         b2.setIsbn("9780131103627");
+        List<Long> courses2 = new ArrayList<>();
+        courses2.add((long) 2);
         bookRecommendationService.addBookRecommendation(b2);
 
         VideoRecommendation v1 = new VideoRecommendation();
@@ -53,8 +69,9 @@ public class RecommendationController {
         videoRecommendationService.addVideoRecommendation(v1);
     }
 
-    @GetMapping(path = {"", "/", "/home","/recommendations"})
+    @GetMapping(path = {"", "/", "/home", "/recommendations"})
     public String getAll(Model model) {
+        model.addAttribute("courses", courseService.getCourses());
         model.addAttribute("recommendations", recommendationService.getRecommendations());
         model.addAttribute("bookRecommendation", new BookRecommendation());
         model.addAttribute("videoRecommendation", new VideoRecommendation());
@@ -96,6 +113,5 @@ public class RecommendationController {
 
         return "recommendation_" + recommendation.getRecommendationType();
     }
-
 
 }
