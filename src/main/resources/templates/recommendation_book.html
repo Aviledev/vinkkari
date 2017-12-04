@@ -38,11 +38,8 @@
                     <p th:text="${bookRecommendation.recommendation.description}"></p>
                 </li>
                 <li class="list-group-item"><b>Prerequisite courses:</b>
-                    <ul>
-                        <li>A</li>
-                        <li>A</li>
-                        <li>A</li>
-                        <li>A</li>
+                    <ul th:each="course : ${bookRecommendation.recommendation.prerequisiteCourses}">
+                        <li th:text="${course.name}"></li>
                     </ul>
                 </li>
                 <li class="list-group-item"><b>Related courses:</b>

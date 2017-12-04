@@ -65,7 +65,6 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="inputBookPrerequisiteCourses">Prerequisite courses <a href="#" class="">Missing?</a></label>
-                                    <!-- Tässä on mahdollinen ongelman aiheuttaja. Erityisesti tuple brackets vai id? Mihin field? Lisätäänkö th:selected vai osaako field hoitaa? -->
                                     <select multiple="multiple" name="prerequisiteCourses" th:field="*{recommendation.prerequisiteCourses}" class="form-control" id="inputBookPrerequisiteCourses">
                                         <option th:each="course: ${courses}"
                                                 th:value="${{course}}"
@@ -110,7 +109,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="inputVideoPrerequisiteCourses">Prerequisite courses <a href="#" class="">Missing?</a></label>
-                                        <select multiple="multiple" name="prerequisiteCourses" th:field="*{recommendation.prerequisiteCourses}" class="form-control" id="inputVideoPrerequisiteCourses">
+                                        <select multiple="multiple" name="prerequisiteCourses" th:field="*{recommendation.prerequisiteCourses}" class="form-control" id="inputBlogpostPrerequisiteCourses">
                                             <option th:each="course: ${courses}"
                                                     th:value="${{course}}"
                                                     th:text="${course.name}"></option>
@@ -118,7 +117,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="inputVideoRelatedCourses">Recommended courses <a href="#" class="">Missing?</a></label>
-                                        <select multiple="multiple" name="relatedCourses" th:field="*{recommendation.relatedCourses}" class="form-control" id="inputVideoRelatedCourses">
+                                        <select multiple="multiple" name="relatedCourses" th:field="*{recommendation.relatedCourses}" class="form-control" id="inputBlogpostRelatedCourses">
                                             <option th:each="course: ${courses}"
                                                     th:value="${{course}}"
                                                     th:text="${course.name}"></option>

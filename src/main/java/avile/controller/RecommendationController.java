@@ -37,28 +37,35 @@ public class RecommendationController {
     @Autowired
     public void setUp() {
         Course c1 = new Course();
-        c1.setName("TKTL2001 Laskennan mallit");
+        c1.setName("Aineopintojen harjoitustyö: Tietoliikenne");
+        c1.setCode("TKT20012");
         courseService.addCourse(c1);
 
         Course c2 = new Course();
-        c2.setName("TKTL2004 Tietokantojen perusteet");
+        c2.setName("Tietoturvan perusteet");
+        c2.setCode("TKT20009");
         courseService.addCourse(c2);
 
         BookRecommendation b1 = new BookRecommendation();
         b1.getRecommendation().setTitle("Introduction to Algorithms, 3rd Edition");
         b1.setAuthor("Thomas H. Cormen, Charles E. Leiserson, Ronald L. Rivest, Clifford Stein");
         b1.setIsbn("9780262033848");
-        List<Long> courses = new ArrayList<>();
-        courses.add((long) 1);
-        courses.add((long) 2);
+        List<Course> rCourses = new ArrayList<>();
+        rCourses.add(courseService.getCourse((long) 1));
+        rCourses.add(courseService.getCourse((long) 2));
+        b1.getRecommendation().setRelatedCourses(rCourses);
+        List<Course> pCourses = new ArrayList<>();
+        pCourses.add(courseService.getCourse((long) 1));
+        b1.getRecommendation().setPrerequisiteCourses(pCourses);
         bookRecommendationService.addBookRecommendation(b1);
 
         BookRecommendation b2 = new BookRecommendation();
         b2.getRecommendation().setTitle("C Programming Language, 2nd Edition");
         b2.setAuthor("Brian W. Kernighan, Dennis M. Ritchie");
         b2.setIsbn("9780131103627");
-        List<Long> courses2 = new ArrayList<>();
-        courses2.add((long) 2);
+        List<Course> courses2 = new ArrayList<>();
+        courses2.add(courseService.getCourse((long) 2));
+        b2.getRecommendation().setRelatedCourses(courses2);
         bookRecommendationService.addBookRecommendation(b2);
 
         VideoRecommendation v1 = new VideoRecommendation();
@@ -100,6 +107,7 @@ public class RecommendationController {
     // Used for parsing the typed recommendation item from the "super" recommendation and adding it to model
     private String getRecommendationFromRecommendationId(Model model, Long id) {
         Recommendation recommendation = recommendationService.getRecommendation(id);
+        model.addAttribute("courses", courseService.getCourses());
 
         if (recommendation.getRecommendationType() == RecommendationType.BOOK) {
             model.addAttribute("bookRecommendation", bookRecommendationService.getBookRecommendationByRecommendationId(id));

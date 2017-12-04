@@ -27,12 +27,6 @@ public class BookRecommendationService {
     }
 
     public Long addBookRecommendation(BookRecommendation bookRecommendation) {
-       /* ArrayList<Course> rCourses = new ArrayList<>();
-        for (Long relatedCourse : relatedCourses) {
-            rCourses.add(courseService.getCourse(relatedCourse));
-        }
-        bookRecommendation.getRecommendation().setRelatedCourses(rCourses);
-*/
         return bookRecommendationRepository.save(bookRecommendation).getId();
     }
 

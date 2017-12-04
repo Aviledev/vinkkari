@@ -11,6 +11,7 @@ import java.util.Date;
 import java.util.List;
 import javax.persistence.FetchType;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -32,6 +33,17 @@ public class Recommendation extends AbstractPersistable<Long> {
 
     @ManyToMany
     private List<Course> relatedCourses;
+    
+    @ManyToMany
+    private List<Course> prerequisiteCourses;
+
+    public void setPrerequisiteCourses(List<Course> prerequisiteCourses) {
+        this.prerequisiteCourses = prerequisiteCourses;
+    }
+
+    public List<Course> getPrerequisiteCourses() {
+        return prerequisiteCourses;
+    }
 
     public void setRelatedCourses(List<Course> relatedCourses) {
         this.relatedCourses = relatedCourses;
