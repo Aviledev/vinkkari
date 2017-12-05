@@ -1,84 +1,78 @@
 <!doctype html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <title>VINKKARI | Recommendations</title>
-    <!-- Required meta tags -->
-    <meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <head>
+        <title>VINKKARI | Recommendations</title>
+        <!-- Required meta tags -->
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css"
-          integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous"/>
-    <link rel="stylesheet" href="../static/css/bootstrap-tagsinput.css" th:href="@{/css/bootstrap-tagsinput.css}"/>
-    <link rel="stylesheet" href="../static/css/recommendation_item.css" th:href="@{/css/recommendation_item.css}"/>
-</head>
-<body>
-<div class="container">
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css"
+              integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous"/>
+        <link rel="stylesheet" href="../static/css/bootstrap-tagsinput.css" th:href="@{/css/bootstrap-tagsinput.css}"/>
+        <link rel="stylesheet" href="../static/css/recommendation_item.css" th:href="@{/css/recommendation_item.css}"/>
+    </head>
+    <body>
+        <div class="container">
 
-    <div th:replace="fragments/header :: header(active = 'Recommendations')"></div>
+            <div th:replace="fragments/header :: header(active = 'Recommendations')"></div>
 
 
-    <div class="jumbotron title-jumbotron">
-        <div class="mx-auto">
-            <h1 class="display-4"><span id="pageTitle" th:text="${bookRecommendation.recommendation.title}"></span> (<b th:text="${bookRecommendation.recommendation.recommendationType}"></b>)</h1>
-            <p class="lead">Created by <a href="#">Firstname Lastname</a></p>
-            <a href="#"><span class="recommendation-tag badge badge-pill badge-primary">Tag1</span></a>
-            <a href="#"><span class="recommendation-tag badge badge-pill badge-primary">Tag1</span></a>
-            <a href="#"><span class="recommendation-tag badge badge-pill badge-primary">Tag1</span></a>
+            <div class="jumbotron title-jumbotron">
+                <div class="mx-auto">
+                    <h1 class="display-4"><span id="pageTitle" th:text="${bookRecommendation.recommendation.title}"></span> (<b th:text="${bookRecommendation.recommendation.recommendationType}"></b>)</h1>
+                    <p class="lead">Created by <a href="#">Firstname Lastname</a></p>
+                    <a href="#"><span class="recommendation-tag badge badge-pill badge-primary">Tag1</span></a>
+                    <a href="#"><span class="recommendation-tag badge badge-pill badge-primary">Tag1</span></a>
+                    <a href="#"><span class="recommendation-tag badge badge-pill badge-primary">Tag1</span></a>
+                </div>
+            </div>
+
+            <hr class="my-4"/>
+
+            <ul class="list-group mb-3">
+                <li class="list-group-item"><b>Author:</b> <span th:text="${bookRecommendation.author}"></span></li>
+                <li class="list-group-item"><b>ISBN:</b> <span th:text="${bookRecommendation.isbn}"></span></li>
+                <li class="list-group-item">
+                    <b>Description:</b>
+                    <p th:text="${bookRecommendation.recommendation.description}"></p>
+                </li>
+                <li class="list-group-item"><b>Prerequisite courses:</b>
+                    <ul th:each="course : ${bookRecommendation.recommendation.prerequisiteCourses}">
+                        <li th:text="${course.name}"></li>
+                    </ul>
+                </li>
+                <li class="list-group-item"><b>Related courses:</b>
+                    <ul th:each="course : ${bookRecommendation.recommendation.relatedCourses}">
+                        <li th:text="${course.name}"></li>
+                    </ul>
+                </li>
+            </ul>
+
+            <a class="btn btn-primary" id="editBtn" th:href="@{/recommendations/{id}/edit(id=${bookRecommendation.recommendation.id})}" role="button">Edit</a>
+
+            <form method="post"
+                  class="destroy-form"
+                  data-confirm="Are you sure, you want to delete this recommendation"
+                  style="display: inline-block"
+                  th:action="@{/books/{id}/delete(id=${bookRecommendation.id})}">
+                <button type="submit" id="deleteBtn" class="btn btn-danger">Delete</button>
+            </form>
         </div>
-    </div>
-
-    <hr class="my-4"/>
-
-    <ul class="list-group mb-3">
-        <li class="list-group-item"><b>Author:</b> <span th:text="${bookRecommendation.author}"></span></li>
-        <li class="list-group-item"><b>ISBN:</b> <span th:text="${bookRecommendation.isbn}"></span></li>
-        <li class="list-group-item">
-            <b>Description:</b>
-            <p th:text="${bookRecommendation.recommendation.description}"></p>
-        </li>
-        <li class="list-group-item"><b>Prerequisite courses:</b>
-            <ul>
-                <li>A</li>
-                <li>A</li>
-                <li>A</li>
-                <li>A</li>
-            </ul>
-        </li>
-        <li class="list-group-item"><b>Related courses:</b>
-            <ul>
-                <li>A</li>
-                <li>A</li>
-                <li>A</li>
-                <li>A</li>
-            </ul>
-        </li>
-    </ul>
-
-    <a class="btn btn-primary" id="editBtn" th:href="@{/recommendations/{id}/edit(id=${bookRecommendation.recommendation.id})}" role="button">Edit</a>
-
-    <form method="post"
-          class="destroy-form"
-          data-confirm="Are you sure, you want to delete this recommendation"
-          style="display: inline-block"
-          th:action="@{/books/{id}/delete(id=${bookRecommendation.id})}">
-        <button type="submit" id="deleteBtn" class="btn btn-danger">Delete</button>
-    </form>
-</div>
-<div th:replace="fragments/footer :: footer"></div>
+        <div th:replace="fragments/footer :: footer"></div>
 
 
-<!-- Optional JavaScript -->
-<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-<script src="https://code.jquery.com/jquery-3.2.1.min.js"
+        <!-- Optional JavaScript -->
+        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        <script src="https://code.jquery.com/jquery-3.2.1.min.js"
         integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"
-        integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh"
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"
+                integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh"
         crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"
-        integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ"
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"
+                integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ"
         crossorigin="anonymous"></script>
-<script src="../static/js/bootstrap-tagsinput.min.js" th:src="@{/js/bootstrap-tagsinput.min.js}"></script>
-<script src="../static/js/recommendation_item.js" th:src="@{/js/recommendation_item.js}"></script>
-</body>
+        <script src="../static/js/bootstrap-tagsinput.min.js" th:src="@{/js/bootstrap-tagsinput.min.js}"></script>
+        <script src="../static/js/recommendation_item.js" th:src="@{/js/recommendation_item.js}"></script>
+    </body>
 </html>

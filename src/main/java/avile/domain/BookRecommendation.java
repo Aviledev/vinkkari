@@ -15,7 +15,7 @@ import java.util.Date;
 public class BookRecommendation extends AbstractPersistable<Long> {
 
 
-    @Size(max = 40)
+    @Size(max = 100)
     private String author;
 
     @NotNull

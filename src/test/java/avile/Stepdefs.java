@@ -1,24 +1,22 @@
 package avile;
 
-import cucumber.api.PendingException;
 import cucumber.api.java.After;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
-
-import java.io.File;
-
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.assertFalse;
-
 import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.io.File;
+
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 public class Stepdefs {
 
@@ -27,14 +25,18 @@ public class Stepdefs {
     public Stepdefs() {
         File file;
         if (System.getProperty("os.name").matches("Mac OS X")) {
-            file = new File("lib/macgeckodriver");
+            file = new File("lib/macchromedriver");
         } else {
             file = new File("lib/geckodriver");
         }
         String absolutePath = file.getAbsolutePath();
         System.setProperty("webdriver.gecko.driver", absolutePath);
 
-        this.driver = new FirefoxDriver();
+        if (System.getProperty("os.name").matches("Mac OS X")) {
+            this.driver = new ChromeDriver();
+        } else {
+            this.driver = new FirefoxDriver();
+        }
     }
 
     @After
@@ -62,7 +64,7 @@ public class Stepdefs {
 
     @Then("^Recommendations are shown$")
     public void recommendationsAreShown() throws Throwable {
-        assertTrue(driver.getPageSource().contains("Here you can find all recommendations"));
+        assertTrue(driver.getPageSource().contains("RECOMMENDATIONS"));
     }
 
     @Then("^the form \"([^\"]*)\" is opened$")
@@ -138,6 +140,11 @@ public class Stepdefs {
         assertTrue(driver.getPageSource().contains(arg1) && driver.getPageSource().contains(arg2) && driver.getPageSource().contains(arg3));
     }
 
+    @Then("^the entry with title \"([^\"]*)\", author \"([^\"]*)\" and url \"([^\"]*)\" is saved$")
+    public void theEntryWithTitleAuthorAndUrlIsSaved(String arg0, String arg1, String arg2) throws Throwable {
+        assertTrue(driver.getPageSource().contains(arg0) && driver.getPageSource().contains(arg1) && driver.getPageSource().contains(arg2));
+    }
+
     private void clickButtonWithId(String id) {
         WebElement element = new WebDriverWait(driver, 10)
                 .until(ExpectedConditions.elementToBeClickable(By.id(id)));
@@ -157,7 +164,6 @@ public class Stepdefs {
         element.sendKeys(input);
     }
 
-
     @Then("^user searches for \"([^\"]*)\" and submits the search form$")
     public void userSearchesForAndSubmitsTheSearchForm(String arg0) throws Throwable {
         this.enterInputToField(arg0, "titleInput");
@@ -168,12 +174,17 @@ public class Stepdefs {
     public void bookWithTitleIsFound(String arg0) throws Throwable {
         new WebDriverWait(driver, 10)
                 .until(ExpectedConditions.titleIs("VINKKARI | Search results"));
-        System.out.println(driver.getPageSource());
         assertTrue(driver.getPageSource().contains(arg0));
     }
 
     @And("^user is at the Search results page after searching \"([^\"]*)\"$")
     public void userIsAtTheSearchResultsPageAfterSearching(String arg0) throws Throwable {
-        assertTrue(driver.getPageSource().contains("Search results for <b>" + arg0 + "</b>"));
+        assertTrue(driver.getPageSource().contains("SEARCH RESULTS"));
     }
+
+    @When("^user clicks Blogpost button$")
+    public void user_clicks_Blogpost_button() throws Throwable {
+        clickButtonWithId("pills-blogpost-tab");
+    }
+
 }

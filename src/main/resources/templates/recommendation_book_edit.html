@@ -48,21 +48,18 @@
                         <div class="invalid-feedback" th:if="${#fields.hasErrors('recommendation.description')}" th:errors="*{recommendation.description}">Error</div>
                     </li>
                     <li class="list-group-item"><b>Prerequisite courses:</b>
-                        <select multiple="multiple" name="prerequisiteCourses" class="form-control" id="inputPrerequisiteCourses">
-                            <option>1</option>
-                            <option>2</option>
-                            <option>3</option>
-                            <option>4</option>
-                            <option>5</option>
+                        <select multiple="multiple" name="prerequisiteCourses" th:field="*{recommendation.prerequisiteCourses}" class="form-control" id="inputBookPrerequisiteCourses">
+                            <option th:each="course: ${courses}"
+                                    th:value="${{course}}"
+                                    th:text="${course.name}"></option>
                         </select>
                     </li>
                     <li class="list-group-item"><b>Related courses:</b>
-                        <select multiple="multiple" name="relatedCourses" class="form-control" id="inputRelatedCourses">
-                            <option>1</option>
-                            <option>2</option>
-                            <option>3</option>
-                            <option>4</option>
-                            <option>5</option>
+
+                        <select multiple="multiple" name="relatedCourses" th:field="*{recommendation.relatedCourses}" class="form-control" id="inputBookRelatedCourses">
+                            <option th:each="course: ${courses}"
+                                    th:value="${{course}}"
+                                    th:text="${course.name}"></option>
                         </select>
                     </li>
                 </ul>

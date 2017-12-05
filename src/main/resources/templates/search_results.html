@@ -11,29 +11,22 @@
           integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous"/>
     <link rel="stylesheet" href="../static/css/bootstrap-tagsinput.css" th:href="@{/css/bootstrap-tagsinput.css}"/>
     <link rel="stylesheet" href="../static/css/recommendation.css" th:href="@{/css/recommendation.css}"/>
+    <link rel="stylesheet" href="../static/css/createRecommendationForm.css" th:href="@{/css/createRecommendationForm.css}"/>
 </head>
 <body>
 <div class="container">
 
     <div th:replace="fragments/header :: header(active='Search results')"></div>
 
-    <div class="jumbotron title-jumbotron">
-        <div class="mx-auto">
-            <h1 class="display-4">Search results</h1>
-            <p class="lead">Search results for <b th:text="${searchTerm}">searchTerm</b></p>
+
+    <form action="/recommendations/search" method="POST">
+        <div class="input-group p-0">
+            <input type="text" class="form-control" th:value="${searchTerm}" placeholder="Search for..." aria-label="Search for..." id="titleInput" name="title"/>
+            <span class="input-group-btn"><button class="btn btn-primary" id="searchBtn" type="submit">Go!</button></span>
         </div>
-    </div>
+    </form>
 
     <hr class="my-4"/>
-
-    <div class="row title-row">
-        <div class="col-6 col-sm-8 col-md-10">
-            <h4>Title</h4>
-        </div>
-        <div class="col-6 col-sm-4 col-md-2">
-            <h6>Account</h6>
-        </div>
-    </div>
 
 
     <div class="card">
@@ -41,13 +34,16 @@
 
             <li class="list-group-item list-group-item-action list-group-item-container" th:each="recommendation : ${recommendations}">
                 <div class="row">
-                    <div class="col-6 col-sm-8 col-md-10">
-                        <h5 class="list-group-item-title"><a th:href="@{/recommendations/{id}(id=${recommendation.id})}" th:text="${recommendation.title}"></a></h5>
-                        <small class="text-muted" th:text="${recommendation.recommendationType}">Type</small>
+                    <div class="col-auto mr-auto col-title">
+                        <h5 class="list-group-item-title mt-1"><a th:href="@{/recommendations/{id}(id=${recommendation.id})}" th:text="${recommendation.title}"></a></h5>
+                        <small class="text-muted mb-1" th:text="${recommendation.recommendationType+ ' ('+#calendars.format(recommendation.date, 'dd.MM.yyyy') + ')'}">Kirja</small>
                     </div>
-                    <div class="col-6 col-sm-4 col-md-2">
-                        <h6 class="list-group-item-account"><a href="#">Firstname Lastname</a></h6>
-                        <small class="text-muted" th:text="${#calendars.format(recommendation.date, 'HH:mm dd.MM.yyyy')}">01.01.2017 18:42 UTC</small>
+                    <div class="col-auto col-tags align-self-center">
+
+                        <a href="#" class="badge badge-pill badge-primary my-1"  th:each="i : ${#numbers.sequence( 1, 20)}">Tag1</a>
+                        <!--         <h6 class="list-group-item-account"><a href="#">Firstname Lastname</a></h6>
+                    <small class="text-muted" th:text="${#calendars.format(recommendation.date, 'HH:mm dd.MM.yyyy')}">01.01.2017 18:42 UTC</small>
+               -->
                     </div>
                 </div>
             </li>
