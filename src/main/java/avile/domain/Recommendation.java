@@ -37,17 +37,19 @@ public class Recommendation extends AbstractPersistable<Long> {
     @ManyToMany
     private List<Course> prerequisiteCourses;
     
-    // add mappedby?
+   
     @ManyToMany
-    private List<Tag> tagsForRecommendations;
+    private List<Tag> tags;
 
-    public List<Tag> getTagsForRecommendations() {
-        return tagsForRecommendations;
+    public List<Tag> getTags() {
+        return tags;
     }
 
-    public void setTagsForRecommendations(List<Tag> tagsForRecommendations) {
-        this.tagsForRecommendations = tagsForRecommendations;
+    public void setTags(List<Tag> tags) {
+        this.tags = tags;
     }
+
+    
 
     public void setPrerequisiteCourses(List<Course> prerequisiteCourses) {
         this.prerequisiteCourses = prerequisiteCourses;
