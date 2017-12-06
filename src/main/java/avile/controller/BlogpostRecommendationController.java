@@ -50,6 +50,7 @@ public class BlogpostRecommendationController {
             model.addAttribute("podcastRecommendation", new PodcastRecommendation());
             return "recommendations";
         } else {
+            tagService.assignTagsToRecommendation(blogpostRecommendation.getRecommendation(), tags);
             blogpostRecommendationService.addBlogpostRecommendation(blogpostRecommendation);
             return "redirect:/recommendations";
         }

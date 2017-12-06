@@ -38,12 +38,15 @@ public class BookRecommendationController {
 
         TagValidator tv = new TagValidator();
 
-        List<Tag> tagsList = tagService.parseTagsFromString(tags);
+        if (tags != null && tags.split(",").length > 1) {
+            List<Tag> tagsList = tagService.parseTagsFromString(tags);
 
-        for (Tag tag :
-                tagsList) {
-            tv.validate(tag, bs);
+            for (Tag tag :
+                    tagsList) {
+                tv.validate(tag, bs);
+            }
         }
+
 
         if (bs.hasErrors()) {
             model.addAttribute("courses", courseService.getCourses());

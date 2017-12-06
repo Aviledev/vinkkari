@@ -33,12 +33,15 @@ public class VideoRecommendationController {
 
         TagValidator tv = new TagValidator();
 
-        List<Tag> tagsList = tagService.parseTagsFromString(tags);
+        if (tags != null && tags.split(",").length > 1) {
+            List<Tag> tagsList = tagService.parseTagsFromString(tags);
 
-        for (Tag tag :
-                tagsList) {
-            tv.validate(tag, bs);
+            for (Tag tag :
+                    tagsList) {
+                tv.validate(tag, bs);
+            }
         }
+
 
         if (bs.hasErrors()) {
             model.addAttribute("recommendations", recommendationService.getRecommendations());
@@ -47,6 +50,7 @@ public class VideoRecommendationController {
             model.addAttribute("podcastRecommendation", new PodcastRecommendation());
             return "recommendations";
         } else {
+            tagService.assignTagsToRecommendation(videoRecommendation.getRecommendation(), tags);
             videoRecommendationService.addVideoRecommendation(videoRecommendation);
             return "redirect:/recommendations";
         }
