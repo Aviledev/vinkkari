@@ -34,19 +34,9 @@ public class BookRecommendationController {
     TagService tagService;
 
     @PostMapping("/books")
-    public String createOne(@Valid BookRecommendation bookRecommendation, @RequestParam String tags, BindingResult bs, Model model, final RedirectAttributes redirectAttributes) {
+    public String createOne(@Valid BookRecommendation bookRecommendation, BindingResult bs, Model model, final RedirectAttributes redirectAttributes) {
 
-        TagValidator tv = new TagValidator();
-
-        if (tags != null && tags.split(",").length > 1) {
-            List<Tag> tagsList = tagService.parseTagsFromString(tags);
-
-            for (Tag tag :
-                    tagsList) {
-                tv.validate(tag, bs);
-            }
-        }
-
+        tagService.assignTagsToRecommendation(bookRecommendation.getRecommendation(), bookRecommendation.getRecommendation().getRawTags(), bs);
 
         if (bs.hasErrors()) {
             model.addAttribute("courses", courseService.getCourses());
@@ -56,9 +46,7 @@ public class BookRecommendationController {
             model.addAttribute("podcastRecommendation", new PodcastRecommendation());
             return "recommendations";
         } else {
-            tagService.assignTagsToRecommendation(bookRecommendation.getRecommendation(), tags);
             bookRecommendationService.addBookRecommendation(bookRecommendation);
-            //success or warning
             redirectAttributes.addFlashAttribute("messageType", "success");
             redirectAttributes.addFlashAttribute("message", "New book recommendation was created successfully.");
             return "redirect:/recommendations";
@@ -74,8 +62,12 @@ public class BookRecommendationController {
 
 
     @PostMapping("/books/edit")
-    public String updateOne(@Valid BookRecommendation bookRecommendation, BindingResult bs, Model model) {
+    public String updateOne(@Valid BookRecommendation bookRecommendation, BindingResult bs, Model model, RedirectAttributes redirectAttributes) {
+
+        tagService.assignTagsToRecommendation(bookRecommendation.getRecommendation(), bookRecommendation.getRecommendation().getRawTags(), bs);
+
         if (bs.hasErrors()) {
+            model.addAttribute("courses", courseService.getCourses());
             model.addAttribute("recommendations", recommendationService.getRecommendations());
             model.addAttribute("videoRecommendation", new VideoRecommendation());
             model.addAttribute("blogpostRecommendation", new BlogpostRecommendation());
@@ -83,6 +75,8 @@ public class BookRecommendationController {
             return "recommendation_book_edit";
         } else {
             bookRecommendationService.updateBookRecommendation(bookRecommendation);
+            redirectAttributes.addFlashAttribute("messageType", "success");
+            redirectAttributes.addFlashAttribute("message", "Book recommendation was updated successfully.");
             return "redirect:/recommendations/" + bookRecommendation.getRecommendation().getId();
         }
     }

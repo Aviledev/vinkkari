@@ -23,8 +23,8 @@
                         <h1 class="display-4"><input type="text" name="title" class="form-control title-input-form" id="inputBlogpostTitle" placeholder="Enter title"  th:field="*{recommendation.title}" th:errorclass="is-invalid" />(<b th:text="*{recommendation.recommendationType}"></b>)</h1>
                         <div class="invalid-feedback-edit" th:if="${#fields.hasErrors('recommendation.title')}" th:errors="*{recommendation.title}">Error</div>
                         <p class="lead">Created by <a href="#">Firstname Lastname</a></p>
-                        <input type="text" th:value="${blogpostRecommendation.recommendation.getTagsAsString()}" name="tags" class="form-control edit-input-form" id="inputRecommendationTags" placeholder="Enter tags" data-role="tagsinput"/>
-                        <input type="hidden" name="id" th:field="*{id}"/>
+                        <input type="text" th:field="*{recommendation.rawTags}" class="form-control edit-input-form" id="inputRecommendationTags" placeholder="Enter tags" data-role="tagsinput" th:errorclass="is-invalid"/>
+                        <div class="invalid-feedback-edit" th:if="${#fields.hasErrors('recommendation.rawTags')}" th:errors="*{recommendation.rawTags}">Error</div>                        <input type="hidden" name="id" th:field="*{id}"/>
                         <input type="hidden" name="recommendationId" th:field="*{recommendation.id}"/>
                     </div>
                 </div>
@@ -32,6 +32,11 @@
                 <hr class="my-4"/>
 
                 <ul class="list-group mb-3">
+                    <li class="list-group-item">
+                        <b>Name:</b>
+                        <input type="text" th:field="*{name}" name="author" class="form-control edit-input-form" id="inputNameAuthor" placeholder="Enter name" th:errorclass="is-invalid"/>
+                        <div class="invalid-feedback-edit" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Error</div>
+                    </li>
                     <li class="list-group-item">
                         <b>Author:</b>
                         <input type="text" th:field="*{author}" name="author" class="form-control edit-input-form" id="inputBlogpostAuthor" placeholder="Enter author" th:errorclass="is-invalid"/>

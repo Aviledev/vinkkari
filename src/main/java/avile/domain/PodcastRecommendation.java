@@ -18,6 +18,9 @@ public class PodcastRecommendation extends AbstractPersistable<Long> {
     @Size(max = 100)
     private String author;
 
+    @Size(max = 100)
+    private String name;
+
     @NotNull
     @URL
     private String url;
@@ -69,22 +72,19 @@ public class PodcastRecommendation extends AbstractPersistable<Long> {
         this.url = url;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public Long getId() {
         return super.getId();
     }
 
     public void setId(Long id) {
         super.setId(id);
-    }
-
-    @Transient
-    public String tags;
-
-    public String getTags(){
-        return this.tags;
-    }
-
-    public void setTags(String tmpTags){
-        this.tags = tmpTags;
     }
 }

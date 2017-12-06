@@ -29,6 +29,7 @@
             <hr class="my-4"/>
 
             <ul class="list-group mb-3">
+                <li class="list-group-item"><b>Name:</b> <span th:text="${podcastRecommendation.name}"></span></li>
                 <li class="list-group-item"><b>Author:</b> <span th:text="${podcastRecommendation.author}"></span></li>
                 <li class="list-group-item"><b>URL:</b> <span><a th:href="${podcastRecommendation.url}" th:text="${podcastRecommendation.url}"></a></span></li>
                 <li class="list-group-item"><b>Release date:</b> <span th:text="${podcastRecommendation.releaseDate}"></span></li>

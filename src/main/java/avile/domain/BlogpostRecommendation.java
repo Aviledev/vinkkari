@@ -27,6 +27,9 @@ public class BlogpostRecommendation extends AbstractPersistable<Long> {
     @URL
     private String url;
 
+    @Size(max = 100)
+    private String name;
+
     @Temporal(TemporalType.DATE)
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date releaseDate;
@@ -67,6 +70,14 @@ public class BlogpostRecommendation extends AbstractPersistable<Long> {
         return url;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public Date getReleaseDate() {
         return releaseDate;
     }
@@ -83,14 +94,4 @@ public class BlogpostRecommendation extends AbstractPersistable<Long> {
         super.setId(id);
     }
 
-    @Transient
-    public String tags;
-
-    public String getTags(){
-        return this.tags;
-    }
-
-    public void setTags(String tmpTags){
-        this.tags = tmpTags;
-    }
 }

@@ -12,8 +12,6 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
 public class Tag extends AbstractPersistable<Long>{
     
     @Column(unique=true)
-    @NotNull
-    @Size(min=3, max = 20)
     private String name;
     
     private String description;

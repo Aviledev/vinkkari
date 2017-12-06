@@ -22,7 +22,6 @@
                 <div class="mx-auto">
                     <h1 class="display-4"><span id="pageTitle" th:text="${blogpostRecommendation.recommendation.title}"></span> (<b th:text="${blogpostRecommendation.recommendation.recommendationType}"></b>)</h1>
                     <p class="lead">Created by <a href="#">Firstname Lastname</a></p>
-                    <a href="#"><span class="recommendation-tag badge badge-pill badge-primary">Tag1</span></a>
                     <a th:each="tag : ${blogpostRecommendation.recommendation.tags}" th:href="@{/tag/{id}(id=${tag.id})}"><span class="recommendation-tag badge badge-pill badge-primary" th:text="${tag.name}"></span></a>
                 </div>
             </div>
@@ -30,6 +29,7 @@
             <hr class="my-4"/>
 
             <ul class="list-group mb-3">
+                <li class="list-group-item"><b>Name:</b> <span th:text="${blogpostRecommendation.name}"></span></li>
                 <li class="list-group-item"><b>Author:</b> <span th:text="${blogpostRecommendation.author}"></span></li>
                 <li class="list-group-item"><b>URL:</b> <span><a th:href="${blogpostRecommendation.url}" th:text="${blogpostRecommendation.url}"></a></span></li>
                 <li class="list-group-item"><b>Release date:</b> <span th:text="${blogpostRecommendation.releaseDate}"></span></li>

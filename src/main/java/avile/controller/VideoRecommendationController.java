@@ -1,6 +1,7 @@
 package avile.controller;
 
 import avile.domain.*;
+import avile.service.CourseService;
 import avile.service.RecommendationService;
 import avile.service.TagService;
 import avile.service.VideoRecommendationService;
@@ -12,6 +13,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -28,30 +30,25 @@ public class VideoRecommendationController {
     @Autowired
     private TagService tagService;
 
+    @Autowired
+    private CourseService courseService;
+
     @PostMapping("/videos")
-    public String createOne(@Valid VideoRecommendation videoRecommendation, @RequestParam String tags, BindingResult bs, Model model) {
+    public String createOne(@Valid VideoRecommendation videoRecommendation, BindingResult bs, Model model, RedirectAttributes redirectAttributes) {
 
-        TagValidator tv = new TagValidator();
-
-        if (tags != null && tags.split(",").length > 1) {
-            List<Tag> tagsList = tagService.parseTagsFromString(tags);
-
-            for (Tag tag :
-                    tagsList) {
-                tv.validate(tag, bs);
-            }
-        }
-
+        tagService.assignTagsToRecommendation(videoRecommendation.getRecommendation(), videoRecommendation.getRecommendation().getRawTags(), bs);
 
         if (bs.hasErrors()) {
+            model.addAttribute("courses", courseService.getCourses());
             model.addAttribute("recommendations", recommendationService.getRecommendations());
             model.addAttribute("blogpostRecommendation", new BlogpostRecommendation());
             model.addAttribute("bookRecommendation", new BookRecommendation());
             model.addAttribute("podcastRecommendation", new PodcastRecommendation());
             return "recommendations";
         } else {
-            tagService.assignTagsToRecommendation(videoRecommendation.getRecommendation(), tags);
             videoRecommendationService.addVideoRecommendation(videoRecommendation);
+            redirectAttributes.addFlashAttribute("messageType", "success");
+            redirectAttributes.addFlashAttribute("message", "New video recommendation was created successfully.");
             return "redirect:/recommendations";
         }
 
@@ -65,8 +62,12 @@ public class VideoRecommendationController {
 
 
     @PostMapping("/videos/edit")
-    public String updateOne(@Valid VideoRecommendation videoRecommendation, BindingResult bs, Model model) {
+    public String updateOne(@Valid VideoRecommendation videoRecommendation, BindingResult bs, Model model, RedirectAttributes redirectAttributes) {
+
+        tagService.assignTagsToRecommendation(videoRecommendation.getRecommendation(), videoRecommendation.getRecommendation().getRawTags(), bs);
+
         if (bs.hasErrors()) {
+            model.addAttribute("courses", courseService.getCourses());
             model.addAttribute("recommendations", recommendationService.getRecommendations());
             model.addAttribute("blogpostRecommendation", new BlogpostRecommendation());
             model.addAttribute("bookRecommendation", new BookRecommendation());
@@ -74,6 +75,8 @@ public class VideoRecommendationController {
             return "recommendation_video_edit";
         } else {
             videoRecommendationService.updateVideoRecommendation(videoRecommendation);
+            redirectAttributes.addFlashAttribute("messageType", "success");
+            redirectAttributes.addFlashAttribute("message", "Video recommendation was updated successfully.");
             return "redirect:/recommendations/" + videoRecommendation.getRecommendation().getId();
         }
     }

@@ -4,10 +4,7 @@ import avile.enums.RecommendationType;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
-import javax.persistence.Entity;
-import javax.persistence.ManyToMany;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.Date;
@@ -35,9 +32,19 @@ public class Recommendation extends AbstractPersistable<Long> {
     @ManyToMany
     private List<Course> prerequisiteCourses;
 
-
     @ManyToMany
     private List<Tag> tags;
+
+    @Transient
+    private String rawTags;
+
+    public String getRawTags() {
+        return rawTags;
+    }
+
+    public void setRawTags(String rawTags) {
+        this.rawTags = rawTags;
+    }
 
     public List<Tag> getTags() {
         return tags;

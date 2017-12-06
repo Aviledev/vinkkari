@@ -65,15 +65,4 @@ public class VideoRecommendation extends AbstractPersistable<Long> {
         super.setId(id);
     }
 
-    @Transient
-    public String tags;
-
-    public String getTags(){
-        return this.tags;
-    }
-
-    public void setTags(String tmpTags){
-        this.tags = tmpTags;
-    }
-
 }

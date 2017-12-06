@@ -63,15 +63,4 @@ public class BookRecommendation extends AbstractPersistable<Long> {
     public void setId(Long id) {
         super.setId(id);
     }
-
-    @Transient
-    public String tags;
-
-    public String getTags(){
-        return this.tags;
-    }
-
-    public void setTags(String tmpTags){
-        this.tags = tmpTags;
-    }
 }

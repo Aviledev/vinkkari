@@ -15,9 +15,12 @@ public class TagValidator implements Validator {
     @Override
     public void validate(Object target, Errors errors) {
         Tag tag = (Tag) target;
+        if (tag.getName().length() < 3) {
+            errors.rejectValue("recommendation.rawTags", "Length", "Individual tag must be longer than 2 characters long");
+        }
 
-        if(tag.getName().length() < 3 || tag.getName().length() > 20) {
-            errors.rejectValue("tags", null);
+        if (tag.getName().length() > 20) {
+            errors.rejectValue("recommendation.rawTags", "Length", "Individual tag must be lower than 20 characters long");
         }
     }
 }
