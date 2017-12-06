@@ -3,8 +3,6 @@ package avile.controller;
 import avile.domain.*;
 import avile.enums.RecommendationType;
 import avile.service.*;
-import java.util.ArrayList;
-import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,6 +10,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 public class RecommendationController {
@@ -33,6 +34,9 @@ public class RecommendationController {
 
     @Autowired
     CourseService courseService;
+
+    @Autowired
+    TagService tagService;
 
     @Autowired
     public void setUp() {
@@ -57,6 +61,7 @@ public class RecommendationController {
         List<Course> pCourses = new ArrayList<>();
         pCourses.add(courseService.getCourse((long) 1));
         b1.getRecommendation().setPrerequisiteCourses(pCourses);
+        tagService.assignTagsToRecommendation(b1.getRecommendation(), "Algorithms,Programming");
         bookRecommendationService.addBookRecommendation(b1);
 
         BookRecommendation b2 = new BookRecommendation();
@@ -66,6 +71,8 @@ public class RecommendationController {
         List<Course> courses2 = new ArrayList<>();
         courses2.add(courseService.getCourse((long) 2));
         b2.getRecommendation().setRelatedCourses(courses2);
+
+        tagService.assignTagsToRecommendation(b2.getRecommendation(), "Programming");
         bookRecommendationService.addBookRecommendation(b2);
 
         VideoRecommendation v1 = new VideoRecommendation();
@@ -73,6 +80,7 @@ public class RecommendationController {
         v1.setAuthor("thenewboston");
         v1.setUrl("https://www.youtube.com/watch?v=5u8rFbpdvds");
         v1.getRecommendation().setDescription("Very interesting tutorial about running Java program");
+        tagService.assignTagsToRecommendation(v1.getRecommendation(), "Programming,Java,Novice level");
         videoRecommendationService.addVideoRecommendation(v1);
     }
 
