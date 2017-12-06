@@ -1,13 +1,11 @@
 package avile.controller;
 
-import avile.domain.BlogpostRecommendation;
-import avile.domain.BookRecommendation;
-import avile.domain.PodcastRecommendation;
-import avile.domain.VideoRecommendation;
+import avile.domain.*;
 import avile.service.BookRecommendationService;
 import avile.service.CourseService;
 import avile.service.RecommendationService;
 import avile.service.TagService;
+import avile.validator.TagValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @Controller
 public class BookRecommendationController {
@@ -36,6 +35,16 @@ public class BookRecommendationController {
 
     @PostMapping("/books")
     public String createOne(@Valid BookRecommendation bookRecommendation, @RequestParam String tags, BindingResult bs, Model model, final RedirectAttributes redirectAttributes) {
+
+        TagValidator tv = new TagValidator();
+
+        List<Tag> tagsList = tagService.parseTagsFromString(tags);
+
+        for (Tag tag :
+                tagsList) {
+            tv.validate(tag, bs);
+        }
+
         if (bs.hasErrors()) {
             model.addAttribute("courses", courseService.getCourses());
             model.addAttribute("recommendations", recommendationService.getRecommendations());
@@ -44,7 +53,6 @@ public class BookRecommendationController {
             model.addAttribute("podcastRecommendation", new PodcastRecommendation());
             return "recommendations";
         } else {
-
             tagService.assignTagsToRecommendation(bookRecommendation.getRecommendation(), tags);
             bookRecommendationService.addBookRecommendation(bookRecommendation);
             //success or warning
