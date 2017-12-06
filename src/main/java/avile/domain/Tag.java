@@ -1,6 +1,7 @@
 package avile.domain;
 
 import java.util.List;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
 import javax.validation.constraints.NotNull;
@@ -10,13 +11,14 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
 @Entity
 public class Tag extends AbstractPersistable<Long>{
     
+    @Column(unique=true)
     @NotNull
-    @Size(min=3, max = 100)
+    @Size(min=3, max = 20)
     private String name;
     
     private String description;
 
-    @ManyToMany
+    @ManyToMany(mappedBy = "tags")
     private List<Recommendation> recommendations;
 
     public String getName() {
