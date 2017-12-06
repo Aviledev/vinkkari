@@ -60,7 +60,7 @@
                     </div>
                     <div class="col-auto col-tags align-self-center">
 
-                        <a href="#" class="badge badge-pill badge-primary my-1"  th:each="i : ${#numbers.sequence( 1, 10)}">Tag1</a>
+                        <a href="#" class="badge badge-pill badge-primary my-1" th:each="tag : ${recommendation.tags}" th:href="@{/tag/{id}(id=${tag.id})}"><span th:text="${tag.name}"></span></a>
                             <!--         <h6 class="list-group-item-account"><a href="#">Firstname Lastname</a></h6>
                         <small class="text-muted" th:text="${#calendars.format(recommendation.date, 'HH:mm dd.MM.yyyy')}">01.01.2017 18:42 UTC</small>
                    -->

@@ -61,7 +61,8 @@
                                 </div>
                                 <div class="form-group">
                                     <label class="d-block" for="inputBookTags">Tags</label>
-                                    <input type="text" name="tags" class="form-control" id="inputBookTags" placeholder="Enter tags" data-role="tagsinput"/>
+                                    <input type="text" name="tags" class="form-control" id="inputBookTags" th:field="*{tags}" placeholder="Enter tags" data-role="tagsinput"/>
+                                    <div class="invalid-feedback-edit" th:if="${#fields.hasErrors('tags')}" th:errors="*{tags}">Error</div>
                                 </div>
                                 <div class="form-group">
                                     <label for="inputBookPrerequisiteCourses">Prerequisite courses <a href="#" class="">Missing?</a></label>
@@ -105,7 +106,8 @@
                                     </div>
                                     <div class="form-group">
                                         <label class="d-block" for="inputVideoTags">Tags</label>
-                                        <input type="text" name="tags" class="form-control" id="inputVideoTags" placeholder="Enter tags" data-role="tagsinput"/>
+                                        <input type="text" name="tags" class="form-control" id="inputVideoTags" th:field="*{tags}" placeholder="Enter tags" data-role="tagsinput"/>
+                                        <div class="invalid-feedback-edit" th:if="${#fields.hasErrors('tags')}" th:errors="*{tags}">Error</div>
                                     </div>
                                     <div class="form-group">
                                         <label for="inputVideoPrerequisiteCourses">Prerequisite courses <a href="#" class="">Missing?</a></label>
@@ -155,7 +157,8 @@
                                     </div>
                                     <div class="form-group">
                                         <label class="d-block" for="inputBlogpostTags">Tags</label>
-                                        <input type="text" name="tags" class="form-control" id="inputBlogpostTags" placeholder="Enter tags" data-role="tagsinput"/>
+                                        <input type="text" name="tags" class="form-control" id="inputBlogpostTags" th:field="*{tags}" placeholder="Enter tags" data-role="tagsinput"/>
+                                        <div class="invalid-feedback-edit" th:if="${#fields.hasErrors('tags')}" th:errors="*{tags}">Error</div>
                                     </div>
                                     <div class="form-group">
                                         <label for="inputBlogpostPrerequisiteCourses">Prerequisite courses <a href="#" class="">Missing?</a></label>
@@ -204,7 +207,8 @@
                                     </div>
                                     <div class="form-group">
                                         <label class="d-block" for="inputPodcastTags">Tags</label>
-                                        <input type="text" name="tags" class="form-control" id="inputPodcastTags" placeholder="Enter tags" data-role="tagsinput"/>
+                                        <input type="text" name="tags" class="form-control" id="inputPodcastTags" th:field="*{tags}" placeholder="Enter tags" data-role="tagsinput"/>
+                                        <div class="invalid-feedback-edit" th:if="${#fields.hasErrors('tags')}" th:errors="*{tags}">Error</div>
                                     </div>
                                     <div class="form-group">
                                         <label for="inputPodcastPrerequisiteCourses">Prerequisite courses <a href="#" class="">Missing?</a></label>

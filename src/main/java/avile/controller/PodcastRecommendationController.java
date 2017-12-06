@@ -1,12 +1,11 @@
 package avile.controller;
 
-import avile.domain.BlogpostRecommendation;
-import avile.domain.BookRecommendation;
-import avile.domain.PodcastRecommendation;
-import avile.domain.VideoRecommendation;
+import avile.domain.*;
 import avile.repository.PodcastRecommendationRepository;
 import avile.service.PodcastRecommendationService;
 import avile.service.RecommendationService;
+import avile.service.TagService;
+import avile.validator.TagValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,18 +15,31 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @Controller
 public class PodcastRecommendationController {
 
     @Autowired
-    PodcastRecommendationService podcastRecommendationService;
+    private PodcastRecommendationService podcastRecommendationService;
 
     @Autowired
-    RecommendationService recommendationService;
+    private RecommendationService recommendationService;
+
+    @Autowired
+    private TagService tagService;
 
     @PostMapping("/podcasts")
-    public String createOne(@Valid PodcastRecommendation podcastRecommendation, BindingResult bs, Model model) {
+    public String createOne(@Valid PodcastRecommendation podcastRecommendation, @RequestParam String tags, BindingResult bs, Model model) {
+
+        TagValidator tv = new TagValidator();
+
+        List<Tag> tagsList = tagService.parseTagsFromString(tags);
+
+        for (Tag tag :
+                tagsList) {
+            tv.validate(tag, bs);
+        }
 
         if (bs.hasErrors()) {
             model.addAttribute("recommendations", recommendationService.getRecommendations());

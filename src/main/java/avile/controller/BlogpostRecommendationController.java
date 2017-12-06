@@ -1,12 +1,10 @@
 package avile.controller;
 
-import avile.domain.BlogpostRecommendation;
-import avile.domain.BookRecommendation;
-import avile.domain.PodcastRecommendation;
-import avile.domain.VideoRecommendation;
+import avile.domain.*;
 import avile.service.BlogpostRecommendationService;
-import avile.service.BookRecommendationService;
 import avile.service.RecommendationService;
+import avile.service.TagService;
+import avile.validator.TagValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @Controller
 public class BlogpostRecommendationController {
@@ -26,9 +25,23 @@ public class BlogpostRecommendationController {
     @Autowired
     RecommendationService recommendationService;
 
+    @Autowired
+    private TagService tagService;
 
     @PostMapping("/blogposts")
-    public String createOne(@Valid BlogpostRecommendation blogpostRecommendation, BindingResult bs, Model model) {
+    public String createOne(@Valid BlogpostRecommendation blogpostRecommendation, @RequestParam String tags, BindingResult bs, Model model) {
+
+        TagValidator tv = new TagValidator();
+
+        if (tags != null && tags.split(",").length > 1) {
+            List<Tag> tagsList = tagService.parseTagsFromString(tags);
+
+            for (Tag tag :
+                    tagsList) {
+                tv.validate(tag, bs);
+            }
+        }
+
 
         if (bs.hasErrors()) {
             model.addAttribute("recommendations", recommendationService.getRecommendations());
@@ -60,7 +73,7 @@ public class BlogpostRecommendationController {
             return "recommendation_blogpost_edit";
         } else {
             blogpostRecommendationService.updateBlogpostRecommendation(blogpostRecommendation);
-            return "redirect:/recommendations/"+ blogpostRecommendation.getRecommendation().getId();
+            return "redirect:/recommendations/" + blogpostRecommendation.getRecommendation().getId();
         }
     }
 
