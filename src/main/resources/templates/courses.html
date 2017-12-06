@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>VINKKARI | Recommendations</title>
+        <!-- Required meta tags -->
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css"
+              integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous"/>
+        <link rel="stylesheet" href="../static/css/createCourseForm.css" th:href="@{/css/createCourseForm.css}"/>
+        <link rel="stylesheet" href="../static/css/course.css" th:href="@{/css/course.css}"/>
+    </head>
+    <body>
+        <div class="container">
+
+            <div th:replace="fragments/header :: header(active='Courses')"></div>
+
+            <div class="row">
+                <div class="p-0 col-3 col-sm-3 col-md-2">
+                    <button type="button" id="openCreateFormBtn" class="btn btn-primary btn-block" data-toggle="modal" data-target="#createCourseModal">Add</button>
+                </div>
+                <div class="p-0 d-none d-sm-block col-1 col-sm-3 col-md-7">
+                </div>
+                <div class="p-0 col-9 col-sm-6 col-md-3">
+                    <form action="/recommendations/search" method="POST">
+                        <div class="input-group pl-3">
+                            <input type="text" class="form-control" placeholder="Search for..." aria-label="Search for..." id="titleInput" name="title"/>
+                            <span class="input-group-btn"><button class="btn btn-primary" id="searchBtn" type="submit">Go!</button></span>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+
+
+            <hr class="my-4"/>
+
+
+            <div class="card">
+                <ul class="list-group list-group-striped">
+
+                    <li class="list-group-item list-group-item-action list-group-item-container" th:each="course : ${courses}">
+                        <div class="row">
+                            <div class="col-auto">
+                                <h5 class="list-group-item-title mt-1"><a th:href="@{/courses/{id}(id=${course.id})}" th:text="${course.name}"></a></h5>
+                                <small class="text-muted mb-1" th:text="${course.code}">code</small>
+                            </div>
+                        </div>
+                    </li>
+
+                </ul>
+            </div>
+
+        </div>
+        <div th:replace="fragments/footer :: footer"></div>
+        <div th:replace="fragments/createCourseForm :: createCourseForm"></div>
+
+
+
+        <!-- Optional JavaScript -->
+        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        <script src="https://code.jquery.com/jquery-3.2.1.min.js"
+        integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"
+                integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh"
+        crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"
+                integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ"
+        crossorigin="anonymous"></script>
+        <script src="../static/js/course.js" th:src="@{/js/course.js}"></script>
+        <script src="../static/js/createCourseForm.js" th:src="@{/js/createCourseForm.js}"></script>
+
+
+        <script th:if="${#fields.hasErrors('${course.*}')}">
+            $('#createCourseModal').modal('show');
+        </script>
+
+
+    </body>
+</html>
