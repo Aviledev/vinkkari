@@ -18,7 +18,7 @@ Feature: user can create a new book recommendation
     And user clicks Edit button
     And the entry "M" is entered into the field "inputBookTitle"
     And the entry "M" is entered into the field "inputBookAuthor"
-    And the entry "M" is entered into the field "inputBookIsbn"
+    And the entry " -- " is entered into the field "inputBookIsbn"
     And user clicks Save button
-    Then the entry with title "TestiKirjaM", author "TestiAuthorM" and isbn "TestiIsbnM" is saved
+    Then the entry with title "TestiKirjaM", author "TestiAuthorM" and isbn "9781540753809" is saved
 
