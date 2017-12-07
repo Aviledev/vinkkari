@@ -1,12 +1,9 @@
 package avile.domain;
 
-import avile.enums.RecommendationType;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.Date;
-
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class BookRecommendationTest {
 
@@ -31,6 +28,20 @@ public class BookRecommendationTest {
         String isbn = "123456789";
         bookRecommendation.setIsbn(isbn);
         assertEquals(isbn, bookRecommendation.getIsbn());
+    }
+
+    @Test
+    public void getSetRecommendation() throws Exception {
+        Recommendation recommendation = new Recommendation();
+        bookRecommendation.setRecommendation(recommendation);
+        assertEquals(recommendation, bookRecommendation.getRecommendation());
+    }
+
+    @Test
+    public void getSetId() throws Exception {
+        Long id = 123456789L;
+        bookRecommendation.setId(id);
+        assertEquals(id, bookRecommendation.getId());
     }
 
 }

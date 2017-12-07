@@ -59,11 +59,11 @@ public class Recommendation extends AbstractPersistable<Long> {
             return "";
         }
         StringBuilder sb = new StringBuilder();
-        sb.append(tags.get(0).getName());
         for (Tag tag : tags) {
-            sb.append(",");
             sb.append(tag.getName());
+            sb.append(",");
         }
+        sb.deleteCharAt(sb.length() - 1);
         return sb.toString();
     }
 

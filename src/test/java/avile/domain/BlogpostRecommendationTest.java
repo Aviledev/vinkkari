@@ -5,7 +5,7 @@ import org.junit.Test;
 
 import java.util.Date;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class BlogpostRecommendationTest {
 
@@ -43,5 +43,20 @@ public class BlogpostRecommendationTest {
         blogpostRecommendation.setRecommendation(rec);
         assertEquals(rec, blogpostRecommendation.getRecommendation());
     }
+
+    @Test
+    public void getSetName() throws Exception {
+        String name = "Test name";
+        blogpostRecommendation.setName(name);
+        assertEquals(name, blogpostRecommendation.getName());
+    }
+
+    @Test
+    public void getSetId() throws Exception {
+        Long id = 123456789L;
+        blogpostRecommendation.setId(id);
+        assertEquals(id, blogpostRecommendation.getId());
+    }
+
 
 }

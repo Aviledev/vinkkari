@@ -8,7 +8,7 @@ public enum RecommendationType {
 
     private final String type;
 
-    private RecommendationType(String s) {
+    RecommendationType(String s) {
         type = s;
     }
 
