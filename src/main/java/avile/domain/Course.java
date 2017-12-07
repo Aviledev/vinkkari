@@ -58,4 +58,19 @@ public class Course extends AbstractPersistable<Long> {
         super.setId(id);
     }
 
+    public List<Recommendation> getRecommendationsRelated() {
+        return recommendationsRelated;
+    }
+
+    public void setRecommendationsRelated(List<Recommendation> recommendationsRelated) {
+        this.recommendationsRelated = recommendationsRelated;
+    }
+
+    public List<Recommendation> getRecommendationsPrerequisite() {
+        return recommendationsPrerequisite;
+    }
+
+    public void setRecommendationsPrerequisite(List<Recommendation> recommendationsPrerequisite) {
+        this.recommendationsPrerequisite = recommendationsPrerequisite;
+    }
 }
