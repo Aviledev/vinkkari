@@ -1,11 +1,11 @@
 package avile.service;
 
-import avile.domain.BookRecommendation;
 import avile.domain.Recommendation;
 import avile.repository.RecommendationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Collection;
 import java.util.List;
 
 @Service
@@ -15,7 +15,7 @@ public class RecommendationService {
     RecommendationRepository recommendationRepository;
 
     public List<Recommendation> getRecommendationsWithTitleLike(String title) {
-        return recommendationRepository.findRecommendationsByTitleIsLike("%"+title+"%");
+        return recommendationRepository.findRecommendationsByTitleIsLike("%" + title + "%");
     }
 
     public Recommendation getRecommendation(Long id) {
@@ -26,4 +26,5 @@ public class RecommendationService {
     public List<Recommendation> getRecommendations() {
         return recommendationRepository.findAll();
     }
+
 }
