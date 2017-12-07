@@ -1,7 +1,9 @@
 package avile.controller;
 
+import avile.domain.BlogpostRecommendation;
 import avile.domain.BookRecommendation;
 import avile.domain.Course;
+import avile.domain.PodcastRecommendation;
 import avile.domain.VideoRecommendation;
 import avile.service.CourseService;
 import javax.validation.Valid;
@@ -21,12 +23,18 @@ public class CourseController {
     CourseService courseService;
 
     @PostMapping("/course")
-    public String createOne(@Valid Course course, final RedirectAttributes redirectAttributes) {
-        courseService.addCourse(course);
+    public String createOne(@Valid Course course, BindingResult bs, Model model, final RedirectAttributes redirectAttributes) {
+        if (bs.hasErrors()) {
+            model.addAttribute("courses", courseService.getCourses());
+            return "courses";
+        } else {
 
-        redirectAttributes.addFlashAttribute("messageType", "success");
-        redirectAttributes.addFlashAttribute("message", "New course was created successfully.");
-        return "redirect:/courses";
+            courseService.addCourse(course);
+
+            redirectAttributes.addFlashAttribute("messageType", "success");
+            redirectAttributes.addFlashAttribute("message", "New course was created successfully.");
+            return "redirect:/courses";
+        }
     }
 
     @PostMapping("/courses/{id}/delete")
@@ -36,12 +44,14 @@ public class CourseController {
     }
 
     @PostMapping("/courses/edit")
-    public String updateOne(@Valid Course course, BindingResult bs, Model model) {
+    public String updateOne(@Valid Course course, BindingResult bs, Model model, RedirectAttributes redirectAttributes) {
         if (bs.hasErrors()) {
             model.addAttribute("courses", courseService.getCourses());
             return "course_item_edit";
         } else {
             courseService.updateCourse(course);
+            redirectAttributes.addFlashAttribute("messageType", "success");
+            redirectAttributes.addFlashAttribute("message", "Course was successfully updated.");
             return "redirect:/courses/" + course.getId();
         }
     }
