@@ -22,9 +22,7 @@
                 <div class="mx-auto">
                     <h1 class="display-4"><span id="pageTitle" th:text="${bookRecommendation.recommendation.title}"></span> (<b th:text="${bookRecommendation.recommendation.recommendationType}"></b>)</h1>
                     <p class="lead">Created by <a href="#">Firstname Lastname</a></p>
-                    <a href="#"><span class="recommendation-tag badge badge-pill badge-primary">Tag1</span></a>
-                    <a href="#"><span class="recommendation-tag badge badge-pill badge-primary">Tag1</span></a>
-                    <a href="#"><span class="recommendation-tag badge badge-pill badge-primary">Tag1</span></a>
+                    <a th:each="tag : ${bookRecommendation.recommendation.tags}" th:href="@{/tag/{id}(id=${tag.id})}"><span class="recommendation-tag badge badge-pill badge-primary" th:text="${tag.name}"></span></a>
                 </div>
             </div>
 

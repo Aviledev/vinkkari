@@ -61,10 +61,11 @@
                                 </div>
                                 <div class="form-group">
                                     <label class="d-block" for="inputBookTags">Tags</label>
-                                    <input type="text" name="tags" class="form-control" id="inputBookTags" placeholder="Enter tags" data-role="tagsinput"/>
+                                    <input type="text" name="tags" class="form-control" id="inputBookTags" th:field="*{recommendation.rawTags}" placeholder="Enter tags" data-role="tagsinput" th:errorclass="is-invalid"/>
+                                    <div class="invalid-feedback" th:if="${#fields.hasErrors('recommendation.rawTags')}" th:errors="*{recommendation.rawTags}">Error</div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="inputBookPrerequisiteCourses">Prerequisite courses <a href="#" class="">Missing?</a></label>
+                                    <label for="inputBookPrerequisiteCourses">Prerequisite courses <a th:href="@{/courses}" class="">Missing?</a></label>
                                     <select multiple="multiple" name="prerequisiteCourses" th:field="*{recommendation.prerequisiteCourses}" class="form-control" id="inputBookPrerequisiteCourses">
                                         <option th:each="course: ${courses}"
                                                 th:value="${{course}}"
@@ -72,7 +73,7 @@
                                     </select>
                                 </div>
                                 <div class="form-group">
-                                    <label for="inputBookRelatedCourses">Related courses <a href="#" class="">Missing?</a></label>
+                                    <label for="inputBookRelatedCourses">Related courses <a th:href="@{/courses}" class="">Missing?</a></label>
                                     <select multiple="multiple" name="relatedCourses" th:field="*{recommendation.relatedCourses}" class="form-control" id="inputBookRelatedCourses">
                                         <option th:each="course: ${courses}"
                                                 th:value="${{course}}"
@@ -105,19 +106,20 @@
                                     </div>
                                     <div class="form-group">
                                         <label class="d-block" for="inputVideoTags">Tags</label>
-                                        <input type="text" name="tags" class="form-control" id="inputVideoTags" placeholder="Enter tags" data-role="tagsinput"/>
+                                        <input type="text" name="tags" class="form-control" id="inputVideoTags" th:field="*{recommendation.rawTags}" placeholder="Enter tags" data-role="tagsinput" th:errorclass="is-invalid"/>
+                                        <div class="invalid-feedback-edit" th:if="${#fields.hasErrors('recommendation.rawTags')}" th:errors="*{recommendation.rawTags}">Error</div>
                                     </div>
                                     <div class="form-group">
-                                        <label for="inputVideoPrerequisiteCourses">Prerequisite courses <a href="#" class="">Missing?</a></label>
-                                        <select multiple="multiple" name="prerequisiteCourses" th:field="*{recommendation.prerequisiteCourses}" class="form-control" id="inputBlogpostPrerequisiteCourses">
+                                        <label for="inputVideoPrerequisiteCourses">Prerequisite courses <a th:href="@{/courses}" class="">Missing?</a></label>
+                                        <select multiple="multiple" name="prerequisiteCourses" th:field="*{recommendation.prerequisiteCourses}" class="form-control" id="inputVideoPrerequisiteCourses">
                                             <option th:each="course: ${courses}"
                                                     th:value="${{course}}"
                                                     th:text="${course.name}"></option>
                                         </select>
                                     </div>
                                     <div class="form-group">
-                                        <label for="inputVideoRelatedCourses">Recommended courses <a href="#" class="">Missing?</a></label>
-                                        <select multiple="multiple" name="relatedCourses" th:field="*{recommendation.relatedCourses}" class="form-control" id="inputBlogpostRelatedCourses">
+                                        <label for="inputVideoRelatedCourses">Recommended courses <a th:href="@{/courses}" class="">Missing?</a></label>
+                                        <select multiple="multiple" name="relatedCourses" th:field="*{recommendation.relatedCourses}" class="form-control" id="inputVideoRelatedCourses">
                                             <option th:each="course: ${courses}"
                                                     th:value="${{course}}"
                                                     th:text="${course.name}"></option>
@@ -132,6 +134,11 @@
                                         <label for="inputBlogpostTitle">Title</label>
                                         <input type="text" name="title" class="form-control" id="inputBlogpostTitle" placeholder="Enter title" th:field="*{recommendation.title}" th:errorclass="is-invalid"/>
                                         <div class="invalid-feedback" th:if="${#fields.hasErrors('recommendation.title')}" th:errors="*{recommendation.title}">Error</div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="inputBlogpostName">Name</label>
+                                        <input type="text" name="name" class="form-control" id="inputBlogpostName" placeholder="Enter name" th:field="*{name}" th:errorclass="is-invalid"/>
+                                        <div class="invalid-feedback" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Error</div>
                                     </div>
                                     <div class="form-group">
                                         <label for="inputBlogpostAuthor">Author</label>
@@ -155,10 +162,11 @@
                                     </div>
                                     <div class="form-group">
                                         <label class="d-block" for="inputBlogpostTags">Tags</label>
-                                        <input type="text" name="tags" class="form-control" id="inputBlogpostTags" placeholder="Enter tags" data-role="tagsinput"/>
+                                        <input type="text" name="tags" class="form-control" id="inputBlogpostTags" th:field="*{recommendation.rawTags}" placeholder="Enter tags" data-role="tagsinput" th:errorclass="is-invalid"/>
+                                        <div class="invalid-feedback-edit" th:if="${#fields.hasErrors('recommendation.rawTags')}" th:errors="*{recommendation.rawTags}">Error</div>
                                     </div>
                                     <div class="form-group">
-                                        <label for="inputBlogpostPrerequisiteCourses">Prerequisite courses <a href="#" class="">Missing?</a></label>
+                                        <label for="inputBlogpostPrerequisiteCourses">Prerequisite courses <a th:href="@{/courses}" class="">Missing?</a></label>
                                         <select multiple="multiple" name="prerequisiteCourses" th:field="*{recommendation.prerequisiteCourses}" class="form-control" id="inputBlogpostPrerequisiteCourses">
                                             <option th:each="course: ${courses}"
                                                     th:value="${{course}}"
@@ -166,7 +174,7 @@
                                         </select>
                                     </div>
                                     <div class="form-group">
-                                        <label for="inputBlogpostRelatedCourses">Recommended courses <a href="#" class="">Missing?</a></label>
+                                        <label for="inputBlogpostRelatedCourses">Recommended courses <a th:href="@{/courses}" class="">Missing?</a></label>
                                         <select multiple="multiple" name="relatedCourses" th:field="*{recommendation.relatedCourses}" class="form-control" id="inputBlogpostRelatedCourses">
                                             <option th:each="course: ${courses}"
                                                     th:value="${{course}}"
@@ -182,6 +190,11 @@
                                         <label for="inputPodcastTitle">Title</label>
                                         <input type="text" name="title" class="form-control" id="inputPodcastTitle" placeholder="Enter title" th:field="*{recommendation.title}" th:errorclass="is-invalid"/>
                                         <div class="invalid-feedback" th:if="${#fields.hasErrors('recommendation.title')}" th:errors="*{recommendation.title}">Error</div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="inputPodcastName">Name</label>
+                                        <input type="text" name="name" class="form-control" id="inputPodcastName" placeholder="Enter name" th:field="*{name}" th:errorclass="is-invalid"/>
+                                        <div class="invalid-feedback" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Error</div>
                                     </div>
                                     <div class="form-group">
                                         <label for="inputPodcastAuthor">Author</label>
@@ -204,10 +217,11 @@
                                     </div>
                                     <div class="form-group">
                                         <label class="d-block" for="inputPodcastTags">Tags</label>
-                                        <input type="text" name="tags" class="form-control" id="inputPodcastTags" placeholder="Enter tags" data-role="tagsinput"/>
+                                        <input type="text" name="tags" class="form-control" id="inputPodcastTags" th:field="*{recommendation.rawTags}" placeholder="Enter tags" data-role="tagsinput" th:errorclass="is-invalid"/>
+                                        <div class="invalid-feedback-edit" th:if="${#fields.hasErrors('recommendation.rawTags')}" th:errors="*{recommendation.rawTags}">Error</div>
                                     </div>
                                     <div class="form-group">
-                                        <label for="inputPodcastPrerequisiteCourses">Prerequisite courses <a href="#" class="">Missing?</a></label>
+                                        <label for="inputPodcastPrerequisiteCourses">Prerequisite courses <a th:href="@{/courses}" class="">Missing?</a></label>
                                         <select multiple="multiple" name="prerequisiteCourses" th:field="*{recommendation.prerequisiteCourses}" class="form-control" id="inputPodcastPrerequisiteCourses">
                                             <option th:each="course: ${courses}"
                                                     th:value="${{course}}"
@@ -215,7 +229,7 @@
                                         </select>
                                     </div>
                                     <div class="form-group">
-                                        <label for="inputPodcastRelatedCourses">Recommended courses <a href="#" class="">Missing?</a></label>
+                                        <label for="inputPodcastRelatedCourses">Recommended courses <a th:href="@{/courses}" class="">Missing?</a></label>
                                         <select multiple="multiple" name="relatedCourses" th:field="*{recommendation.relatedCourses}" class="form-control" id="inputPodcastRelatedCourses">
                                             <option th:each="course: ${courses}"
                                                     th:value="${{course}}"

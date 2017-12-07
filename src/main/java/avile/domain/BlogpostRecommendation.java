@@ -27,6 +27,9 @@ public class BlogpostRecommendation extends AbstractPersistable<Long> {
     @URL
     private String url;
 
+    @Size(max = 100)
+    private String name;
+
     @Temporal(TemporalType.DATE)
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date releaseDate;
@@ -65,6 +68,14 @@ public class BlogpostRecommendation extends AbstractPersistable<Long> {
 
     public String getUrl() {
         return url;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public Date getReleaseDate() {
