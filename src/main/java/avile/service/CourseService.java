@@ -5,7 +5,11 @@ import avile.domain.Course;
 import avile.domain.Recommendation;
 import avile.repository.CourseRepository;
 import avile.repository.RecommendationRepository;
+
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -50,4 +54,23 @@ public class CourseService {
         courseRepository.delete(course.getId());
     }
 
+    public List<Course> getByNameLike(String name) {
+        List<Course> courses = courseRepository.findByNameIsLike("%"+name+"%");
+        if(courses == null || courses.size() == 0) {
+            return new ArrayList<>();
+        }
+        return courses;
+    }
+
+    public Set<Recommendation> getRecommendationsWithCourseAsPrerequisite(String key) {
+
+        Set<Recommendation> recommendations = new HashSet<>();
+        getByNameLike(key).forEach(course -> recommendations.addAll(course.getRecommendationsPrerequisite()));
+        return recommendations;
+    }
+    public Set<Recommendation> getRecommendationsWithCourseAsRelation(String key) {
+        Set<Recommendation> recommendations = new HashSet<>();
+        getByNameLike(key).forEach(course -> recommendations.addAll(course.getRecommendationsRelated()));
+        return recommendations;
+    }
 }

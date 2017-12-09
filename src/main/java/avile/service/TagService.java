@@ -6,11 +6,13 @@ import avile.repository.RecommendationRepository;
 import avile.repository.TagRepository;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import javax.transaction.Transactional;
 
 import avile.validator.TagListValidator;
 import avile.validator.TagValidator;
+import org.apache.regexp.RE;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.BindingResult;
@@ -100,4 +102,11 @@ public class TagService {
         }
     }
 
+    public List<Recommendation> findRecommendationsWithTag(String key) {
+        Tag tag = tagRepository.findByName(key);
+        if(tag==null) {
+            return new ArrayList<>();
+        }
+        return tag.getRecommendations();
+    }
 }

@@ -1,9 +1,14 @@
 package avile.service;
 
 import avile.domain.BlogpostRecommendation;
+import avile.domain.Recommendation;
 import avile.repository.BlogpostRecommendationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 @Service
 public class BlogpostRecommendationService {
@@ -24,5 +29,17 @@ public class BlogpostRecommendationService {
 
     public Long updateBlogpostRecommendation(BlogpostRecommendation blogpostRecommendation) {
         return this.addBlogpostRecommendation(blogpostRecommendation);
+    }
+
+    public List<Recommendation> getRecommendationsWithAuthorLike(String author) {
+        List<Recommendation> recommendations = new ArrayList<>();
+        blogpostRecommendationRepository.findByAuthorIsLike("%"+author+"%").forEach(bookRecommendation -> recommendations.add(bookRecommendation.getRecommendation()));
+        return recommendations;
+    }
+
+    public List<Recommendation> getRecommendationsWithNameLike(String key) {
+        List<Recommendation> recommendations = new ArrayList<>();
+        blogpostRecommendationRepository.findByNameIsLike("%"+key+"%").forEach(blogpostRecommendation -> recommendations.add(blogpostRecommendation.getRecommendation()));
+        return recommendations;
     }
 }

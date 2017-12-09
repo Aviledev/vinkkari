@@ -2,12 +2,14 @@ package avile.service;
 
 import avile.domain.BookRecommendation;
 import avile.domain.Course;
+import avile.domain.Recommendation;
 import avile.repository.BookRecommendationRepository;
 import avile.repository.RecommendationRepository;
 import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Collection;
 import java.util.List;
 
 @Service
@@ -48,5 +50,17 @@ public class BookRecommendationService {
 
     public BookRecommendation getBookRecommendationByRecommendationId(Long id) {
         return bookRecommendationRepository.findByRecommendationId(id);
+    }
+
+    public List<Recommendation> getRecommendationsWithAuthorLike(String author) {
+        List<Recommendation> recommendations = new ArrayList<>();
+        bookRecommendationRepository.findByAuthorIsLike("%"+author+"%").forEach(bookRecommendation -> recommendations.add(bookRecommendation.getRecommendation()));
+        return recommendations;
+    }
+
+    public List<Recommendation> getRecommendationsWithIsbn(String isbn) {
+        List<Recommendation> recommendations = new ArrayList<>();
+        bookRecommendationRepository.findByIsbn(isbn).forEach(bookRecommendation -> recommendations.add(bookRecommendation.getRecommendation()));
+        return recommendations;
     }
 }
