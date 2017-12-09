@@ -1,5 +1,6 @@
 package avile.service;
 
+import avile.domain.Account;
 import avile.domain.Recommendation;
 import avile.domain.Tag;
 import avile.repository.RecommendationRepository;
@@ -77,5 +78,9 @@ public class RecommendationService {
         recommendations.addAll(podcastRecommendationService.getRecommendationsWithNameLike(key));
         recommendations.addAll(blogpostRecommendationService.getRecommendationsWithNameLike(key));
         return recommendations;
+    }
+
+    public List<Recommendation> getRecommendationsForAccount(Account account) {
+        return recommendationRepository.findRecommendationsByCheckersNotContaining(account);
     }
 }

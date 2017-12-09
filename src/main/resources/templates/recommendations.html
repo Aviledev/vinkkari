@@ -25,9 +25,12 @@
         <div class="p-0 d-none d-sm-block col-1 col-sm-3 col-md-7">
         </div>
         <div class="p-0 col-9 col-sm-6 col-md-3">
-            <form action="/recommendations/search" method="POST">
+            <form th:action="@{/recommendations/search}" method="POST">
                 <div class="input-group pl-3">
                     <input type="text" class="form-control" placeholder="Search for..." aria-label="Search for..." id="titleInput" name="key"/>
+                    <input type="hidden"
+                           name="${_csrf.parameterName}"
+                           value="${_csrf.token}"/>
                     <span class="input-group-btn"><button class="btn btn-primary" id="searchBtn" type="submit">Go!</button></span>
                 </div>
             </form>
