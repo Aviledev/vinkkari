@@ -5,18 +5,17 @@ import avile.service.BookRecommendationService;
 import avile.service.CourseService;
 import avile.service.RecommendationService;
 import avile.service.TagService;
-import avile.validator.TagValidator;
+import avile.validator.IsbnValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
-import java.util.List;
+import org.springframework.validation.Validator;
 
 @Controller
 public class BookRecommendationController {
@@ -36,6 +35,8 @@ public class BookRecommendationController {
     @PostMapping("/books")
     public String createOne(@Valid BookRecommendation bookRecommendation, BindingResult bs, Model model, final RedirectAttributes redirectAttributes) {
 
+        Validator isbnValidator = new IsbnValidator();
+        isbnValidator.validate(bookRecommendation, bs);
         tagService.assignTagsToRecommendation(bookRecommendation.getRecommendation(), bookRecommendation.getRecommendation().getRawTags(), bs);
 
         if (bs.hasErrors()) {
@@ -64,6 +65,8 @@ public class BookRecommendationController {
     @PostMapping("/books/edit")
     public String updateOne(@Valid BookRecommendation bookRecommendation, BindingResult bs, Model model, RedirectAttributes redirectAttributes) {
 
+        Validator isbnValidator = new IsbnValidator();
+        isbnValidator.validate(bookRecommendation, bs);
         tagService.assignTagsToRecommendation(bookRecommendation.getRecommendation(), bookRecommendation.getRecommendation().getRawTags(), bs);
 
         if (bs.hasErrors()) {

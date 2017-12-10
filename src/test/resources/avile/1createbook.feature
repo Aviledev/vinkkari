@@ -15,7 +15,7 @@ Feature: user can create a new book recommendation
     When user clicks Create button
     And the entry "TestiKirja" is entered into the field "inputBookTitle"
     And the entry "TestiAuthor" is entered into the field "inputBookAuthor"
-    And the entry "TestiIsbn" is entered into the field "inputBookIsbn"
+    And the entry "978-1540753809" is entered into the field "inputBookIsbn"
     And the form "createBookForm" is submitted
     Then the entry with title "TestiKirja" is added
 
