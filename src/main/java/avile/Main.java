@@ -53,8 +53,8 @@ public class Main implements ApplicationRunner{
         Account admin = new Account();
         admin.setEmail("admin@admin");
         admin.setPassword("123456");
-        admin.setFirstname("Admin");
-        admin.setLastname("Admin");
+        admin.setFirstname("Teppo");
+        admin.setLastname("Testaaja");
         accountService.save(admin);
 
         Course c1 = new Course();
@@ -104,6 +104,7 @@ public class Main implements ApplicationRunner{
         pCourses.add(courseService.getCourse((long) 1));
         b1.getRecommendation().setPrerequisiteCourses(pCourses);
         tagService.assignTagsToRecommendation(b1.getRecommendation(), "Algorithms,Programming", null);
+        b1.getRecommendation().setCreator(admin);
         bookRecommendationService.addBookRecommendation(b1);
 
         BookRecommendation b2 = new BookRecommendation();

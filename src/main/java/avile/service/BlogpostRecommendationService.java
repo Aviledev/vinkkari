@@ -16,14 +16,22 @@ public class BlogpostRecommendationService {
     @Autowired
     private BlogpostRecommendationRepository blogpostRecommendationRepository;
 
+    @Autowired
+    AccountService accountService;
+
     public BlogpostRecommendation getBlogpostRecommendationByRecommendationId(Long id) {
-        return blogpostRecommendationRepository.findByRecommendationId(id);
+        BlogpostRecommendation blogpostRecommendation = blogpostRecommendationRepository.findByRecommendationId(id);
+        blogpostRecommendation.getRecommendation().setRawTags(blogpostRecommendation.getRecommendation().getTagsAsString());
+        return blogpostRecommendation;
     }
 
     public void deleteBlogpostRecommendationById(Long id) { this.blogpostRecommendationRepository.delete(id);
     }
 
     public Long addBlogpostRecommendation(BlogpostRecommendation blogpostRecommendation) {
+        if(accountService.getAuthenticatedAccount() != null) {
+            blogpostRecommendation.getRecommendation().setCreator(accountService.getAuthenticatedAccount());
+        }
         return this.blogpostRecommendationRepository.save(blogpostRecommendation).getId();
     }
 

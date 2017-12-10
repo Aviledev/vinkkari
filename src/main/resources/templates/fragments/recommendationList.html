@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Recommendations</title>
+</head>
+<body>
+
+<div class="card" th:fragment="recommendations(recommendations)">
+    <ul class="list-group list-group-striped">
+
+        <li class="list-group-item list-group-item-action list-group-item-container" th:each="recommendation : ${recommendations}">
+            <div class="row">
+                <div class="col-auto mr-auto col-title">
+                    <h5 class="list-group-item-title mt-1"><a th:href="@{/recommendations/{id}(id=${recommendation.id})}" th:text="${recommendation.title}"></a></h5>
+                    <small class="text-muted mb-1" th:text="${recommendation.recommendationType+ ' ('+#calendars.format(recommendation.date, 'dd.MM.yyyy') + ')'}">Kirja</small>
+                </div>
+                <div class="col-auto col-tags align-self-center">
+                    <a href="#" class="badge badge-pill badge-primary my-1" th:each="tag : ${recommendation.tags}" th:href="@{/tag/{id}(id=${tag.id})}"><span th:text="${tag.name}"></span></a>
+                </div>
+            </div>
+        </li>
+    </ul>
+</div>
+
+<div th:fragment="userrecommendations(userrecommendations, recommendations)">
+    <div class="tab-content" id="pills-tabContent">
+        <div class="tab-pane fade show active" id="pills-user-recommendations" role="tabpanel" aria-labelledby="pills-user-recommendations-tab">
+            <div th:replace="fragments/recommendationList :: recommendations(recommendations=${userrecommendations})"></div>
+        </div>
+        <div class="tab-pane fade" id="pills-recommendations" role="tabpanel" aria-labelledby="pills-recommendations-tab">
+            <div th:replace="fragments/recommendationList :: recommendations(recommendations=${recommendations})"></div>
+        </div>
+    </div>
+    <ul class="nav nav-pills my-3" id="pills-tab-selection" role="tablist">
+        <li class="nav-item">
+            <a class="nav-link active" id="pills-user-recommendations-tab" data-toggle="pill" href="#pills-user-recommendations" role="tab" aria-controls="pills-user-recommendations" aria-selected="true">Uncheked</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="pills-recommendations-tab" data-toggle="pill" href="#pills-recommendations" role="tab" aria-controls="pills-recommendations" aria-selected="false">All</a>
+        </li>
+    </ul>
+</div>
+
+
+</body>
+</html>

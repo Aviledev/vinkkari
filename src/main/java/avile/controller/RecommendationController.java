@@ -46,10 +46,10 @@ public class RecommendationController {
         model.addAttribute("blogpostRecommendation", new BlogpostRecommendation());
         model.addAttribute("podcastRecommendation", new PodcastRecommendation());
 
+        model.addAttribute("recommendations", recommendationService.getRecommendations());
+
         if(accountService.getAuthenticatedAccount() != null)  {
-            model.addAttribute("recommendations", recommendationService.getRecommendationsForAccount(accountService.getAuthenticatedAccount()));
-        } else {
-            model.addAttribute("recommendations", recommendationService.getRecommendations());
+            model.addAttribute("userRecommendations", recommendationService.getRecommendationsForAccount(accountService.getAuthenticatedAccount()));
         }
 
         return "recommendations";
@@ -63,6 +63,14 @@ public class RecommendationController {
     @GetMapping("/recommendations/{id}/edit")
     public String getEditOne(Model model, @PathVariable Long id) {
         return getRecommendationFromRecommendationId(model, id) + "_edit";
+    }
+
+    @PostMapping("/recommendations/{id}/check")
+    public String toggleCheckForAccount(Model model, @PathVariable Long id) {
+        if(accountService.getAuthenticatedAccount() != null) {
+            accountService.toggleChecked(accountService.getAuthenticatedAccount(), recommendationService.getRecommendation(id));
+        }
+        return getRecommendationFromRecommendationId(model, id);
     }
 
     @PostMapping("/recommendations/search")
@@ -81,22 +89,22 @@ public class RecommendationController {
         Recommendation recommendation = recommendationService.getRecommendation(id);
         model.addAttribute("courses", courseService.getCourses());
 
+        if(accountService.getAuthenticatedAccount() != null) {
+            if(recommendation.getCheckers().contains(accountService.getAuthenticatedAccount())){
+                model.addAttribute("checked", true);
+            } else {
+                model.addAttribute("checked", false);
+            }
+        }
+
         if (recommendation.getRecommendationType() == RecommendationType.BOOK) {
-            BookRecommendation bookRecommendation = bookRecommendationService.getBookRecommendationByRecommendationId(id);
-            bookRecommendation.getRecommendation().setRawTags(bookRecommendation.getRecommendation().getTagsAsString());
-            model.addAttribute("bookRecommendation", bookRecommendation);
+            model.addAttribute("bookRecommendation", bookRecommendationService.getBookRecommendationByRecommendationId(id));
         } else if (recommendation.getRecommendationType() == RecommendationType.VIDEO) {
-            VideoRecommendation videoRecommendation = videoRecommendationService.getVideoRecommendationByRecommendationId(id);
-            videoRecommendation.getRecommendation().setRawTags(videoRecommendation.getRecommendation().getTagsAsString());
-            model.addAttribute("videoRecommendation", videoRecommendation);
+            model.addAttribute("videoRecommendation", videoRecommendationService.getVideoRecommendationByRecommendationId(id));
         } else if (recommendation.getRecommendationType() == RecommendationType.PODCAST) {
-            PodcastRecommendation podcastRecommendation = podcastRecommendationService.getPodcastRecommendationByRecommendationId(id);
-            podcastRecommendation.getRecommendation().setRawTags(podcastRecommendation.getRecommendation().getTagsAsString());
-            model.addAttribute("podcastRecommendation", podcastRecommendation);
+            model.addAttribute("podcastRecommendation",  podcastRecommendationService.getPodcastRecommendationByRecommendationId(id));
         } else if (recommendation.getRecommendationType() == RecommendationType.BLOGPOST) {
-            BlogpostRecommendation blogpostRecommendation = blogpostRecommendationService.getBlogpostRecommendationByRecommendationId(id);
-            blogpostRecommendation.getRecommendation().setRawTags(blogpostRecommendation.getRecommendation().getTagsAsString());
-            model.addAttribute("blogpostRecommendation", blogpostRecommendation);
+            model.addAttribute("blogpostRecommendation", blogpostRecommendationService.getBlogpostRecommendationByRecommendationId(id));
         }
 
         return "recommendation_" + recommendation.getRecommendationType();

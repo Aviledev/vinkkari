@@ -16,11 +16,20 @@ public class PodcastRecommendationService {
     @Autowired
     private PodcastRecommendationRepository podcastRecommendationRepository;
 
+    @Autowired
+    private AccountService accountService;
+
     public PodcastRecommendation getPodcastRecommendationByRecommendationId(Long id) {
-        return podcastRecommendationRepository.findByRecommendationId(id);
+        PodcastRecommendation podcastRecommendation = podcastRecommendationRepository.findByRecommendationId(id);
+        podcastRecommendation.getRecommendation().setRawTags(podcastRecommendation.getRecommendation().getTagsAsString());
+        return podcastRecommendation;
+
     }
 
     public Long addPodcastRecommendation(PodcastRecommendation podcastRecommendation) {
+        if(accountService.getAuthenticatedAccount() != null) {
+            podcastRecommendation.getRecommendation().setCreator(accountService.getAuthenticatedAccount());
+        }
         return this.podcastRecommendationRepository.save(podcastRecommendation).getId();
     }
 

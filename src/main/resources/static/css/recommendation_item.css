@@ -7,7 +7,7 @@ body {
     margin-bottom: 80px;
 }
 .display-4 {
-    font-size: 2.5rem;
+    font-size: 2.0rem;
 }
 .footer {
     position: absolute;
@@ -27,4 +27,8 @@ body {
 
 .recommendation-tag {
     font-size: 1rem;
+}
+.btn-check {
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
 }

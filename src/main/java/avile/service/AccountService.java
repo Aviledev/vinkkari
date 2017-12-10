@@ -25,7 +25,11 @@ public class AccountService {
     BCryptPasswordEncoder bCryptPasswordEncoder;
 
     public Account getAuthenticatedAccount() {
-        return accountRepository.findByEmail(SecurityContextHolder.getContext().getAuthentication().getName());
+        try {
+            return accountRepository.findByEmail(SecurityContextHolder.getContext().getAuthentication().getName());
+        } catch (Exception e) {
+            return null;
+        }
     }
 
     public boolean isAuthenticated () {
