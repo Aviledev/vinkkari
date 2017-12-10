@@ -19,7 +19,6 @@ public class BookRecommendation extends AbstractPersistable<Long> {
     @Size(max = 100)
     private String author;
 
-    @NotNull
     private String isbn;
 
     @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
