@@ -16,11 +16,20 @@ public class PodcastRecommendationService {
     @Autowired
     private PodcastRecommendationRepository podcastRecommendationRepository;
 
+    @Autowired
+    private AccountService accountService;
+
     public PodcastRecommendation getPodcastRecommendationByRecommendationId(Long id) {
-        return podcastRecommendationRepository.findByRecommendationId(id);
+        PodcastRecommendation podcastRecommendation = podcastRecommendationRepository.findByRecommendationId(id);
+        podcastRecommendation.getRecommendation().setRawTags(podcastRecommendation.getRecommendation().getTagsAsString());
+        return podcastRecommendation;
+
     }
 
     public Long addPodcastRecommendation(PodcastRecommendation podcastRecommendation) {
+        if(accountService.getAuthenticatedAccount() != null) {
+            podcastRecommendation.getRecommendation().setCreator(accountService.getAuthenticatedAccount());
+        }
         return this.podcastRecommendationRepository.save(podcastRecommendation).getId();
     }
 
@@ -34,13 +43,13 @@ public class PodcastRecommendationService {
 
     public List<Recommendation> getRecommendationsWithAuthorLike(String author) {
         List<Recommendation> recommendations = new ArrayList<>();
-        podcastRecommendationRepository.findByAuthorIsLike("%"+author+"%").forEach(bookRecommendation -> recommendations.add(bookRecommendation.getRecommendation()));
+        podcastRecommendationRepository.findByAuthorIsLikeIgnoreCase("%"+author+"%").forEach(bookRecommendation -> recommendations.add(bookRecommendation.getRecommendation()));
         return recommendations;
     }
 
     public List<Recommendation> getRecommendationsWithNameLike(String key) {
         List<Recommendation> recommendations = new ArrayList<>();
-        podcastRecommendationRepository.findByNameIsLike("%"+key+"%").forEach(podcastRecommendation -> recommendations.add(podcastRecommendation.getRecommendation()));;
+        podcastRecommendationRepository.findByNameIsLikeIgnoreCase("%"+key+"%").forEach(podcastRecommendation -> recommendations.add(podcastRecommendation.getRecommendation()));;
         return recommendations;
     }
 }

@@ -32,5 +32,5 @@ $("#inputBlogpostTags").tagsinput({
 
 
 $("#submitBtn").click(function () {
-    $("#create"+$(".nav-pills .active").text()+ "Form").submit();
+    $("#create"+$("#pills-tab-category").find(".active").text()+ "Form").submit();
 });

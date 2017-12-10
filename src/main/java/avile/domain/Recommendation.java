@@ -7,6 +7,7 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -37,6 +38,12 @@ public class Recommendation extends AbstractPersistable<Long> {
 
     @Transient
     private String rawTags;
+
+    @ManyToMany(mappedBy = "checkedRecommendations", fetch = FetchType.EAGER)
+    private List<Account> checkers = new ArrayList<>();
+
+    @ManyToOne
+    private Account creator;
 
     public String getRawTags() {
         return rawTags;
@@ -121,5 +128,21 @@ public class Recommendation extends AbstractPersistable<Long> {
 
     public void setId(Long id) {
         super.setId(id);
+    }
+
+    public List<Account> getCheckers() {
+        return checkers;
+    }
+
+    public void setCheckers(List<Account> checkers) {
+        this.checkers = checkers;
+    }
+
+    public Account getCreator() {
+        return creator;
+    }
+
+    public void setCreator(Account creator) {
+        this.creator = creator;
     }
 }

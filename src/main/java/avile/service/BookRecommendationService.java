@@ -17,18 +17,19 @@ public class BookRecommendationService {
 
     @Autowired
     private BookRecommendationRepository bookRecommendationRepository;
-    
-    @Autowired
-    private CourseService courseService;
 
     @Autowired
-    private RecommendationRepository recommendationRepository;
+    private AccountService accountService;
+    
 
     public List<BookRecommendation> getBookRecommendations() {
         return bookRecommendationRepository.findAll();
     }
 
     public Long addBookRecommendation(BookRecommendation bookRecommendation) {
+        if(accountService.getAuthenticatedAccount() != null) {
+            bookRecommendation.getRecommendation().setCreator(accountService.getAuthenticatedAccount());
+        }
         return bookRecommendationRepository.save(bookRecommendation).getId();
     }
 
@@ -49,12 +50,14 @@ public class BookRecommendationService {
     }
 
     public BookRecommendation getBookRecommendationByRecommendationId(Long id) {
-        return bookRecommendationRepository.findByRecommendationId(id);
+        BookRecommendation bookRecommendation = bookRecommendationRepository.findByRecommendationId(id);
+        bookRecommendation.getRecommendation().setRawTags(bookRecommendation.getRecommendation().getTagsAsString());
+        return bookRecommendation;
     }
 
     public List<Recommendation> getRecommendationsWithAuthorLike(String author) {
         List<Recommendation> recommendations = new ArrayList<>();
-        bookRecommendationRepository.findByAuthorIsLike("%"+author+"%").forEach(bookRecommendation -> recommendations.add(bookRecommendation.getRecommendation()));
+        bookRecommendationRepository.findByAuthorIsLikeIgnoreCase("%"+author+"%").forEach(bookRecommendation -> recommendations.add(bookRecommendation.getRecommendation()));
         return recommendations;
     }
 

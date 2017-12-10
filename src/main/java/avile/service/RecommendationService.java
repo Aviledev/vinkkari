@@ -1,5 +1,6 @@
 package avile.service;
 
+import avile.domain.Account;
 import avile.domain.Recommendation;
 import avile.domain.Tag;
 import avile.repository.RecommendationRepository;
@@ -61,7 +62,7 @@ public class RecommendationService {
     }
 
     private List<Recommendation> getRecommendationsWithTitleLike(String title) {
-        return recommendationRepository.findRecommendationsByTitleIsLike("%" + title + "%");
+        return recommendationRepository.findRecommendationsByTitleIsLikeIgnoreCase("%" + title + "%");
     }
 
     private List<Recommendation> getRecommendationsWithAuthorLike(String key) {
@@ -77,5 +78,9 @@ public class RecommendationService {
         recommendations.addAll(podcastRecommendationService.getRecommendationsWithNameLike(key));
         recommendations.addAll(blogpostRecommendationService.getRecommendationsWithNameLike(key));
         return recommendations;
+    }
+
+    public List<Recommendation> getRecommendationsForAccount(Account account) {
+        return recommendationRepository.findRecommendationsByCheckersNotContaining(account);
     }
 }

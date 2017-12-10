@@ -2,16 +2,17 @@ html {
     min-height: 100%;
     position: relative;
 }
+
 body {
     padding-top: 1.5rem;
     margin-bottom: 80px;
 }
 .display-4 {
-    font-size: 1.5rem;
+    font-size: 2.5rem;
 }
 .footer {
     position: absolute;
-    bottom: 0;
+    bottom:0;
     width: 100%;
     height: 60px;
     line-height: 60px;
@@ -20,15 +21,7 @@ body {
 .navbar {
     margin-bottom: 20px;
 }
-
 .title-jumbotron {
     padding: 1rem;
 }
 
-.recommendation-tag {
-    font-size: 1rem;
-}
-.btn-check {
-    border-top-left-radius: 0;
-    border-top-right-radius: 0;
-}

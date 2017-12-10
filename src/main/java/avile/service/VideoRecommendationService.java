@@ -15,17 +15,25 @@ public class VideoRecommendationService {
     @Autowired
     private VideoRecommendationRepository videoRecommendationRepository;
 
+    @Autowired
+    private AccountService accountService;
+
     public List<VideoRecommendation> getVideoRecommendations() {
         return videoRecommendationRepository.findAll();
     }
 
     public Long addVideoRecommendation(VideoRecommendation videoRecommendation) {
+        if(accountService.getAuthenticatedAccount() != null) {
+            videoRecommendation.getRecommendation().setCreator(accountService.getAuthenticatedAccount());
+        }
         return videoRecommendationRepository.save(videoRecommendation).getId();
     }
 
 
     public VideoRecommendation getVideoRecommendationByRecommendationId(Long id) {
-        return videoRecommendationRepository.findByRecommendationId(id);
+        VideoRecommendation videoRecommendation =  videoRecommendationRepository.findByRecommendationId(id);
+        videoRecommendation.getRecommendation().setRawTags(videoRecommendation.getRecommendation().getTagsAsString());
+        return videoRecommendation;
     }
 
     public void deleteVideoRecommendationById(Long id) {
@@ -37,7 +45,7 @@ public class VideoRecommendationService {
     }
     public List<Recommendation> getRecommendationsWithAuthorLike(String author) {
         List<Recommendation> recommendations = new ArrayList<>();
-        videoRecommendationRepository.findByAuthorIsLike("%"+author+"%").forEach(bookRecommendation -> recommendations.add(bookRecommendation.getRecommendation()));
+        videoRecommendationRepository.findByAuthorIsLikeIgnoreCase("%"+author+"%").forEach(bookRecommendation -> recommendations.add(bookRecommendation.getRecommendation()));
         return recommendations;
     }
 
