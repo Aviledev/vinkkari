@@ -8,6 +8,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 public interface BlogpostRecommendationRepository extends JpaRepository<BlogpostRecommendation, Long>{
 
     BlogpostRecommendation findByRecommendationId(Long id);
-    List<BlogpostRecommendation> findByAuthorIsLike(String author);
-    List<BlogpostRecommendation> findByNameIsLike(String name);
+    List<BlogpostRecommendation> findByAuthorIsLikeIgnoreCase(String author);
+    List<BlogpostRecommendation> findByNameIsLikeIgnoreCase(String name);
 }

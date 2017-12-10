@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.springframework.org/security/tags">
 <head>
     <title>VINKKARI | Search results</title>
     <!-- Required meta tags -->
@@ -19,7 +19,7 @@
     <div th:replace="fragments/header :: header(active='Search results')"></div>
 
 
-    <form action="/recommendations/search" method="POST">
+    <form th:action="@{/recommendations/search}" method="POST">
         <div class="input-group p-0">
             <input type="text" class="form-control" th:value="${searchTerm}" placeholder="Search for..." aria-label="Search for..." id="titleInput" name="key"/>
             <input type="hidden"

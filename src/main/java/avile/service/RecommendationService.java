@@ -62,7 +62,7 @@ public class RecommendationService {
     }
 
     private List<Recommendation> getRecommendationsWithTitleLike(String title) {
-        return recommendationRepository.findRecommendationsByTitleIsLike("%" + title + "%");
+        return recommendationRepository.findRecommendationsByTitleIsLikeIgnoreCase("%" + title + "%");
     }
 
     private List<Recommendation> getRecommendationsWithAuthorLike(String key) {

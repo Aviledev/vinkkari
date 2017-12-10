@@ -45,7 +45,7 @@ public class VideoRecommendationService {
     }
     public List<Recommendation> getRecommendationsWithAuthorLike(String author) {
         List<Recommendation> recommendations = new ArrayList<>();
-        videoRecommendationRepository.findByAuthorIsLike("%"+author+"%").forEach(bookRecommendation -> recommendations.add(bookRecommendation.getRecommendation()));
+        videoRecommendationRepository.findByAuthorIsLikeIgnoreCase("%"+author+"%").forEach(bookRecommendation -> recommendations.add(bookRecommendation.getRecommendation()));
         return recommendations;
     }
 

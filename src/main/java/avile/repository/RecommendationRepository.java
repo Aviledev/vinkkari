@@ -8,6 +8,6 @@ import java.util.List;
 
 public interface RecommendationRepository extends JpaRepository<Recommendation, Long>{
 
-    List<Recommendation> findRecommendationsByTitleIsLike(String title);
+    List<Recommendation> findRecommendationsByTitleIsLikeIgnoreCase(String title);
     List<Recommendation> findRecommendationsByCheckersNotContaining(Account account);
 }

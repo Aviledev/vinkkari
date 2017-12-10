@@ -9,7 +9,7 @@ import java.util.List;
 public interface PodcastRecommendationRepository extends JpaRepository<PodcastRecommendation, Long>{
 
     PodcastRecommendation findByRecommendationId(Long id);
-    List<PodcastRecommendation> findByAuthorIsLike(String author);
-    List<PodcastRecommendation> findByNameIsLike(String name);
+    List<PodcastRecommendation> findByAuthorIsLikeIgnoreCase(String author);
+    List<PodcastRecommendation> findByNameIsLikeIgnoreCase(String name);
 
 }

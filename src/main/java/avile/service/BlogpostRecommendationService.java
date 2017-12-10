@@ -41,13 +41,13 @@ public class BlogpostRecommendationService {
 
     public List<Recommendation> getRecommendationsWithAuthorLike(String author) {
         List<Recommendation> recommendations = new ArrayList<>();
-        blogpostRecommendationRepository.findByAuthorIsLike("%"+author+"%").forEach(bookRecommendation -> recommendations.add(bookRecommendation.getRecommendation()));
+        blogpostRecommendationRepository.findByAuthorIsLikeIgnoreCase("%"+author+"%").forEach(bookRecommendation -> recommendations.add(bookRecommendation.getRecommendation()));
         return recommendations;
     }
 
     public List<Recommendation> getRecommendationsWithNameLike(String key) {
         List<Recommendation> recommendations = new ArrayList<>();
-        blogpostRecommendationRepository.findByNameIsLike("%"+key+"%").forEach(blogpostRecommendation -> recommendations.add(blogpostRecommendation.getRecommendation()));
+        blogpostRecommendationRepository.findByNameIsLikeIgnoreCase("%"+key+"%").forEach(blogpostRecommendation -> recommendations.add(blogpostRecommendation.getRecommendation()));
         return recommendations;
     }
 }

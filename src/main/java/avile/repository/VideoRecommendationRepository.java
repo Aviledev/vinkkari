@@ -7,6 +7,6 @@ import java.util.List;
 
 public interface VideoRecommendationRepository extends JpaRepository<VideoRecommendation, Long> {
     VideoRecommendation findByRecommendationId(Long id);
-    List<VideoRecommendation> findByAuthorIsLike(String author);
+    List<VideoRecommendation> findByAuthorIsLikeIgnoreCase(String author);
 
 }
