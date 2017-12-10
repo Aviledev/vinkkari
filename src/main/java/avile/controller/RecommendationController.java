@@ -151,18 +151,15 @@ public class RecommendationController {
     }
 
     @PostMapping("/recommendations/search")
-    public String searchRecommendationByTitle(Model model, @RequestParam(required = false) String title) {
-        Set<Recommendation> results = new HashSet<>();
-        results.addAll(recommendationService.getRecommendationsWithTitleLike(title));
-        results.addAll(tagService.getByName(title).getRecommendations());
-        model.addAttribute("recommendations", results);
-        model.addAttribute("searchTerm", title);
+    public String searchRecommendationByTitle(Model model, @RequestParam(required = false) String key) {
+        model.addAttribute("recommendations", recommendationService.findRecommendationsBy(key));
+        model.addAttribute("searchTerm", key);
         return "search_results";
     }
 
     @GetMapping("/recommendations/search")
-    public String searchRecommendationByTitleGet(Model model, @RequestParam(required = false) String title) {
-        return searchRecommendationByTitle(model, title);
+    public String searchRecommendationByTitleGet(Model model, @RequestParam(required = false) String key) {
+        return searchRecommendationByTitle(model, key);
     }
 
     private String getRecommendationFromRecommendationId(Model model, Long id) {
