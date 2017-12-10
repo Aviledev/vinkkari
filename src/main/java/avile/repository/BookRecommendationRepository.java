@@ -9,4 +9,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface BookRecommendationRepository extends JpaRepository<BookRecommendation, Long>{
     BookRecommendation findByRecommendationId(Long id);
+    List<BookRecommendation> findByAuthorIsLike(String author);
+    List<BookRecommendation> findByIsbn(String isbn);
 }

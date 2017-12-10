@@ -17,7 +17,7 @@ public class TagController {
     @GetMapping("/tag/{id}")
     public String getOne(@PathVariable Long id) {
 
-        return "redirect:/recommendations/search?title="+tagService.getTag(id).getName();
+        return "redirect:/recommendations/search?key="+tagService.getTag(id).getName();
     }
     
 }
