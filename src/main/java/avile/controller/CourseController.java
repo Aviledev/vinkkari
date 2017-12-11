@@ -5,7 +5,9 @@ import avile.domain.BookRecommendation;
 import avile.domain.Course;
 import avile.domain.PodcastRecommendation;
 import avile.domain.VideoRecommendation;
+import avile.service.AccountService;
 import avile.service.CourseService;
+import avile.service.RecommendationService;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,6 +23,12 @@ public class CourseController {
 
     @Autowired
     CourseService courseService;
+
+    @Autowired
+    AccountService accountService;
+
+    @Autowired
+    RecommendationService recommendationService;
 
     @PostMapping("/course")
     public String createOne(@Valid Course course, BindingResult bs, Model model, final RedirectAttributes redirectAttributes) {
@@ -75,6 +83,19 @@ public class CourseController {
         Course course = courseService.getCourse(id);
         model.addAttribute("course", course);
         return "course_item_edit";
+    }
+
+    @GetMapping("/courses/{id}/related")
+    public String getRecommendationsForCourse(Model model, @PathVariable Long id) {
+        Course course = courseService.getCourse(id);
+        model.addAttribute("recommendations", courseService.getRecommendationsWithCourseAsRelation(course.getName()));
+        model.addAttribute("course" , course);
+        
+        if (accountService.getAuthenticatedAccount() != null) {
+            model.addAttribute("userRecommendations", recommendationService.getRecommendationsForAccount(accountService.getAuthenticatedAccount()));
+        }
+
+        return "recommendations_for_course";
     }
 
 }

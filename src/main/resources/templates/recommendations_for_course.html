@@ -1,7 +1,7 @@
 <!doctype html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.springframework.org/security/tags">
     <head>
-        <title>VINKKARI | Courses</title>
+        <title>VINKKARI | Recommendations</title>
         <!-- Required meta tags -->
         <meta charset="utf-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
@@ -9,19 +9,18 @@
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css"
               integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous"/>
-        <link rel="stylesheet" href="../static/css/createCourseForm.css" th:href="@{/css/createCourseForm.css}"/>
-        <link rel="stylesheet" href="../static/css/course.css" th:href="@{/css/course.css}"/>
+        <link rel="stylesheet" href="../static/css/bootstrap-tagsinput.css" th:href="@{/css/bootstrap-tagsinput.css}"/>
+        <link rel="stylesheet" href="../static/css/createRecommendationForm.css" th:href="@{/css/createRecommendationForm.css}"/>
+        <link rel="stylesheet" href="../static/css/recommendation.css" th:href="@{/css/recommendation.css}"/>
     </head>
     <body>
         <div class="container">
 
-            <div th:replace="fragments/header :: header(active='Courses')"></div>
+            <div th:replace="fragments/header :: header(active='Recommendations')"></div>
 
             <div class="row">
-                <div class="p-0 col-3 col-sm-3 col-md-2">
-                    <button type="button" id="openCreateFormBtn" class="btn btn-primary btn-block" data-toggle="modal" data-target="#createCourseModal">Add</button>
-                </div>
-                <div class="p-0 d-none d-sm-block col-1 col-sm-3 col-md-7">
+                <div class="p-0 d-none d-sm-block col-4 col-sm-6 col-md-9">
+                    <h1 class="display-5">Recommendations for course <span th:text="${course.name}"></span></h1>
                 </div>
                 <div class="p-0 col-9 col-sm-6 col-md-3">
                     <form th:action="@{/recommendations/search}" method="POST">
@@ -40,30 +39,18 @@
 
             <hr class="my-4"/>
 
-
-            <div class="card">
-                <ul class="list-group list-group-striped">
-
-                    <li class="list-group-item list-group-item-action list-group-item-container" th:each="course : ${courses}">
-                        <div class="row">
-                            <div class="col-auto">
-                                <h5 class="list-group-item-title mt-1"><a th:href="@{/courses/{id}(id=${course.id})}" th:text="${course.name}"></a></h5>
-                                <small class="text-muted mb-1" th:text="${course.code}">code</small>
-                            </div>
-                            <div class="col-auto col-tags align-self-center">
-                                <a href="#" class="badge badge-pill badge-primary my-1" th:href="@{/courses/{id}/related(id=${course.id})}"><span>Go to Recommendations</span></a>
-                            </div>
-                        </div>
-                    </li>
-
-                </ul>
+            <div sec:authorize="isAnonymous()" >
+                <div th:replace="fragments/recommendationList :: recommendations(recommendations=${recommendations})"></div>
             </div>
+
+
+            <div sec:authorize="isAuthenticated()">
+                <div th:replace="fragments/recommendationList :: userrecommendations(userrecommendations=${userRecommendations}, recommendations=${recommendations})"></div>
+            </div>
+
 
         </div>
         <div th:replace="fragments/footer :: footer"></div>
-        <div th:replace="fragments/createCourseForm :: createCourseForm"></div>
-
-
 
         <!-- Optional JavaScript -->
         <!-- jQuery first, then Popper.js, then Bootstrap JS -->
@@ -75,14 +62,8 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"
                 integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ"
         crossorigin="anonymous"></script>
-        <script src="../static/js/course.js" th:src="@{/js/course.js}"></script>
-        <script src="../static/js/createCourseForm.js" th:src="@{/js/createCourseForm.js}"></script>
-
-
-        <script th:if="${#fields.hasErrors('${course.*}')}">
-            $('#createCourseModal').modal('show');
-        </script>
-
+        <script src="../static/js/bootstrap-tagsinput.min.js" th:src="@{/js/bootstrap-tagsinput.min.js}"></script>
+        <script src="../static/js/recommendation.js" th:src="@{/js/recommendation.js}"></script>
 
     </body>
 </html>
