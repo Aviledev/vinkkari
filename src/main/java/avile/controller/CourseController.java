@@ -90,10 +90,6 @@ public class CourseController {
         Course course = courseService.getCourse(id);
         model.addAttribute("recommendations", courseService.getRecommendationsWithCourseAsRelation(course.getName()));
         model.addAttribute("course" , course);
-        
-        if (accountService.getAuthenticatedAccount() != null) {
-            model.addAttribute("userRecommendations", recommendationService.getRecommendationsForAccount(accountService.getAuthenticatedAccount()));
-        }
 
         return "recommendations_for_course";
     }
