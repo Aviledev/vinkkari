@@ -39,15 +39,7 @@
 
             <hr class="my-4"/>
 
-            <div sec:authorize="isAnonymous()" >
-                <div th:replace="fragments/recommendationList :: recommendations(recommendations=${recommendations})"></div>
-            </div>
-
-
-            <div sec:authorize="isAuthenticated()">
-                <div th:replace="fragments/recommendationList :: userrecommendations(userrecommendations=${userRecommendations}, recommendations=${recommendations})"></div>
-            </div>
-
+            <div th:replace="fragments/recommendationList :: recommendations(recommendations=${recommendations})"></div>
 
         </div>
         <div th:replace="fragments/footer :: footer"></div>
