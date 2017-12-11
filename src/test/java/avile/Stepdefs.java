@@ -137,9 +137,9 @@ public class Stepdefs {
 
     @Then("^the entry with title \"([^\"]*)\", author \"([^\"]*)\" and isbn \"([^\"]*)\" is saved$")
     public void the_entry_with_title_author_and_isbn_is_saved(String arg1, String arg2, String arg3) throws Throwable {
-        
+
         assertTrue(driver.getPageSource().contains(arg1) && driver.getPageSource().contains(arg2) && driver.getPageSource().contains(arg3));
-        
+
     }
 
     @Then("^the entry with title \"([^\"]*)\", author \"([^\"]*)\" and url \"([^\"]*)\" is saved$")
@@ -187,6 +187,11 @@ public class Stepdefs {
     @When("^user clicks Blogpost button$")
     public void user_clicks_Blogpost_button() throws Throwable {
         clickButtonWithId("pills-blogpost-tab");
+    }
+
+    @Then("^Courses are shown$")
+    public void courses_are_shown() throws Throwable {
+        assertTrue(driver.getPageSource().contains("COURSES"));
     }
 
 }
