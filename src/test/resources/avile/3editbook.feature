@@ -1,4 +1,4 @@
-Feature: user can create a new book recommendation
+Feature: user can edit book recommendation
 
   Scenario: user can find a page where user can edit a recommendation
     Given user is at the "home" page

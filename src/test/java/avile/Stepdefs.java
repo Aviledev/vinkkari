@@ -147,6 +147,11 @@ public class Stepdefs {
         assertTrue(driver.getPageSource().contains(arg0) && driver.getPageSource().contains(arg1) && driver.getPageSource().contains(arg2));
     }
 
+    @Then("^the entry with title \"([^\"]*)\", code \"([^\"]*)\" and decsription \"([^\"]*)\" is saved$")
+    public void the_entry_with_title_code_and_decsription_is_saved(String arg1, String arg2, String arg3) throws Throwable {
+        assertTrue(driver.getPageSource().contains(arg1) && driver.getPageSource().contains(arg2) && driver.getPageSource().contains(arg3));
+    }
+
     private void clickButtonWithId(String id) {
         WebElement element = new WebDriverWait(driver, 10)
                 .until(ExpectedConditions.elementToBeClickable(By.id(id)));
