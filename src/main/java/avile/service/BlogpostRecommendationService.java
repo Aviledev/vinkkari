@@ -7,17 +7,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 @Service
 public class BlogpostRecommendationService {
 
     @Autowired
-    private BlogpostRecommendationRepository blogpostRecommendationRepository;
-
-    @Autowired
     AccountService accountService;
+    @Autowired
+    private BlogpostRecommendationRepository blogpostRecommendationRepository;
 
     public BlogpostRecommendation getBlogpostRecommendationByRecommendationId(Long id) {
         BlogpostRecommendation blogpostRecommendation = blogpostRecommendationRepository.findByRecommendationId(id);
@@ -25,11 +23,12 @@ public class BlogpostRecommendationService {
         return blogpostRecommendation;
     }
 
-    public void deleteBlogpostRecommendationById(Long id) { this.blogpostRecommendationRepository.delete(id);
+    public void deleteBlogpostRecommendationById(Long id) {
+        this.blogpostRecommendationRepository.delete(id);
     }
 
     public Long addBlogpostRecommendation(BlogpostRecommendation blogpostRecommendation) {
-        if(accountService.getAuthenticatedAccount() != null) {
+        if (accountService.getAuthenticatedAccount() != null) {
             blogpostRecommendation.getRecommendation().setCreator(accountService.getAuthenticatedAccount());
         }
         return this.blogpostRecommendationRepository.save(blogpostRecommendation).getId();
@@ -41,13 +40,18 @@ public class BlogpostRecommendationService {
 
     public List<Recommendation> getRecommendationsWithAuthorLike(String author) {
         List<Recommendation> recommendations = new ArrayList<>();
-        blogpostRecommendationRepository.findByAuthorIsLikeIgnoreCase("%"+author+"%").forEach(bookRecommendation -> recommendations.add(bookRecommendation.getRecommendation()));
+        blogpostRecommendationRepository.findByAuthorIsLikeIgnoreCase("%" + author + "%").forEach(bookRecommendation -> recommendations.add(bookRecommendation.getRecommendation()));
         return recommendations;
     }
 
     public List<Recommendation> getRecommendationsWithNameLike(String key) {
         List<Recommendation> recommendations = new ArrayList<>();
-        blogpostRecommendationRepository.findByNameIsLikeIgnoreCase("%"+key+"%").forEach(blogpostRecommendation -> recommendations.add(blogpostRecommendation.getRecommendation()));
+        blogpostRecommendationRepository.findByNameIsLikeIgnoreCase("%" + key + "%").forEach(blogpostRecommendation -> recommendations.add(blogpostRecommendation.getRecommendation()));
         return recommendations;
     }
+
+    public List<BlogpostRecommendation> getBlogpostRecommendations() {
+        return blogpostRecommendationRepository.findAll();
+    }
+
 }

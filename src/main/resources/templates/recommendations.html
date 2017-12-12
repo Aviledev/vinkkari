@@ -10,7 +10,8 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css"
           integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous"/>
     <link rel="stylesheet" href="../static/css/bootstrap-tagsinput.css" th:href="@{/css/bootstrap-tagsinput.css}"/>
-    <link rel="stylesheet" href="../static/css/createRecommendationForm.css" th:href="@{/css/createRecommendationForm.css}"/>
+    <link rel="stylesheet" href="../static/css/createRecommendationForm.css"
+          th:href="@{/css/createRecommendationForm.css}"/>
     <link rel="stylesheet" href="../static/css/recommendation.css" th:href="@{/css/recommendation.css}"/>
 </head>
 <body>
@@ -19,29 +20,43 @@
     <div th:replace="fragments/header :: header(active='Recommendations')"></div>
 
     <div class="row">
-        <div class="p-0 col-3 col-sm-3 col-md-2">
-            <button type="button" id="openCreateFormBtn" class="btn btn-primary btn-block" data-toggle="modal" data-target="#createRecommendationModal">Create</button>
+        <div class="p-0 col-3 col-md-3 col-md-2">
+            <button type="button" id="openCreateFormBtn" class="btn btn-primary btn-block" data-toggle="modal"
+                    data-target="#createRecommendationModal">Create
+            </button>
+            <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown">Filter
+                    <span class="caret"></span></button>
+                <ul class="dropdown-menu">
+                    <li><a th:href="@{/recommendations}">All</a></li>
+                    <li><a th:href="@{/recommendations?filter=books}">Books</a></li>
+                    <li><a th:href="@{/recommendations?filter=blogposts}">Blogposts</a></li>
+                    <li><a th:href="@{/recommendations?filter=podcasts}">Podcasts</a></li>
+                    <li><a th:href="@{/recommendations?filter=videos}">Videos</a></li>
+                </ul>
+            </div>
         </div>
         <div class="p-0 d-none d-sm-block col-1 col-sm-3 col-md-7">
+
         </div>
         <div class="p-0 col-9 col-sm-6 col-md-3">
             <form th:action="@{/recommendations/search}" method="POST">
                 <div class="input-group pl-3">
-                    <input type="text" class="form-control" placeholder="Search for..." aria-label="Search for..." id="titleInput" name="key"/>
+                    <input type="text" class="form-control" placeholder="Search for..." aria-label="Search for..."
+                           id="titleInput" name="key"/>
                     <input type="hidden"
                            name="${_csrf.parameterName}"
                            value="${_csrf.token}"/>
-                    <span class="input-group-btn"><button class="btn btn-primary" id="searchBtn" type="submit">Go!</button></span>
+                    <span class="input-group-btn"><button class="btn btn-primary" id="searchBtn"
+                                                          type="submit">Go!</button></span>
                 </div>
             </form>
         </div>
     </div>
 
-
-
     <hr class="my-4"/>
 
-    <div sec:authorize="isAnonymous()" >
+    <div sec:authorize="isAnonymous()">
         <div th:replace="fragments/recommendationList :: recommendations(recommendations=${recommendations})"></div>
     </div>
 
@@ -54,7 +69,6 @@
 </div>
 <div th:replace="fragments/footer :: footer"></div>
 <div th:replace="fragments/createRecommendationForm :: createRecommendationForm"></div>
-
 
 
 <!-- Optional JavaScript -->
@@ -88,7 +102,6 @@
     $('#createRecommendationModal').modal('show');
     $('#pills-podcast-tab').tab('show')
 </script>
-
 
 
 </body>
