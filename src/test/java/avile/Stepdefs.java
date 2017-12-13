@@ -141,6 +141,13 @@ public class Stepdefs {
         assertTrue(driver.getPageSource().contains(arg1) && driver.getPageSource().contains(arg2) && driver.getPageSource().contains(arg3));
 
     }
+    
+    @Then("^the entry with title \"([^\"]*)\", name \"([^\"]*)\" and author \"([^\"]*)\" is saved$")
+    public void the_entry_with_title_name_and_author_is_saved(String arg1, String arg2, String arg3) throws Throwable {
+
+        assertTrue(driver.getPageSource().contains(arg1) && driver.getPageSource().contains(arg2) && driver.getPageSource().contains(arg3));
+
+    }
 
     @Then("^the entry with title \"([^\"]*)\", author \"([^\"]*)\" and url \"([^\"]*)\" is saved$")
     public void theEntryWithTitleAuthorAndUrlIsSaved(String arg0, String arg1, String arg2) throws Throwable {
@@ -193,10 +200,20 @@ public class Stepdefs {
     public void user_clicks_Blogpost_button() throws Throwable {
         clickButtonWithId("pills-blogpost-tab");
     }
+    
+    @When("^user clicks Podcast button$")
+    public void user_clicks_Podcast_button() throws Throwable {
+        clickButtonWithId("pills-podcast-tab");
+    }
 
     @Then("^Courses are shown$")
     public void courses_are_shown() throws Throwable {
         assertTrue(driver.getPageSource().contains("COURSES"));
+    }
+    
+    @Then("^error message \"([^\"]*)\" is given$")
+    public void errorMessageIsGiven(String arg0) throws Throwable {
+        assertTrue(driver.getPageSource().contains(arg0));
     }
 
 }
