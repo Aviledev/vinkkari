@@ -20,26 +20,31 @@
     <div th:replace="fragments/header :: header(active='Recommendations')"></div>
 
     <div class="row">
-        <div class="p-0 col-3 col-md-3 col-md-2">
-            <button type="button" id="openCreateFormBtn" class="btn btn-primary btn-block" data-toggle="modal"
-                    data-target="#createRecommendationModal">Create
-            </button>
-            <div class="dropdown">
-                <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown">Filter
-                    <span class="caret"></span></button>
-                <ul class="dropdown-menu">
-                    <li><a th:href="@{/recommendations}">All</a></li>
-                    <li><a th:href="@{/recommendations?filter=books}">Books</a></li>
-                    <li><a th:href="@{/recommendations?filter=blogposts}">Blogposts</a></li>
-                    <li><a th:href="@{/recommendations?filter=podcasts}">Podcasts</a></li>
-                    <li><a th:href="@{/recommendations?filter=videos}">Videos</a></li>
-                </ul>
+        <div class="p-0 col-6 col-sm-4 col-md-3">
+            <div class="row p-0">
+                <div class="col-6 col-sm-6 p-0">
+                    <button type="button" id="openCreateFormBtn" class="btn btn-primary btn-block" data-toggle="modal"
+                            data-target="#createRecommendationModal">Create
+                    </button>
+                </div>
+                <div class="col-1 col-sm-1 p-0"></div>
+                <div class="col-5 col-sm-5 p-0">
+                    <div class="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle btn-block" type="button" data-toggle="dropdown">Filter
+                            <span class="caret"></span></button>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" th:href="@{/recommendations}">All</a>
+                            <a class="dropdown-item" th:href="@{/recommendations?filter=books}">Books</a>
+                            <a class="dropdown-item" th:href="@{/recommendations?filter=blogposts}">Blogposts</a>
+                            <a class="dropdown-item" th:href="@{/recommendations?filter=podcasts}">Podcasts</a>
+                            <a class="dropdown-item" th:href="@{/recommendations?filter=videos}">Videos</a>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="p-0 d-none d-sm-block col-1 col-sm-3 col-md-7">
-
-        </div>
-        <div class="p-0 col-9 col-sm-6 col-md-3">
+        <div class="p-0 d-none d-sm-block col-1 col-sm-3 col-md-6"></div>
+        <div class="p-0 col-6 col-sm-5 col-md-3">
             <form th:action="@{/recommendations/search}" method="POST">
                 <div class="input-group pl-3">
                     <input type="text" class="form-control" placeholder="Search for..." aria-label="Search for..."
