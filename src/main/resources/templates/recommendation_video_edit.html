@@ -22,7 +22,8 @@
                     <div class="mx-auto">
                         <h1 class="display-4"><input type="text" name="title" class="form-control title-input-form" id="inputVideoTitle" placeholder="Enter title"  th:field="*{recommendation.title}" th:errorclass="is-invalid" />(<b th:text="*{recommendation.recommendationType}"></b>)</h1>
                         <div class="invalid-feedback-edit" th:if="${#fields.hasErrors('recommendation.title')}" th:errors="*{recommendation.title}">Error</div>
-                        <p class="lead">Created by <a href="#">Firstname Lastname</a></p>
+                        <p th:if="${videoRecommendation.recommendation.creator != null}" class="lead">Created by <a href="#" th:text="${videoRecommendation.recommendation.creator.firstname + ' ' + videoRecommendation.recommendation.creator.lastname}">Firstname Lastname</a></p>
+                        <p th:if="${videoRecommendation.recommendation.creator == null}" class="lead">Created by anonymous</p>
                         <input type="text" th:field="*{recommendation.rawTags}" class="form-control edit-input-form" id="inputRecommendationTags" placeholder="Enter tags" data-role="tagsinput" th:errorclass="is-invalid"/>
                         <div class="invalid-feedback-edit" th:if="${#fields.hasErrors('recommendation.rawTags')}" th:errors="*{recommendation.rawTags}">Error</div>                        <input type="hidden" name="id" th:field="*{id}"/>
                         <input type="hidden" name="recommendationId" th:field="*{recommendation.id}"/>
