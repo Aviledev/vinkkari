@@ -11,8 +11,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.*;
-
 @Controller
 public class RecommendationController {
 
@@ -39,18 +37,53 @@ public class RecommendationController {
 
 
     @GetMapping(path = {"", "/", "/home", "/recommendations"})
-    public String getAll(Model model) {
+    public String getAll(Model model, @RequestParam(value = "filter", required = false) String filter) {
         model.addAttribute("courses", courseService.getCourses());
+
+
         model.addAttribute("bookRecommendation", new BookRecommendation());
         model.addAttribute("videoRecommendation", new VideoRecommendation());
         model.addAttribute("blogpostRecommendation", new BlogpostRecommendation());
         model.addAttribute("podcastRecommendation", new PodcastRecommendation());
 
-        model.addAttribute("recommendations", recommendationService.getRecommendations());
+        RecommendationType type = null;
 
-        if(accountService.getAuthenticatedAccount() != null)  {
-            model.addAttribute("userRecommendations", recommendationService.getRecommendationsForAccount(accountService.getAuthenticatedAccount()));
+        if (filter == null) {
+            model.addAttribute("recommendations", recommendationService.getRecommendations());
+        } else {
+            switch (filter) {
+                case "books":
+                    type = RecommendationType.BOOK;
+                    break;
+                case "videos":
+                    type = RecommendationType.VIDEO;
+                    break;
+                case "blogposts":
+                    type = RecommendationType.BLOGPOST;
+                    break;
+                case "podcasts":
+                    type = RecommendationType.PODCAST;
+                    break;
+                default:
+                    type = null;
+                    break;
+            }
+
+            if (type == null) {
+                model.addAttribute("recommendations", recommendationService.getRecommendations());
+            } else {
+                model.addAttribute("recommendations", recommendationService.getRecommendationsByType(type));
+            }
+
         }
+        if (accountService.getAuthenticatedAccount() != null) {
+            if (filter == null || type == null) {
+                model.addAttribute("userRecommendations", recommendationService.getRecommendationsForAccount(accountService.getAuthenticatedAccount()));
+            } else {
+                model.addAttribute("userRecommendations", recommendationService.getRecommendationsForAccountAndFilter(accountService.getAuthenticatedAccount(), type));
+            }
+        }
+
 
         return "recommendations";
     }
@@ -67,7 +100,7 @@ public class RecommendationController {
 
     @PostMapping("/recommendations/{id}/check")
     public String toggleCheckForAccount(Model model, @PathVariable Long id) {
-        if(accountService.getAuthenticatedAccount() != null) {
+        if (accountService.getAuthenticatedAccount() != null) {
             accountService.toggleChecked(accountService.getAuthenticatedAccount(), recommendationService.getRecommendation(id));
         }
         return getRecommendationFromRecommendationId(model, id);
@@ -89,8 +122,8 @@ public class RecommendationController {
         Recommendation recommendation = recommendationService.getRecommendation(id);
         model.addAttribute("courses", courseService.getCourses());
 
-        if(accountService.getAuthenticatedAccount() != null) {
-            if(recommendation.getCheckers().contains(accountService.getAuthenticatedAccount())){
+        if (accountService.getAuthenticatedAccount() != null) {
+            if (recommendation.getCheckers().contains(accountService.getAuthenticatedAccount())) {
                 model.addAttribute("checked", true);
             } else {
                 model.addAttribute("checked", false);
@@ -102,7 +135,7 @@ public class RecommendationController {
         } else if (recommendation.getRecommendationType() == RecommendationType.VIDEO) {
             model.addAttribute("videoRecommendation", videoRecommendationService.getVideoRecommendationByRecommendationId(id));
         } else if (recommendation.getRecommendationType() == RecommendationType.PODCAST) {
-            model.addAttribute("podcastRecommendation",  podcastRecommendationService.getPodcastRecommendationByRecommendationId(id));
+            model.addAttribute("podcastRecommendation", podcastRecommendationService.getPodcastRecommendationByRecommendationId(id));
         } else if (recommendation.getRecommendationType() == RecommendationType.BLOGPOST) {
             model.addAttribute("blogpostRecommendation", blogpostRecommendationService.getBlogpostRecommendationByRecommendationId(id));
         }

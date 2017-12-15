@@ -2,13 +2,15 @@ package avile.service;
 
 import avile.domain.Account;
 import avile.domain.Recommendation;
-import avile.domain.Tag;
+import avile.enums.RecommendationType;
 import avile.repository.RecommendationRepository;
-import org.apache.regexp.RE;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 @Service
 public class RecommendationService {
@@ -43,6 +45,10 @@ public class RecommendationService {
         return recommendationRepository.findAll();
     }
 
+    public List<Recommendation> getRecommendationsByType(RecommendationType type) {
+        return recommendationRepository.findRecommendationsByRecommendationType(type);
+    }
+
     public Set<Recommendation> findRecommendationsBy(String key) {
         Set<Recommendation> recommendations = new HashSet<>();
         recommendations.addAll(getRecommendationsWithTitleLike(key));
@@ -54,9 +60,11 @@ public class RecommendationService {
         recommendations.addAll(getRecommendationsWithRelatedCourses(key));
         return recommendations;
     }
+
     private Set<Recommendation> getRecommendationsWithPrerequisiteCourses(String key) {
         return courseService.getRecommendationsWithCourseAsPrerequisite(key);
     }
+
     private Set<Recommendation> getRecommendationsWithRelatedCourses(String key) {
         return courseService.getRecommendationsWithCourseAsRelation(key);
     }
@@ -73,6 +81,7 @@ public class RecommendationService {
         recommendations.addAll(podcastRecommendationService.getRecommendationsWithAuthorLike(key));
         return recommendations;
     }
+
     private List<Recommendation> getRecommendationsWithNameLike(String key) {
         List<Recommendation> recommendations = new ArrayList<>();
         recommendations.addAll(podcastRecommendationService.getRecommendationsWithNameLike(key));
@@ -82,5 +91,9 @@ public class RecommendationService {
 
     public List<Recommendation> getRecommendationsForAccount(Account account) {
         return recommendationRepository.findRecommendationsByCheckersNotContaining(account);
+    }
+
+    public List<Recommendation> getRecommendationsForAccountAndFilter(Account account, RecommendationType recommendationType) {
+        return recommendationRepository.findRecommendationsByRecommendationTypeAndCheckersNotContaining(recommendationType, account);
     }
 }
