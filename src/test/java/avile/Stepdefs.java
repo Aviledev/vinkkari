@@ -216,4 +216,23 @@ public class Stepdefs {
         assertTrue(driver.getPageSource().contains(arg0));
     }
 
+    @When("^user clicks Login button$")
+    public void user_clicks_Login_button() throws Throwable {
+        clickButtonWithId("loginBtn");
+    }
+
+    @Then("^user is at the page which contains buttons all and uncheked$")
+    public void user_is_at_the_page_which_contains_buttons_all_and_uncheked() throws Throwable {
+        assertTrue(driver.findElement(By.id("pills-recommendations-tab")).isDisplayed());
+        assertTrue(driver.findElement(By.id("pills-user-recommendations-tab")).isDisplayed());
+    }
+
+    @When("^the entry with title \"([^\"]*)\" is created by \"([^\"]*)\"$")
+    public void the_entry_with_title_is_created_by(String arg1, String arg2) throws Throwable {
+        clickLinkWithText(arg1);
+        WebElement element = new WebDriverWait(driver, 10)
+                .until(ExpectedConditions.elementToBeClickable(By.linkText(arg2)));
+        element.isDisplayed();
+    }
+
 }
