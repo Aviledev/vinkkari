@@ -5,6 +5,8 @@
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/8149192fb4fa400dae8493295136abcf)](https://www.codacy.com/app/leevilehtonen/vinkkari?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Aviledev/vinkkari&amp;utm_campaign=Badge_Grade)
 [![codebeat badge](https://codebeat.co/badges/dc809389-f3c9-4fbb-b200-90fe338bc21f)](https://codebeat.co/projects/github-com-aviledev-vinkkari-master)
 
+[Loppuraportti](https://github.com/Aviledev/vinkkari/blob/master/doc/Loppuraportti.pdf)
+
 
 [Backlog](https://docs.google.com/spreadsheets/d/1pEWCLGSSiPcI1rFv1Su9gxMdy0C1xjPz9IltO_ZW0Qw/edit?usp=sharing)
 
